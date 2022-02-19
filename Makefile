@@ -13,11 +13,12 @@ WHITE		= \033[1;37m
 LIBFT_PATH	= libraries/libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
-SOURCE_FILES =
+SOURCE_FILES = minishell.c
 
+OBJ_PATH	 = objects
 PATH_SOURCES = sources
 SOURCES_MS	 = $(addprefix $(PATH_SOURCES)/, $(SOURCE_FILES))
-OBJ_SOURCES  = $(SOURCES_MS:.c=.o)
+OBJ_SOURCES  = $(SOURCES_MS:$(PATH_SOURCES)/%.c=$(OBJ_PATH)/%.o)
 
 HEADER		= $(PATH_SOURCES)/minishell.h
 NAME		= minishell
@@ -26,21 +27,24 @@ CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -g3
 RM			= rm -rf
 
-.c.o:
-			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(LIBFT_PATH)
+$(OBJ_PATH)/%.o:	$(PATH_SOURCES)/%.c
+					$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
 
 all:		$(NAME)
 
-$(NAME):	$(LIBFT) $(OBJ_SOURCES) $(HEADER)
+$(NAME):	$(LIBFT) $(OBJ_PATH) $(OBJ_SOURCES) $(HEADER)
 			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
 			$(MAKE) -C $(LIBFT_PATH)
 			$(MAKE) -C $(LIBFT_PATH) bonus
 
+$(OBJ_PATH):
+			mkdir -p $(OBJ_PATH)
+
 clean:
 			$(MAKE) -C $(LIBFT_PATH) clean
-			$(RM) $(OBJ_SOURCES)
+			$(RM) $(OBJ_PATH)
 
 fclean:		clean
 			$(MAKE) -C $(LIBFT_PATH) fclean
