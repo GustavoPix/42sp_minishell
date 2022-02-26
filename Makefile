@@ -1,51 +1,63 @@
-NOC			= \033[0m
-BOLD		= \033[1m
-UNDERLINE	= \033[4m
-BLACK		= \033[1;30m
-RED			= \033[1;31m
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-BLUE		= \033[1;34m
-VIOLET		= \033[1;35m
-CYAN		= \033[1;36m
-WHITE		= \033[1;37m
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
+#    Updated: 2022/02/26 16:49:01 by glima-de         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-LIBFT_PATH	= libraries/libft
-LIBFT		= $(LIBFT_PATH)/libft.a
+SRCS_MANDATORY = ./main.c \
 
-SOURCE_FILES =
+OBJS 		= ${SRCS:.c=.o}
+OBJS_M		= ${SRCS_MANDATORY:.c=.o}
 
-PATH_SOURCES = sources
-SOURCES_MS	 = $(addprefix $(PATH_SOURCES)/, $(SOURCE_FILES))
-OBJ_SOURCES  = $(SOURCES_MS:.c=.o)
+LIBFT 		= libft
 
-HEADER		= $(PATH_SOURCES)/minishell.h
+SRC			= ./src/inputline/path.c \
+			  ./src/inputline/init.c \
+			  ./src/inputline/inputline.c \
+			  ./src/inputline/clear.c
+
+OBJS_SLG	= ${SRC:.c=.o}
+
+UNAME		:= $(shell uname)
+
+PATH_MLX	= mlx
+CC 			= clang
+CFLAGS		= -Wall -Wextra -Werror
+EFLAGS		= -L/usr/include -lreadline
+RM			= rm -f
 NAME		= minishell
 
-CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -g3
-RM			= rm -rf
+all: 		${NAME}
 
 .c.o:
-			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o) -I $(LIBFT_PATH)
+			${CC} -g ${CFLAGS} -I libft -Imlx -c $< -o ${<:.c=.o}
 
-all:		$(NAME)
-
-$(NAME):	$(LIBFT) $(OBJ_SOURCES) $(HEADER)
-			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -o $(NAME)
-
-$(LIBFT):
-			$(MAKE) -C $(LIBFT_PATH)
-			$(MAKE) -C $(LIBFT_PATH) bonus
+$(NAME): 	$(OBJS) ${OBJS_M} ${OBJS_SLG}
+			make -C $(LIBFT)
+			${CC} -g $(CFLAGS) ${EFLAGS} -o $(NAME) $(OBJS) ${OBJS_M} ${OBJS_SLG} -L $(LIBFT) -lft
 
 clean:
-			$(MAKE) -C $(LIBFT_PATH) clean
-			$(RM) $(OBJ_SOURCES)
+			make -C $(LIBFT) clean
+			${RM} ${OBJS} ${OBJS_M} ${OBJS_SLG}
 
-fclean:		clean
-			$(MAKE) -C $(LIBFT_PATH) fclean
-			$(RM) $(NAME)
+fclean: 	clean
+			make -C $(LIBFT) fclean
+			${RM} ${NAME}
 
-re:			clean fclean all
+re: 		fclean all
 
-.PHONY:		all clean fclean re .c.o
+test:		all clean
+			clear
+			./${NAME}
+
+val:		all clean
+			clear
+			valgrind -q --leak-check=full ./${NAME}
+
+.PHONY:		all gclone clean fclean re test val
