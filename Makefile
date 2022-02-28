@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/02/26 16:49:01 by glima-de         ###   ########.fr        #
+#    Updated: 2022/02/28 15:02:56 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,11 @@ LIBFT 		= libft
 SRC			= ./src/inputline/path.c \
 			  ./src/inputline/init.c \
 			  ./src/inputline/inputline.c \
-			  ./src/inputline/clear.c
+			  ./src/inputline/clear.c \
+			  ./src/path/gofolder.c \
+			  ./src/cmds/init.c \
+			  ./src/cmds/split_cmds.c \
+			  ./src/cmds/clear.c
 
 OBJS_SLG	= ${SRC:.c=.o}
 
@@ -60,4 +64,4 @@ val:		all clean
 			clear
 			valgrind -q --leak-check=full ./${NAME}
 
-.PHONY:		all gclone clean fclean re test val
+.PHONY:		all clean fclean re test val

@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputline.h                                        :+:      :+:    :+:   */
+/*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 12:53:25 by glima-de          #+#    #+#             */
-/*   Updated: 2022/02/27 14:31:28 by glima-de         ###   ########.fr       */
+/*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
+/*   Updated: 2022/02/28 15:26:58 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUTLINE_H
-#define INPUTLINE_H
+#ifndef CMDS_H
+#define CMDS_H
 
+#include "../inputline/inputline.h"
 #include "../../libft/libft.h"
-#include <unistd.h>
 
-// Readline
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-typedef struct s_inputline
+typedef struct s_cmd
 {
-	char *path;
-	char *input;
-} t_inputline;
+	char *file_in;
+	char *file_out;
+	int bultin;
+	char *bin;
+	char **parans;
+	void *next;
+} t_cmd;
 
-t_inputline *start_inputline();
-void show_path(t_inputline *iline);
-void input_line(t_inputline *iline);
-void clear_inputline(t_inputline *iline);
+typedef struct s_cmds
+{
+	int qty;
+	t_cmd *first_cmd;
+	t_cmd *last_cmd;
+} t_cmds;
+
+t_cmds *start_cmds();
+void split_cmds(t_cmds *cmds, char *str);
+void clear_cmds(t_cmds *cmds, int all);
+
+void debug_cmds(t_cmds *cmds);
 
 #endif
