@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/02/28 15:02:56 by glima-de         ###   ########.fr        #
+#    Updated: 2022/03/05 11:33:44 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC			= ./src/inputline/path.c \
 			  ./src/path/gofolder.c \
 			  ./src/cmds/init.c \
 			  ./src/cmds/split_cmds.c \
-			  ./src/cmds/clear.c
+			  ./src/cmds/clear.c \
+			  ./src/cmds/get_inoutfile.c
 
 OBJS_SLG	= ${SRC:.c=.o}
 

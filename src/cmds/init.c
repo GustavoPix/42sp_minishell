@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/02/28 14:56:29 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:06:26 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_cmds *start_cmds()
 	t_cmds *cmds;
 	cmds = malloc(sizeof(t_cmds));
 	cmds->qty = 0;
+	cmds->file_in = 0;
 	return (cmds);
 }
 
@@ -45,6 +46,10 @@ void debug_cmds(t_cmds *cmds)
 	i = 0;
 	t_cmd *cmd;
 	cmd = cmds->first_cmd;
+	ft_putstr_fd("file in -> |", 1);
+	if (cmds->file_in)
+		ft_putstr_fd(cmds->file_in, 1);
+	ft_putstr_fd("|\n", 1);
 	while (i < cmds->qty)
 	{
 		print_cmd(cmd);

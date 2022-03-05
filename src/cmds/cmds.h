@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/02/28 15:26:58 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:36:56 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 
 typedef struct s_cmd
 {
-	char *file_in;
-	char *file_out;
 	int bultin;
 	char *bin;
 	char **parans;
@@ -29,6 +27,8 @@ typedef struct s_cmd
 typedef struct s_cmds
 {
 	int qty;
+	char *file_in;
+	char *file_out;
 	t_cmd *first_cmd;
 	t_cmd *last_cmd;
 } t_cmds;
@@ -36,6 +36,8 @@ typedef struct s_cmds
 t_cmds *start_cmds();
 void split_cmds(t_cmds *cmds, char *str);
 void clear_cmds(t_cmds *cmds, int all);
+void split_minnor_char(t_cmds *cmds);
+int has_minnor_signal(char *str);
 
 void debug_cmds(t_cmds *cmds);
 

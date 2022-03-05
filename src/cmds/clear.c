@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/02/28 15:26:46 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/05 17:06:35 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void clear_cmds(t_cmds *cmds, int all)
 	cmds->qty = 0;
 	cmds->first_cmd = 0;
 	cmds->last_cmd = 0;
+	if (cmds->file_in)
+	{
+		free(cmds->file_in);
+		cmds->file_in = 0;
+	}
 	if (all)
+	{
 		free(cmds);
+	}
 }
