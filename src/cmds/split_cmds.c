@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 17:02:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/05 22:25:54 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,12 @@
 static void setup_cmd(t_cmds *cmds, char *str)
 {
 	char **aux;
-	char *str_nominnor;
-	int i_minus;
 	int args;
 
 	args = 0;
-	i_minus = has_minnor_signal(str);
-	if (i_minus > -1)
-	{
-		if (cmds->file_in)
-			free(cmds->file_in);
-		cmds->file_in = ft_strtrim(&str[i_minus + 1], " ");
-		if (i_minus == 0)
-		{
-			return;
-		}
-		else
-		{
-			str_nominnor = ft_calloc(sizeof(char), i_minus + 1);
-			ft_strlcpy(str_nominnor, str, i_minus);
+	minor_major_setup(cmds, str);
 
-			aux = ft_split(str_nominnor, ' ');
-			free(str_nominnor);
-		}
-	}
-	else
-	{
-		aux = ft_split(str, ' ');
-	}
+	aux = ft_split(str, ' ');
 	t_cmd *cmd;
 	cmd = malloc(sizeof(t_cmd));
 	cmd->bin = ft_strdup(aux[0]);
