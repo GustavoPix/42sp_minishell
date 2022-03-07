@@ -1,19 +1,21 @@
-NOC			= \033[0m
-BOLD		= \033[1m
-UNDERLINE	= \033[4m
-BLACK		= \033[1;30m
-RED			= \033[1;31m
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-BLUE		= \033[1;34m
-VIOLET		= \033[1;35m
-CYAN		= \033[1;36m
-WHITE		= \033[1;37m
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
+#    Updated: 2022/03/05 17:58:56 by wjuneo-f         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 LIBFT_PATH	= libraries/libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 
-SOURCE_FILES = minishell.c
+SOURCE_FILES = builtin_cd.c builtin_echo.c builtin_env.c builtin_export.c \
+			   builtin_pwd.c builtin_unset.c exec_comand.c minishell.c \
+			   start_shell.c
 
 OBJ_PATH	 = objects
 PATH_SOURCES = sources
@@ -33,7 +35,7 @@ $(OBJ_PATH)/%.o:	$(PATH_SOURCES)/%.c
 all:		$(NAME)
 
 $(NAME):	$(LIBFT) $(OBJ_PATH) $(OBJ_SOURCES) $(HEADER)
-			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -lreadline -o $(NAME)
 
 $(LIBFT):
 			$(MAKE) -C $(LIBFT_PATH)
@@ -50,6 +52,4 @@ fclean:		clean
 			$(MAKE) -C $(LIBFT_PATH) fclean
 			$(RM) $(NAME)
 
-re:			clean fclean all
-
-.PHONY:		all clean fclean re .c.o
+re:			clean fclean all .c.o
