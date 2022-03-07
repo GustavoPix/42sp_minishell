@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/05 17:58:56 by wjuneo-f         ###   ########.fr        #
+#    Updated: 2022/03/07 19:17:22 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,21 @@ OBJ_SOURCES  = $(SOURCES_MS:$(PATH_SOURCES)/%.c=$(OBJ_PATH)/%.o)
 HEADER		= $(PATH_SOURCES)/minishell.h
 NAME		= minishell
 
-CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -g3
-RM			= rm -rf
+all: 		${NAME}
 
 $(OBJ_PATH)/%.o:	$(PATH_SOURCES)/%.c
 					$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
 
-all:		$(NAME)
+$(NAME): 	$(OBJS) ${OBJS_M} ${OBJS_SLG}
+			make -C $(LIBFT)
+			${CC} -g $(CFLAGS) ${EFLAGS} -o $(NAME) $(OBJS) ${OBJS_M} ${OBJS_SLG} -L $(LIBFT) -lft
 
 $(NAME):	$(LIBFT) $(OBJ_PATH) $(OBJ_SOURCES) $(HEADER)
 			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -lreadline -o $(NAME)
 
-$(LIBFT):
-			$(MAKE) -C $(LIBFT_PATH)
-			$(MAKE) -C $(LIBFT_PATH) bonus
+fclean: 	clean
+			make -C $(LIBFT) fclean
+			${RM} ${NAME}
 
 $(OBJ_PATH):
 			mkdir -p $(OBJ_PATH)
@@ -48,8 +48,8 @@ clean:
 			$(MAKE) -C $(LIBFT_PATH) clean
 			$(RM) $(OBJ_PATH)
 
-fclean:		clean
-			$(MAKE) -C $(LIBFT_PATH) fclean
-			$(RM) $(NAME)
+test:		all clean
+			clear
+			./${NAME}
 
 re:			clean fclean all .c.o
