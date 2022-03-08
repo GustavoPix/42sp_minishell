@@ -1,55 +1,63 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/07 19:17:22 by glima-de         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRCS_MANDATORY = ./main.c \
 
-LIBFT_PATH	= libraries/libft
-LIBFT		= $(LIBFT_PATH)/libft.a
+OBJS 		= ${SRCS:.c=.o}
+OBJS_M		= ${SRCS_MANDATORY:.c=.o}
 
-SOURCE_FILES = builtin_cd.c builtin_echo.c builtin_env.c builtin_export.c \
-			   builtin_pwd.c builtin_unset.c exec_comand.c minishell.c \
-			   start_shell.c
+LIBFT 		= libft
 
-OBJ_PATH	 = objects
-PATH_SOURCES = sources
-SOURCES_MS	 = $(addprefix $(PATH_SOURCES)/, $(SOURCE_FILES))
-OBJ_SOURCES  = $(SOURCES_MS:$(PATH_SOURCES)/%.c=$(OBJ_PATH)/%.o)
+SRC			= ./src/inputline/path.c \
+			  ./src/inputline/init.c \
+			  ./src/inputline/inputline.c \
+			  ./src/inputline/clear.c \
+			  ./src/path/gofolder.c \
+			  ./src/cmds/init.c \
+			  ./src/cmds/split_cmds.c \
+			  ./src/cmds/clear.c \
+			  ./src/cmds/get_inoutfile.c \
+			  ./src/cmds/execute_cmds.c \
+			  ./src/builtin/builtin_cd.c \
+			  ./src/builtin/builtin_echo.c \
+			  ./src/builtin/builtin_env.c \
+			  ./src/builtin/builtin_export.c \
+			  ./src/builtin/builtin_pwd.c \
+			  ./src/builtin/builtin_unset.c
 
-HEADER		= $(PATH_SOURCES)/minishell.h
+OBJS_SLG	= ${SRC:.c=.o}
+
+UNAME		:= $(shell uname)
+
+PATH_MLX	= mlx
+CC 			= clang
+CFLAGS		= -Wall -Wextra -Werror
+EFLAGS		= -L/usr/include -lreadline
+RM			= rm -f
 NAME		= minishell
 
 all: 		${NAME}
 
-$(OBJ_PATH)/%.o:	$(PATH_SOURCES)/%.c
-					$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFT_PATH)
+.c.o:
+			${CC} -g ${CFLAGS} -I libft -Imlx -c $< -o ${<:.c=.o}
 
 $(NAME): 	$(OBJS) ${OBJS_M} ${OBJS_SLG}
 			make -C $(LIBFT)
 			${CC} -g $(CFLAGS) ${EFLAGS} -o $(NAME) $(OBJS) ${OBJS_M} ${OBJS_SLG} -L $(LIBFT) -lft
 
-$(NAME):	$(LIBFT) $(OBJ_PATH) $(OBJ_SOURCES) $(HEADER)
-			$(CC) $(CFLAGS) $(OBJ_SOURCES) $(LIBFT) -lreadline -o $(NAME)
+clean:
+			make -C $(LIBFT) clean
+			${RM} ${OBJS} ${OBJS_M} ${OBJS_SLG}
 
 fclean: 	clean
 			make -C $(LIBFT) fclean
 			${RM} ${NAME}
 
-$(OBJ_PATH):
-			mkdir -p $(OBJ_PATH)
-
-clean:
-			$(MAKE) -C $(LIBFT_PATH) clean
-			$(RM) $(OBJ_PATH)
+re: 		fclean all
 
 test:		all clean
 			clear
 			./${NAME}
 
-re:			clean fclean all .c.o
+val:		all clean
+			clear
+			valgrind -q --leak-check=full ./${NAME}
+
+.PHONY:		all clean fclean re test val

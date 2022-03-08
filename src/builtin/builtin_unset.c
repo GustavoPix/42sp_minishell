@@ -1,6 +1,10 @@
-#include "minishell.h"
+// trocar header depois.
 
-void	builtin_unset(char **comand, int fd[], char *envp[])
+#include "../cmds/cmds.h"
+
+
+// lembrar de dar join nos parans;
+void	builtin_unset(t_cmd *builtin, int fd[], char *envp[])
 {
 	int		size_envp;
 	int		size_temp;
@@ -8,7 +12,7 @@ void	builtin_unset(char **comand, int fd[], char *envp[])
 	char	**temp;
 
 	(void)fd;
-	variable_unset = ft_strchr(*comand, '=');
+	variable_unset = ft_strchr(builtin->parans[1], '=');
 	variable_unset++;
 	size_envp = 0;
 	while(envp[size_envp] != variable_unset)

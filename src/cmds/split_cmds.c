@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 17:02:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/07 21:31:07 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void setup_cmd(t_cmds *cmds, char *str)
 		cmds->last_cmd->next = cmd;
 	cmds->last_cmd = cmd;
 	cmds->qty++;
+	cmd->bultin = 1;
 }
 
 void split_cmds(t_cmds *cmds, char *str)
