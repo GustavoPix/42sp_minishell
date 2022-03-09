@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 17:02:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/09 20:41:42 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void setup_cmd(t_cmds *cmds, char *str)
 		else
 		{
 			str_nominnor = ft_calloc(sizeof(char), i_minus + 1);
-			ft_strlcpy(str_nominnor, str, i_minus);
+			ft_strlcpy(str_nominnor, str, i_minus + 1);
 
 			aux = ft_split(str_nominnor, ' ');
 			free(str_nominnor);
