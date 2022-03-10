@@ -6,20 +6,20 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:50:06 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 16:48:49 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:20:53 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-int has_minnor_signal(char *str)
+int has_minnor_signal(char *str, char c)
 {
 	int i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '<')
+		if (str[i] == c)
 			return (i);
 		i++;
 	}

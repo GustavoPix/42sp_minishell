@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 16:36:56 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:21:22 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_cmds *start_cmds();
 void split_cmds(t_cmds *cmds, char *str);
 void clear_cmds(t_cmds *cmds, int all);
 void split_minnor_char(t_cmds *cmds);
-int has_minnor_signal(char *str);
+int has_minnor_signal(char *str, char c);
 
 void debug_cmds(t_cmds *cmds);
 

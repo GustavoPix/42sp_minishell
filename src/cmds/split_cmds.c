@@ -6,42 +6,86 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/09 20:41:42 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/10 19:45:44 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-static void setup_cmd(t_cmds *cmds, char *str)
+static void theatment_signal(t_cmds *cmds, char **str, char c)
 {
-	char **aux;
-	char *str_nominnor;
-	int i_minus;
-	int args;
+	int i_char;
+	// char *str_nominnor;
+	char *aux;
 
-	args = 0;
-	i_minus = has_minnor_signal(str);
-	if (i_minus > -1)
+	i_char = has_minnor_signal(*str, c);
+	if (cmds->file_in && c == '<')
+		free(cmds->file_in);
+	if (cmds->file_out && c == '>')
+		free(cmds->file_out);
+	if (c == '<')
 	{
-		if (cmds->file_in)
-			free(cmds->file_in);
-		cmds->file_in = ft_strtrim(&str[i_minus + 1], " ");
-		if (i_minus == 0)
-		{
-			return;
-		}
-		else
-		{
-			str_nominnor = ft_calloc(sizeof(char), i_minus + 1);
-			ft_strlcpy(str_nominnor, str, i_minus + 1);
-
-			aux = ft_split(str_nominnor, ' ');
-			free(str_nominnor);
-		}
+		cmds->file_in = ft_strtrim(&str[0][i_char + 1], " ");
+		if (has_minnor_signal(*str, '>') > -1)
+			theatment_signal(cmds, &cmds->file_in, '>');
 	}
 	else
 	{
+		cmds->file_out = ft_strtrim(&str[0][i_char + 1], " ");
+		if (has_minnor_signal(*str, '<') > -1)
+			theatment_signal(cmds, &cmds->file_out, '<');
+	}
+	if (i_char == 0)
+	{
+		return;
+	}
+	else
+	{
+		aux = *str;
+		*str = ft_calloc(sizeof(char), i_char + 1);
+		ft_strlcpy(str[0], aux, i_char + 1);
+
+		// aux = ft_split(str_nominnor, ' ');
+		free(aux);
+	}
+}
+
+static void setup_cmd(t_cmds *cmds, char *str)
+{
+	char **aux;
+
+	int i_minus;
+	int i_major;
+	int args;
+
+	args = 0;
+	i_minus = has_minnor_signal(str, '<');
+	i_major = has_minnor_signal(str, '>');
+	if (i_minus > -1 || i_major > -1)
+	{
+		if (i_minus < i_major)
+		{
+			if (i_minus > -1)
+				theatment_signal(cmds, &str, '<');
+			else
+				theatment_signal(cmds, &str, '>');
+		}
+		else
+		{
+			if (i_major > -1)
+				theatment_signal(cmds, &str, '>');
+			else
+				theatment_signal(cmds, &str, '<');
+		}
+		if (i_minus == 0 && i_major == 0)
+		{
+			return;
+		}
+	}
+	// else
+	{
 		aux = ft_split(str, ' ');
+		free(str);
 	}
 	t_cmd *cmd;
 	cmd = malloc(sizeof(t_cmd));
@@ -79,7 +123,7 @@ void split_cmds(t_cmds *cmds, char *str)
 	while (aux[i])
 	{
 		setup_cmd(cmds, aux[i]);
-		free(aux[i]);
+		// free(aux[i]);
 		i++;
 	}
 	free(aux);
