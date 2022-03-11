@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/10 22:50:58 by glima-de         ###   ########.fr       */
+/*   Created: 2022/03/10 20:54:38 by glima-de          #+#    #+#             */
+/*   Updated: 2022/03/10 23:51:12 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
+#include "../minishell.h"
 
-#include "./libft/libft.h"
-#include "./src/inputline/inputline.h"
-#include "./src/path/path.h"
-#include "./src/cmds/cmds.h"
-
-typedef struct s_env
+void clear_envs(t_data *data)
 {
-	char *name;
-	char **values;
-} t_env;
+	int i;
+	int j;
 
-typedef struct s_data
-{
-	t_inputline *i_line;
-	t_cmds *cmds;
-	t_env **envs;
-	int qty_env;
-} t_data;
-
-void start_envs(t_data *data, char **env);
-void clear_envs(t_data *data);
-
-#endif
+	i = 0;
+	while (i < data->qty_env)
+	{
+		j = 0;
+		if (data->envs[i]->name)
+			free(data->envs[i]->name);
+		while (data->envs[i]->values && data->envs[i]->values[j])
+		{
+			free(data->envs[i]->values[j]);
+			j++;
+		}
+		free(data->envs[i]->values);
+		free(data->envs[i]);
+		i++;
+	}
+	free(data->envs);
+}

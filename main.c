@@ -6,17 +6,21 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:52:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/05 15:32:08 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/10 22:51:30 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minishell.h"
 
-int main()
+int main(int argc, char **argv, char **env)
 {
 	t_data data;
+	(void)argc;
+	(void)argv;
+	(void)env;
 	data.i_line = start_inputline();
 	data.cmds = start_cmds();
+	start_envs(&data, env);
 	while (strcmp(data.i_line->input, "exit") != 0)
 	{
 		show_path(data.i_line);
@@ -31,6 +35,7 @@ int main()
 	}
 	clear_inputline(data.i_line);
 	clear_cmds(data.cmds, 1);
+	clear_envs(&data);
 	ft_putstr_fd("Bye! ;)\n", 1);
 	return (0);
 }
