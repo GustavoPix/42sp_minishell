@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/10 22:50:58 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/12 18:34:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,11 @@ typedef struct s_data
 
 void start_envs(t_data *data, char **env);
 void clear_envs(t_data *data);
+t_env *get_env(t_data *data, char *env);
+char *get_value_env_join(t_env *env);
+
+// Precisa tirar isso daqui
+// inputline.h
+void input_line(t_data *data);
 
 #endif

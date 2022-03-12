@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/11 00:00:35 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/12 14:01:30 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ void start_envs(t_data *data, char **env)
 		i++;
 	}
 
-	i = 0;
-	while (i < data->qty_env)
-	{
-		ft_putstr_fd(envs[i]->name, 1);
-		ft_putchar_fd('\n', 1);
-
-		int j = 0;
-		while (envs[i]->values && envs[i]->values[j])
-		{
-			ft_putstr_fd(envs[i]->values[j], 1);
-			ft_putstr_fd("  -  ", 1);
-			j++;
-		}
-		ft_putstr_fd("\n\n", 1);
-		i++;
-	}
+	// i = 0;
+	// while (i < data->qty_env)
+	//{
+	//	ft_putstr_fd(envs[i]->name, 1);
+	//	ft_putchar_fd('\n', 1);
+	//
+	//	int j = 0;
+	//	while (envs[i]->values && envs[i]->values[j])
+	//	{
+	//		ft_putstr_fd(envs[i]->values[j], 1);
+	//		ft_putstr_fd("  -  ", 1);
+	//		j++;
+	//	}
+	//	ft_putstr_fd("\n\n", 1);
+	//	i++;
+	//}
 	data->envs = envs;
 }
