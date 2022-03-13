@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 18:39:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/13 20:07:53 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,34 +59,34 @@ static int replace_local_vars(t_data *data)
 	{
 		var_name = get_env_name(&data->i_line->input[dollarPos + 1]);
 		env = get_env(data, var_name);
-		if (env)
+		// if (env)
 		{
-			if (env->values)
-			{
+			if (env && env->values)
 				value_env = get_value_env_join(env);
-				aux = ft_calloc(sizeof(char), ft_strlen(data->i_line->input) - ft_strlen(var_name) + ft_strlen(value_env) + 1);
-				int i = 0;
-				int j = 0;
-				while (i < dollarPos)
-				{
-					aux[i] = data->i_line->input[i];
-					i++;
-				}
-				while (value_env[j])
-				{
-					aux[i + j] = value_env[j];
-					j++;
-				}
+			else
+				value_env = ft_strdup("");
+			aux = ft_calloc(sizeof(char), ft_strlen(data->i_line->input) - ft_strlen(var_name) + ft_strlen(value_env) + 1);
+			int i = 0;
+			int j = 0;
+			while (i < dollarPos)
+			{
+				aux[i] = data->i_line->input[i];
 				i++;
-				while (data->i_line->input[i + ft_strlen(var_name)])
-				{
-					aux[i + j - 1] = data->i_line->input[i + ft_strlen(var_name)];
-					i++;
-				}
-				free(data->i_line->input);
-				data->i_line->input = aux;
-				free(value_env);
 			}
+			while (value_env[j])
+			{
+				aux[i + j] = value_env[j];
+				j++;
+			}
+			i++;
+			while (data->i_line->input[i + ft_strlen(var_name)])
+			{
+				aux[i + j - 1] = data->i_line->input[i + ft_strlen(var_name)];
+				i++;
+			}
+			free(data->i_line->input);
+			data->i_line->input = aux;
+			free(value_env);
 		}
 		free(var_name);
 	}
