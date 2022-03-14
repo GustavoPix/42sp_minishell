@@ -6,11 +6,27 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:52:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 15:34:45 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/13 21:26:55 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./minishell.h"
+
+static void setup_cmds_bin_path(t_data *data)
+{
+	t_cmd *cmd;
+	int i;
+
+	i = 0;
+	cmd = data->cmds->first_cmd;
+	while (i < data->cmds->qty)
+	{
+		test_and_apply_bin(data, cmd);
+		i++;
+		if (i < data->cmds->qty)
+			cmd = cmd->next;
+	}
+}
 
 int main(int argc, char **argv, char **env)
 {
@@ -29,7 +45,7 @@ int main(int argc, char **argv, char **env)
 		if (data.cmds->qty == 1)
 			if (ft_strncmp(data.cmds->first_cmd->bin, "cd", 2) == 0)
 				gofolder(data.i_line, data.cmds->first_cmd->parans[1]);
-		// split_minnor_char(data.cmds);
+		setup_cmds_bin_path(&data);
 		debug_cmds(data.cmds);
 		if (data.cmds->qty > 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 18:34:10 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/13 20:56:51 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,8 @@ char *get_value_env_join(t_env *env);
 // Precisa tirar isso daqui
 // inputline.h
 void input_line(t_data *data);
+
+// cmds.h
+int test_and_apply_bin(t_data *data, t_cmd *cmd);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/10 19:45:44 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/13 21:34:35 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-static void theatment_signal(t_cmds *cmds, char **str, char c)
+static void treatment_signal(t_cmds *cmds, char **str, char c)
 {
 	int i_char;
 	// char *str_nominnor;
@@ -27,13 +27,13 @@ static void theatment_signal(t_cmds *cmds, char **str, char c)
 	{
 		cmds->file_in = ft_strtrim(&str[0][i_char + 1], " ");
 		if (has_minnor_signal(*str, '>') > -1)
-			theatment_signal(cmds, &cmds->file_in, '>');
+			treatment_signal(cmds, &cmds->file_in, '>');
 	}
 	else
 	{
 		cmds->file_out = ft_strtrim(&str[0][i_char + 1], " ");
 		if (has_minnor_signal(*str, '<') > -1)
-			theatment_signal(cmds, &cmds->file_out, '<');
+			treatment_signal(cmds, &cmds->file_out, '<');
 	}
 	if (i_char == 0)
 	{
@@ -66,16 +66,16 @@ static void setup_cmd(t_cmds *cmds, char *str)
 		if (i_minus < i_major)
 		{
 			if (i_minus > -1)
-				theatment_signal(cmds, &str, '<');
+				treatment_signal(cmds, &str, '<');
 			else
-				theatment_signal(cmds, &str, '>');
+				treatment_signal(cmds, &str, '>');
 		}
 		else
 		{
 			if (i_major > -1)
-				theatment_signal(cmds, &str, '>');
+				treatment_signal(cmds, &str, '>');
 			else
-				theatment_signal(cmds, &str, '<');
+				treatment_signal(cmds, &str, '<');
 		}
 		if (i_minus == 0 && i_major == 0)
 		{
@@ -103,6 +103,7 @@ static void setup_cmd(t_cmds *cmds, char *str)
 	free(aux[0]);
 	cmd->parans[args] = NULL;
 	cmd->parans[0] = "";
+	cmd->bultin = 0;
 	free(aux);
 	if (cmds->qty == 0)
 		cmds->first_cmd = cmd;
