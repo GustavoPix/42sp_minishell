@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:57:24 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/15 20:12:39 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void split_cmds(t_cmds *cmds, char *str)
 	i = 0;
 	aux = ft_split(str, '|');
 
-	while (aux[i])
+	while (aux && aux[i])
 	{
 		setup_cmd(cmds, aux[i]);
 		// free(aux[i]);

@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:52:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:29:04 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/15 20:50:31 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int main(int argc, char **argv, char **env)
 				ft_putstr_fd("|\n", 1);
 			}
 		}
+		execute_cmds(data.cmds);
 		clear_cmds(data.cmds, 0);
 	}
 	clear_inputline(data.i_line);
