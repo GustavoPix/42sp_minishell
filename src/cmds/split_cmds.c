@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:30:13 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/15 19:57:24 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ static void setup_cmd(t_cmds *cmds, char *str)
 		cmds->last_cmd->next = cmd;
 	cmds->last_cmd = cmd;
 	cmds->qty++;
-	cmd->bultin = 1;
+	cmd->bultin = 0;
 }
 
 void split_cmds(t_cmds *cmds, char *str)
