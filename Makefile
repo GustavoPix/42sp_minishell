@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
+#    Updated: 2022/03/15 19:26:59 by glima-de         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SRCS_MANDATORY = ./main.c \
 
 OBJS 		= ${SRCS:.c=.o}
@@ -20,7 +32,13 @@ SRC			= ./src/inputline/path.c \
 			  ./src/builtin/builtin_env.c \
 			  ./src/builtin/builtin_export.c \
 			  ./src/builtin/builtin_pwd.c \
-			  ./src/builtin/builtin_unset.c
+			  ./src/builtin/builtin_unset.c \
+			  ./src/cmds/binpath.c \
+			  ./src/cmds/get_inoutfile.c \
+			  ./src/cmds/treatments.c \
+			  ./src/envs/init.c \
+			  ./src/envs/clear.c \
+			  ./src/envs/get_env_var.c
 
 OBJS_SLG	= ${SRC:.c=.o}
 

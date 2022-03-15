@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inputline.h                                        :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/26 12:53:25 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 15:42:14 by glima-de         ###   ########.fr       */
+/*   Created: 2022/03/10 20:54:38 by glima-de          #+#    #+#             */
+/*   Updated: 2022/03/10 23:51:12 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INPUTLINE_H
-#define INPUTLINE_H
+#include "../minishell.h"
 
-#include "../../libft/libft.h"
-
-#include <unistd.h>
-
-// Readline
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
-typedef struct s_inputline
+void clear_envs(t_data *data)
 {
-	char *path;
-	char *input;
-} t_inputline;
+	int i;
+	int j;
 
-t_inputline *start_inputline();
-void show_path(t_inputline *iline);
-
-void clear_inputline(t_inputline *iline);
-
-#endif
+	i = 0;
+	while (i < data->qty_env)
+	{
+		j = 0;
+		if (data->envs[i]->name)
+			free(data->envs[i]->name);
+		while (data->envs[i]->values && data->envs[i]->values[j])
+		{
+			free(data->envs[i]->values[j]);
+			j++;
+		}
+		free(data->envs[i]->values);
+		free(data->envs[i]);
+		i++;
+	}
+	free(data->envs);
+}
