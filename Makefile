@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/13 20:56:03 by glima-de         ###   ########.fr        #
+#    Updated: 2022/03/15 18:52:41 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC			= ./src/inputline/path.c \
 			  ./src/cmds/clear.c \
 			  ./src/cmds/binpath.c \
 			  ./src/cmds/get_inoutfile.c \
+			  ./src/cmds/treatments.c \
 			  ./src/envs/init.c \
 			  ./src/envs/clear.c \
 			  ./src/envs/get_env_var.c

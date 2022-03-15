@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/13 21:34:35 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/15 19:21:37 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,9 @@ static void setup_cmd(t_cmds *cmds, char *str)
 		}
 	}
 	// else
-	{
-		aux = ft_split(str, ' ');
-		free(str);
-	}
+	swap_char_quote(str, ' ', 1);
+	aux = ft_split(str, ' ');
+	free(str);
 	t_cmd *cmd;
 	cmd = malloc(sizeof(t_cmd));
 	cmd->bin = ft_strdup(aux[0]);
@@ -96,6 +95,8 @@ static void setup_cmd(t_cmds *cmds, char *str)
 	args = 1;
 	while (aux[args])
 	{
+		swap_char_quote(aux[args], 1, ' ');
+		remove_quote(aux[args]);
 		cmd->parans[args] = ft_strdup(aux[args]);
 		free(aux[args]);
 		args++;
