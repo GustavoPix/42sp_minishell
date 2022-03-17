@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/13 20:23:17 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/15 20:47:29 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,15 @@ void input_line(t_data *data)
 	to_print = ft_strjoin(data->i_line->path, "$ ");
 	data->i_line->input = readline(to_print);
 	free(to_print);
-	aux = ft_strtrim(data->i_line->input, " ");
-	if (aux)
+	if (!data->i_line->input)
 	{
-		add_history(aux);
-		free(data->i_line->input);
-		data->i_line->input = aux;
-		replace_local_vars(data);
+		ft_putstr_fd("exit\n", 1);
+		data->i_line->input = ft_strdup("exit");
 	}
+	aux = ft_strtrim(data->i_line->input, " ");
+	if (ft_strlen(aux))
+		add_history(aux);
+	free(data->i_line->input);
+	data->i_line->input = aux;
+	replace_local_vars(data);
 }
