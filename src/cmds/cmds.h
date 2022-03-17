@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:29:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:32:08 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void split_minnor_char(t_cmds *cmds);
 int has_minnor_signal(char *str, char c);
 void swap_char_quote(char *str, int from, int to);
 void remove_quote(char *str);
+int count_size_matrix(char **str);
 
 void debug_cmds(t_cmds *cmds);
 
