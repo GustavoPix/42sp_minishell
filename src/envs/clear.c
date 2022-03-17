@@ -6,16 +6,16 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:38 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/10 23:51:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:44:15 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void clear_envs(t_data *data)
+void	clear_envs(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < data->qty_env)
