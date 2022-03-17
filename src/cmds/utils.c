@@ -6,15 +6,15 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 20:28:18 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/17 20:31:20 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:37:43 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-int count_size_matrix(char **str)
+int	count_size_matrix(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
