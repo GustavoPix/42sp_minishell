@@ -1,6 +1,25 @@
 #include "cmds.h"
 
-// achar um lugar melhor para essas duas funções;
+void	execute_doc(int fd[], char *end)
+{
+	char	*line;
+
+	while(1)
+	{
+		ft_putstr_fd("-> ", 1);
+		line = get_next_line(STDIN_FILENO);
+		if (ft_strncmp(line, end, ft_strlen(line) - 1) == 0)
+			{
+				free((void *)line);
+				close(0);
+				close(1);
+				close(fd[1]);
+				break ;
+			}
+		ft_putstr_fd(line, fd[1]);
+		free((void *)line);
+	}
+}
 
 void	indentify_builtin(t_cmd *builtin, int fd[])
 {
@@ -38,18 +57,20 @@ int	execute_cmds(t_cmds *cmds)
 		return (1);
 	if (pid == 0)
 	{
+		// if (cmds->file_in)
+		// 	dup2(cmds->file_in, STDIN_FILENO);
 		if (cmds->first_cmd->bultin == 1)
 			indentify_builtin(cmds->first_cmd, fd);
-		// else
-		// {
-		// 	dup2(cmds->file_in, STDIN_FILENO);
-		// 	close(fd[0]);
-		// 	dup2(cmds->file_out, STDOUT_FILENO);
-		// 	if (execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL) == -1)
-		// 	{
-		// 		// free aqui
-		// 		// exit/return.
-		// 	}
+		else
+		{
+			cmds->first_cmd->document = 1;
+			if ((cmds->first_cmd->document) == 1)
+			{
+				execute_doc(fd, "end");
+				dup2(fd[0], STDIN_FILENO);
+			}
+			execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL);
+		}
 		close(fd[0]);
 		close(fd[1]);
 		exit(0);
@@ -57,5 +78,5 @@ int	execute_cmds(t_cmds *cmds)
 	wait(NULL);
 	close(fd[0]);
 	close(fd[1]);
-	return (1);
+	return (0);
 }

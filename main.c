@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:52:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:29:04 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:40:43 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv, char **env)
 			if (ft_strncmp(data.cmds->first_cmd->bin, "cd", 2) == 0)
 				gofolder(data.i_line, data.cmds->first_cmd->parans[1]);
 		setup_cmds_bin_path(&data);
-		debug_cmds(data.cmds);
+		// debug_cmds(data.cmds);
 		if (data.cmds->qty > 0)
 		{
 			t_env *env_obj;
@@ -61,8 +61,10 @@ int main(int argc, char **argv, char **env)
 				ft_putstr_fd("|\n", 1);
 			}
 		}
+		execute_cmds(data.cmds);
 		clear_cmds(data.cmds, 0);
 	}
+
 	clear_inputline(data.i_line);
 	clear_cmds(data.cmds, 1);
 	clear_envs(&data);

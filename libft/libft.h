@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:50:00 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/02/16 11:38:36 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:17:07 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,9 @@ int		ft_isprint(int c);
  */
 int		ft_memcmp(const void *b1, const void *b2, size_t len);
 
+////////
+int ft_strcmp(const char *s1, const char *s2);
+///////
 /**
  * @brief Compares at most the first len bytes of s1 and s2. Characters	that
  * appear after a \\0 character are not compared.
