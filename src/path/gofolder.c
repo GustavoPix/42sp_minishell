@@ -6,13 +6,13 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 14:10:41 by glima-de          #+#    #+#             */
-/*   Updated: 2022/02/27 14:42:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:25:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "path.h"
 
-int gofolder(t_inputline *iline, char *path)
+int	gofolder(t_inputline *iline, char *path)
 {
 	if (chdir(path) != 0)
 	{
