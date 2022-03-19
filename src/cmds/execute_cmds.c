@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 16:59:28 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:17:12 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,15 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 		builtin_env(data, builtin, fd);
 	//else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
 	//	exit(0);
-	else
-	{
-		write(fd[1], "minishell: command not found: ", 31);
-		write(fd[1], builtin->bin, ft_strlen(builtin->bin));
-		write(fd[1], "\n", 1);
-	}
 }
 
 int	execute_cmds(t_data *data, t_cmds *cmds)
 {
 	int	fd[2];
 	int	pid;
+
+	if (cmds->first_cmd->bultin == 1)
+			indentify_builtin(data, cmds->first_cmd, fd);
 
 	if (pipe(fd) == -1)
 		return (1);
@@ -72,8 +69,8 @@ int	execute_cmds(t_data *data, t_cmds *cmds)
 	{
 		// if (cmds->file_in)
 		// 	dup2(cmds->file_in, STDIN_FILENO);
-		if (cmds->first_cmd->bultin == 1)
-			indentify_builtin(data, cmds->first_cmd, fd);
+		//if (cmds->first_cmd->bultin == 1)
+		//	indentify_builtin(data, cmds->first_cmd, fd);
 		// else
 		// {
 		// 	cmds->first_cmd->document = 1;
