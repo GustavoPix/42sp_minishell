@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 16:58:43 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:02:49 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void	builtin_echo(t_cmd *builtin, int fd[]);
 
 
 void	builtin_pwd(t_cmd *builtin, int fd[]);
-void	builtin_unset(t_cmd *builtin, int fd[], char *envp[]);
 
 #endif

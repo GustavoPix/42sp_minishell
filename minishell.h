@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 16:58:47 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:02:03 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 
 void	start_envs(t_data *data, char **env);
 void	add_env(t_data *data, char *env_value);
+void	remove_env(t_data *data, char *env_unset);
 void	clear_envs(t_data *data);
 t_env	*get_env(t_data *data, char *env);
 char	*get_value_env_join(t_env *env);
@@ -50,6 +51,7 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 // finish
 void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_export(t_data *data, t_cmd *builtin, int fd[]);
+void	builtin_unset(t_data *data, t_cmd *builtin, int fd[]);
 
 int		execute_cmds(t_data *data, t_cmds *cmds);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);

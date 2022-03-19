@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 17:15:34 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:17:16 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,37 @@ void	add_env(t_data *data, char *env_value)
 	data->envs = new_envs;
 	data->qty_env++;
 	clear_matrix(aux);
+}
+
+void	remove_env(t_data *data, char *env_unset)
+{
+	t_env	**new_envs;
+	int		i;
+	int		pos;
+
+	pos = 0;
+	i = 0;
+	while (pos < data->qty_env)
+	{
+		if (ft_strcmp(env_unset, data->envs[pos]->name) == 0)
+			break ;
+		pos++;
+	}
+	new_envs = malloc(sizeof(t_env *) * (data->qty_env - 1));
+	while (i < data->qty_env - 1)
+	{
+		if (i < pos)
+			new_envs[i] = data->envs[i];
+		else
+			new_envs[i] = data->envs[i + 1];
+		i++;
+	}
+	free(data->envs[pos]->name);
+	clear_matrix(data->envs[pos]->values);
+	free(data->envs[pos]);
+	free(data->envs);
+	data->envs = new_envs;
+	data->qty_env--;
 }
 
 void	start_envs(t_data *data, char **env)
