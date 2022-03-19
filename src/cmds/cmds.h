@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 11:06:30 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 11:47:35 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,9 @@ int		count_size_matrix(char **str);
 
 void	debug_cmds(t_cmds *cmds);
 
-// My alteration
-int		execute_cmds(t_cmds *cmds);
-void	indentify_builtin(t_cmd *builtin, int fd[]);
-// finish
-
 void	builtin_cd(t_cmd *builtin, int fd[]);
 void	builtin_echo(t_cmd *builtin, int fd[]);
-void	builtin_env(t_cmd *builtin, int fd[], char *envp[]);
+
 void	builtin_export(t_cmd *builtin, int fd[], char *envp[]);
 void	builtin_pwd(t_cmd *builtin, int fd[]);
 void	builtin_unset(t_cmd *builtin, int fd[], char *envp[]);

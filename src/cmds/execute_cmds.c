@@ -6,11 +6,12 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/17 19:46:14 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 12:24:33 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
+#include "../minishell.h"
 
 void	execute_doc(int fd[], char *end)
 {
@@ -33,7 +34,7 @@ void	execute_doc(int fd[], char *end)
 	}
 }
 
-void	indentify_builtin(t_cmd *builtin, int fd[])
+void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 {
 	if (ft_strncmp(builtin->bin, "echo", ft_strlen("echo")) == 0)
 		builtin_echo(builtin, fd);
@@ -45,8 +46,8 @@ void	indentify_builtin(t_cmd *builtin, int fd[])
 	//	builtin_export(builtin, fd);
 	//else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
 	//	builtin_unset(builtin, fd);
-	//else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
-	//	builtin_env(builtin, fd);
+	else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
+		builtin_env(data, builtin, fd);
 	//else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
 	//	exit(0);
 	else
@@ -57,7 +58,7 @@ void	indentify_builtin(t_cmd *builtin, int fd[])
 	}
 }
 
-int	execute_cmds(t_cmds *cmds)
+int	execute_cmds(t_data *data, t_cmds *cmds)
 {
 	int	fd[2];
 	int	pid;
@@ -72,7 +73,7 @@ int	execute_cmds(t_cmds *cmds)
 		// if (cmds->file_in)
 		// 	dup2(cmds->file_in, STDIN_FILENO);
 		if (cmds->first_cmd->bultin == 1)
-			indentify_builtin(cmds->first_cmd, fd);
+			indentify_builtin(data, cmds->first_cmd, fd);
 		// else
 		// {
 		// 	cmds->first_cmd->document = 1;
@@ -83,10 +84,12 @@ int	execute_cmds(t_cmds *cmds)
 		// 	}
 		// 	execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL);
 		// }
+
 		close(fd[0]);
 		close(fd[1]);
 		exit(0);
 	}
+
 	wait(NULL);
 	close(fd[0]);
 	close(fd[1]);
