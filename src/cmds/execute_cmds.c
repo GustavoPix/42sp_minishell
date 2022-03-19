@@ -6,7 +6,11 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/18 20:20:52 by glima-de         ###   ########.fr       */
+=======
+/*   Updated: 2022/03/19 16:21:45 by glima-de         ###   ########.fr       */
+>>>>>>> builtins_envs
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +47,15 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 	else if (ft_strncmp(builtin->bin, "pwd", ft_strlen("pwd")) == 0)
 		builtin_pwd(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
+<<<<<<< HEAD
 		builtin_export(builtin, fd);
+=======
+		builtin_export(data, builtin, fd);
+>>>>>>> builtins_envs
 	//else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
 	//	builtin_unset(builtin, fd);
-	//else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
-	//	builtin_env(builtin, fd);
+	else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
+		builtin_env(data, builtin, fd);
 	//else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
 	//	exit(0);
 	else
@@ -73,7 +81,7 @@ int	execute_cmds(t_data *data, t_cmds *cmds)
 		// if (cmds->file_in)
 		// 	dup2(cmds->file_in, STDIN_FILENO);
 		if (cmds->first_cmd->bultin == 1)
-			indentify_builtin(cmds->first_cmd, fd);
+			indentify_builtin(data, cmds->first_cmd, fd);
 		// else
 		// {
 		// 	cmds->first_cmd->document = 1;
@@ -84,10 +92,12 @@ int	execute_cmds(t_data *data, t_cmds *cmds)
 		// 	}
 		// 	execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL);
 		// }
+
 		close(fd[0]);
 		close(fd[1]);
 		exit(0);
 	}
+
 	wait(NULL);
 	close(fd[0]);
 	close(fd[1]);
