@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 16:58:43 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:22:55 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,5 @@ void	debug_cmds(t_cmds *cmds);
 
 // finish
 
-void	builtin_cd(t_cmd *builtin, int fd[]);
-void	builtin_echo(t_cmd *builtin, int fd[]);
-
-
-void	builtin_pwd(t_cmd *builtin, int fd[]);
-void	builtin_unset(t_cmd *builtin, int fd[], char *envp[]);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/19 16:56:38 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:00:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void setup_cmds_bin_path(t_data *data)
 int main(int argc, char **argv, char **env)
 {
 	t_data data;
+	int fd;
 	int		i;
 
 	(void)argc;
@@ -49,12 +50,15 @@ int main(int argc, char **argv, char **env)
 		i = 0;
 		while (i < data.cmds->qty)
 		{
-			execute_cmds(&data, data.cmds);
+			fd = execute_cmds(&data, data.cmds);
 			i++;
 		}
+		char	buffer[1000];
+		read(fd, buffer, 1000);
+		close(fd);
+		printf("%s", buffer);
 		clear_cmds(data.cmds, 0);
 	}
-
 	clear_inputline(data.i_line);
 	clear_cmds(data.cmds, 1);
 	clear_envs(&data);

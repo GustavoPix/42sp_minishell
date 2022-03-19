@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 16:58:47 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 17:25:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int test_and_apply_bin(t_data *data, t_cmd *cmd);
 int		execute_cmds(t_data *data, t_cmds *cmds);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 // finish
-void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
+void	builtin_echo(t_cmd *builtin, int fd[]);
+void	builtin_cd(t_cmd *builtin, int fd[]);
+void	builtin_pwd(t_cmd *builtin, int fd[]);
 void	builtin_export(t_data *data, t_cmd *builtin, int fd[]);
-
-int		execute_cmds(t_data *data, t_cmds *cmds);
-void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
-
+void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 
 #endif
