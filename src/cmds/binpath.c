@@ -6,14 +6,14 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 20:34:12 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/13 21:34:01 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:39:57 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 
-static int is_builtin(t_cmd *cmd)
+static int	is_builtin(t_cmd *cmd)
 {
 	if (ft_strncmp(cmd->bin, "echo", ft_strlen("echo")) == 0)
 		cmd->bultin = 1;
@@ -32,16 +32,14 @@ static int is_builtin(t_cmd *cmd)
 	return (cmd->bultin);
 }
 
-int test_and_apply_bin(t_data *data, t_cmd *cmd)
+int	test_and_apply_bin(t_data *data, t_cmd *cmd)
 {
-	t_env *env_bin;
-	int i;
-	char *aux;
-	char *test_bin;
+	t_env	*env_bin;
+	int		i;
+	char	*aux;
+	char	*test_bin;
 
-	if (is_builtin(cmd))
-		return (1);
-	if (access(cmd->bin, F_OK) == 0)
+	if (is_builtin(cmd) || access(cmd->bin, F_OK) == 0)
 		return (1);
 	env_bin = get_env(data, "PATH");
 	i = 0;

@@ -6,15 +6,16 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 19:30:07 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:17:40 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-t_cmds *start_cmds()
+t_cmds	*start_cmds(void)
 {
-	t_cmds *cmds;
+	t_cmds	*cmds;
+
 	cmds = malloc(sizeof(t_cmds));
 	cmds->qty = 0;
 	cmds->file_in = 0;
@@ -22,9 +23,9 @@ t_cmds *start_cmds()
 	return (cmds);
 }
 
-void print_cmd(t_cmd *cmd)
+void	print_cmd(t_cmd *cmd)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	ft_putstr_fd("----\n", 1);
@@ -36,16 +37,15 @@ void print_cmd(t_cmd *cmd)
 		ft_putchar_fd('\n', 1);
 		i++;
 	}
-
 	ft_putstr_fd("----\n", 1);
 }
 
-void debug_cmds(t_cmds *cmds)
+void	debug_cmds(t_cmds *cmds)
 {
-	int i;
+	int		i;
+	t_cmd	*cmd;
 
 	i = 0;
-	t_cmd *cmd;
 	cmd = cmds->first_cmd;
 	ft_putstr_fd("file in -> |", 1);
 	if (cmds->file_in)

@@ -6,17 +6,17 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 13:41:36 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 18:46:43 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:49:45 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char *get_value_env_join(t_env *env)
+char	*get_value_env_join(t_env *env)
 {
-	int qty;
-	char *aux;
-	char *result;
+	int		qty;
+	char	*aux;
+	char	*result;
 
 	qty = 0;
 	result = ft_calloc(sizeof(char), 1);
@@ -34,9 +34,9 @@ char *get_value_env_join(t_env *env)
 	return (result);
 }
 
-t_env *get_env(t_data *data, char *env)
+t_env	*get_env(t_data *data, char *env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->qty_env)

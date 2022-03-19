@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_cmds.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
+/*   Updated: 2022/03/17 19:46:14 by glima-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cmds.h"
 
 void	execute_doc(int fd[], char *end)
@@ -29,14 +41,14 @@ void	indentify_builtin(t_cmd *builtin, int fd[])
 		builtin_cd(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "pwd", ft_strlen("pwd")) == 0)
 		builtin_pwd(builtin, fd);
-	// else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
-	// 	builtin_export(builtin, fd);
-	// else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
-	// 	builtin_unset(builtin, fd);
-	// else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
-	// 	builtin_env(builtin, fd);
-	else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
-		exit(0);
+	//else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
+	//	builtin_export(builtin, fd);
+	//else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
+	//	builtin_unset(builtin, fd);
+	//else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
+	//	builtin_env(builtin, fd);
+	//else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
+	//	exit(0);
 	else
 	{
 		write(fd[1], "minishell: command not found: ", 31);

@@ -6,18 +6,18 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 20:47:29 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/18 19:23:19 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inputline.h"
 #include "../minishell.h"
 
-static char *get_env_name(char *str)
+static char	*get_env_name(char *str)
 {
-	int i;
-	int qty;
-	char *aux;
+	int		i;
+	int		qty;
+	char	*aux;
 
 	i = 0;
 	qty = 0;
@@ -32,9 +32,9 @@ static char *get_env_name(char *str)
 	return (aux);
 }
 
-static int index_of_char(char *str, char c)
+static int	index_of_char(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -46,55 +46,55 @@ static int index_of_char(char *str, char c)
 	return (-1);
 }
 
-static int replace_local_vars(t_data *data)
+static char	*join_between(char *sori, char *sbet, int i_split, int ssplit)
 {
-	int dollarPos;
-	char *var_name;
-	t_env *env;
-	char *aux;
-	char *value_env;
+	char	*aux;
+	int		size_new_str;
 
-	dollarPos = index_of_char(data->i_line->input, '$');
-	if (dollarPos > -1)
+	size_new_str = ft_strlen(sori) - ssplit;
+	size_new_str += ft_strlen(sbet) + 1;
+	aux = ft_calloc(sizeof(char), size_new_str);
+	ft_strlcpy(aux, sori, i_split + 1);
+	ft_strlcpy(&aux[i_split], sbet, ft_strlen(sbet) + 1);
+	i_split++;
+	ft_strlcpy(
+		&aux[i_split + ft_strlen(sbet) - 1],
+		&sori[i_split + ssplit],
+		ft_strlen(&sori[i_split + ssplit]) + 1);
+	return (aux);
+}
+
+static int	replace_local_vars(t_data *data)
+{
+	int		dpos;
+	t_env	*env;
+	char	*vname;
+	char	*venv;
+	char	*aux;
+
+	dpos = index_of_char(data->i_line->input, '$');
+	if (dpos > -1)
 	{
-		var_name = get_env_name(&data->i_line->input[dollarPos + 1]);
-		env = get_env(data, var_name);
+		vname = get_env_name(&data->i_line->input[dpos + 1]);
+		env = get_env(data, vname);
 		if (env && env->values)
-			value_env = get_value_env_join(env);
+			venv = get_value_env_join(env);
 		else
-			value_env = ft_strdup("");
-		aux = ft_calloc(sizeof(char), ft_strlen(data->i_line->input) - ft_strlen(var_name) + ft_strlen(value_env) + 1);
-		int i = 0;
-		int j = 0;
-		while (i < dollarPos)
-		{
-			aux[i] = data->i_line->input[i];
-			i++;
-		}
-		while (value_env[j])
-		{
-			aux[i + j] = value_env[j];
-			j++;
-		}
-		i++;
-		while (data->i_line->input[i + ft_strlen(var_name)])
-		{
-			aux[i + j - 1] = data->i_line->input[i + ft_strlen(var_name)];
-			i++;
-		}
+			venv = ft_strdup("");
+		aux = join_between(data->i_line->input, venv, dpos, ft_strlen(vname));
 		free(data->i_line->input);
 		data->i_line->input = aux;
-		free(value_env);
-		free(var_name);
+		free(venv);
+		free(vname);
 		return (replace_local_vars(data));
 	}
 	return (0);
 }
 
-void input_line(t_data *data)
+void	input_line(t_data *data)
 {
-	char *aux;
-	char *to_print;
+	char	*aux;
+	char	*to_print;
 
 	free(data->i_line->input);
 	to_print = ft_strjoin(data->i_line->path, "$ ");

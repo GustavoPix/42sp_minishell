@@ -6,18 +6,31 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/12 14:01:30 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:49:20 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void start_envs(t_data *data, char **env)
+static void	clear_matrix(char **str)
 {
-	int i;
-	int j;
-	t_env **envs;
-	char **aux;
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+void	start_envs(t_data *data, char **env)
+{
+	int		i;
+	int		j;
+	t_env	**envs;
+	char	**aux;
 
 	i = 0;
 	while (env[i])
@@ -35,30 +48,8 @@ void start_envs(t_data *data, char **env)
 		else
 			envs[i]->values = 0;
 		j = 0;
-		while (aux[j])
-		{
-			free(aux[j]);
-			j++;
-		}
-		free(aux);
+		clear_matrix(aux);
 		i++;
 	}
-
-	// i = 0;
-	// while (i < data->qty_env)
-	//{
-	//	ft_putstr_fd(envs[i]->name, 1);
-	//	ft_putchar_fd('\n', 1);
-	//
-	//	int j = 0;
-	//	while (envs[i]->values && envs[i]->values[j])
-	//	{
-	//		ft_putstr_fd(envs[i]->values[j], 1);
-	//		ft_putstr_fd("  -  ", 1);
-	//		j++;
-	//	}
-	//	ft_putstr_fd("\n\n", 1);
-	//	i++;
-	//}
 	data->envs = envs;
 }

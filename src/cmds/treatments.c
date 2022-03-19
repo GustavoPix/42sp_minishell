@@ -6,16 +6,16 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:11 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/15 18:48:29 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:38:26 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-void swap_char_quote(char *str, int from, int to)
+void	swap_char_quote(char *str, int from, int to)
 {
-	int i;
-	int in_quot;
+	int	i;
+	int	in_quot;
 
 	i = 0;
 	in_quot = 0;
@@ -29,9 +29,9 @@ void swap_char_quote(char *str, int from, int to)
 	}
 }
 
-void remove_quote(char *str)
+void	remove_quote(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
