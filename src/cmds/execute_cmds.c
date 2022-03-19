@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 12:24:33 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:21:45 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 		builtin_cd(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "pwd", ft_strlen("pwd")) == 0)
 		builtin_pwd(builtin, fd);
-	//else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
-	//	builtin_export(builtin, fd);
+	else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
+		builtin_export(data, builtin, fd);
 	//else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
 	//	builtin_unset(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)

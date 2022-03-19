@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/19 11:58:00 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:37:18 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv, char **env)
 		input_line(&data);
 		split_cmds(data.cmds, data.i_line->input);
 		setup_cmds_bin_path(&data);
-		// debug_cmds(data.cmds);
+		 debug_cmds(data.cmds);
 		i = 0;
 		while (i < data.cmds->qty)
 		{
