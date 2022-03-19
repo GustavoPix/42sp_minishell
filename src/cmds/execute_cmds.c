@@ -61,16 +61,16 @@ int	execute_cmds(t_cmds *cmds)
 		// 	dup2(cmds->file_in, STDIN_FILENO);
 		if (cmds->first_cmd->bultin == 1)
 			indentify_builtin(cmds->first_cmd, fd);
-		else
-		{
-			cmds->first_cmd->document = 1;
-			if ((cmds->first_cmd->document) == 1)
-			{
-				execute_doc(fd, "end");
-				dup2(fd[0], STDIN_FILENO);
-			}
-			execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL);
-		}
+		// else
+		// {
+		// 	cmds->first_cmd->document = 1;
+		// 	if ((cmds->first_cmd->document) == 1)
+		// 	{
+		// 		execute_doc(fd, "end");
+		// 		dup2(fd[0], STDIN_FILENO);
+		// 	}
+		// 	execve(cmds->first_cmd->bin, cmds->first_cmd->parans, NULL);
+		// }
 		close(fd[0]);
 		close(fd[1]);
 		exit(0);
