@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/17 19:57:06 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/19 11:02:05 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,13 @@ int main(int argc, char **argv, char **env)
 		// show_path(data.i_line);
 		input_line(&data);
 		split_cmds(data.cmds, data.i_line->input);
-		if (data.cmds->qty == 1)
-			if (ft_strncmp(data.cmds->first_cmd->bin, "cd", 2) == 0)
-				gofolder(data.i_line, data.cmds->first_cmd->parans[1]);
 		setup_cmds_bin_path(&data);
 		// debug_cmds(data.cmds);
-		if (data.cmds->qty > 0)
+		while (data.cmds->qty > 0)
 		{
-			t_env *env_obj;
-			env_obj = get_env(&data, data.cmds->first_cmd->bin);
-			if (env_obj)
-			{
-				ft_putstr_fd("var -> ", 1);
-				ft_putstr_fd(env_obj->name, 1);
-				ft_putstr_fd(" |", 1);
-				if (env_obj->values)
-					ft_putstr_fd(env_obj->values[0], 1);
-				ft_putstr_fd("|\n", 1);
-			}
+			execute_cmds(data.cmds);
+			data.cmds->qty--;
 		}
-		execute_cmds(data.cmds);
 		clear_cmds(data.cmds, 0);
 	}
 
