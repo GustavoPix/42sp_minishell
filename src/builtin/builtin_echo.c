@@ -1,11 +1,20 @@
-// trocar header depois.
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/20 14:31:32 by glima-de          #+#    #+#             */
+/*   Updated: 2022/03/20 14:31:55 by glima-de         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cmds/cmds.h"
 
+	// juntar todos os parametros caso existam.
 void	builtin_echo(t_cmd *builtin, int fd[])
 {
-	// printf("Chegou aqui\n");
-	// juntar todos os parametros caso existam.
 	(void)fd;
 	if (builtin->parans[1])
 	{
