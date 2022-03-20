@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/19 18:17:16 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/20 14:37:15 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,8 @@ void	remove_env(t_data *data, char *env_unset)
 
 	pos = 0;
 	i = 0;
-	while (pos < data->qty_env)
-	{
-		if (ft_strcmp(env_unset, data->envs[pos]->name) == 0)
-			break ;
+	while (pos < data->qty_env && ft_strcmp(env_unset, data->envs[pos]->name))
 		pos++;
-	}
 	new_envs = malloc(sizeof(t_env *) * (data->qty_env - 1));
 	while (i < data->qty_env - 1)
 	{
