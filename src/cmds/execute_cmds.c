@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 21:06:38 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:07:21 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 {
 	int	fd[2];
 	int	pid;
+	int	exit_code;
 
+	(void)i;
 	if (pipe(fd) == -1)
 		return (1);
 	pid = fork();
@@ -64,13 +66,13 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		return (1);
 	else if (pid == 0)
 	{
-		if (data->cmds->fd_file_in)
-		{
-			dup2(data->cmds->fd_file_in, STDIN_FILENO);
-			data->cmds->fd_file_in = 0;
-		}
-		else if (i > 0)
-			dup2(fd[0], STDIN_FILENO);
+		// if (data->cmds->fd_file_in)
+		// {
+		// 	dup2(data->cmds->fd_file_in, STDIN_FILENO);
+		// 	data->cmds->fd_file_in = 0;
+		// }
+		// else if (i > 0)
+		// 	dup2(fd[0], STDIN_FILENO);
 
 		if (cmd->bultin == 1)
 			indentify_builtin(data, cmd, fd);
@@ -82,16 +84,16 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			// 	execute_doc(fd, "end");
 			// 	dup2(fd[0], STDIN_FILENO);
 			// }
-			dup2(fd[0], STDIN_FILENO);
+			dup2(data->fd, STDIN_FILENO);
 			dup2(fd[1], STDOUT_FILENO);
 			execve(cmd->bin, cmd->parans, NULL);
 		}
 		close(fd[0]);
 		close(fd[1]);
-		// clear_cmds(cmd, 0);
 		exit(0);
 	}
-	wait(NULL);
+	data->fd = fd[0];
+	waitpid(pid, &exit_code, 0);
 	close(fd[1]);
-	return (fd[0]);
+	return (exit_code);
 }

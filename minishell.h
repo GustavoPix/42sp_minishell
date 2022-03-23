@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 21:08:12 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:58:14 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_data
 	t_cmds		*cmds;
 	t_env		**envs;
 	int			qty_env;
+	int			fd;
 }				t_data;
 
 void	start_envs(t_data *data, char **env);

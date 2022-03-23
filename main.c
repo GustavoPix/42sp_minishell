@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/22 20:50:26 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:03:17 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env)
 {
 	t_data data;
 	t_cmd *temp;
-	int fd;
+	int		fd;
 	int		i;
 
 	(void)argc;
@@ -61,7 +61,7 @@ int main(int argc, char **argv, char **env)
 		char	*buffer;
 		while (1)
 		{
-			buffer = get_next_line(fd);
+			buffer = get_next_line(data.fd);
 			if (buffer == NULL)
 				break;
 			write(1, buffer, ft_strlen(buffer));
