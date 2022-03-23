@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/23 04:19:42 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:22:09 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ void	input_line(t_data *data)
 	char	*user;
 
 	free(data->i_line->input);
-	user = getenv("USER");
 	user = getenv("USER");
 	printf("\033[1;34m%s\033[0;0m in", user);
 	printf("\033[1;32m%s\033[0;0m\n", data->i_line->path);
