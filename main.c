@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/23 03:54:18 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:47:29 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env)
 {
 	t_data data;
 	t_cmd *temp;
-	int		fd;
+	int		exit_code;
 	int		i;
 
 	(void)argc;
@@ -53,7 +53,7 @@ int main(int argc, char **argv, char **env)
 		temp = data.cmds->first_cmd;
 		while (i < data.cmds->qty)
 		{
-			fd = execute_cmds(&data, temp, i);
+			exit_code = execute_cmds(&data, temp, i);
 			i++;
 			if (i < data.cmds->qty)
 				temp = temp->next;
