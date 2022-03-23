@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 21:05:00 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/22 22:46:37 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,11 @@ int		has_minnor_signal(char *str, char c);
 void	swap_char_quote(char *str, int from, int to);
 void	remove_quote(char *str);
 int		count_size_matrix(char **str);
-
 void	debug_cmds(t_cmds *cmds);
-
 // My alteration
-
 // finish
-
 void	builtin_cd(t_cmd *builtin, int fd[]);
 void	builtin_echo(t_cmd *builtin, int fd[]);
-
 void	builtin_pwd(t_cmd *builtin, int fd[]);
 
 #endif

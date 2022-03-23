@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 21:58:14 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/23 04:07:04 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "./src/cmds/cmds.h"
 
 #define clear() printf("\033[H\033[J");
+#define blue \033[1;34m;
 
 typedef struct s_env
 {
