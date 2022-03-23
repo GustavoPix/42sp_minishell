@@ -1,7 +1,18 @@
-// trocar header depois.
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/20 14:31:32 by glima-de          #+#    #+#             */
+/*   Updated: 2022/03/22 21:05:27 by wjuneo-f         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cmds/cmds.h"
 
+	// juntar todos os parametros caso existam.
 void	builtin_echo(t_cmd *builtin, int fd[])
 {
 	char *aux;

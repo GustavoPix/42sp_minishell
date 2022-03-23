@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 20:57:51 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/22 21:06:38 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,12 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 		builtin_pwd(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "export", ft_strlen("export")) == 0)
 		builtin_export(data, builtin, fd);
-	//else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
-	//	builtin_unset(builtin, fd);
+	else if (ft_strncmp(builtin->bin, "unset", ft_strlen("unset")) == 0)
+		builtin_unset(data, builtin, fd);
 	else if (ft_strncmp(builtin->bin, "env", ft_strlen("env")) == 0)
 		builtin_env(data, builtin, fd);
 	else if (ft_strncmp(builtin->bin, "exit", ft_strlen("exit")) == 0)
 		exit(0);
-	// else
-	// {
-	// 	write(fd[1], "minishell: command not found: ", 31);
-	// 	write(fd[1], builtin->bin, ft_strlen(builtin->bin));
-	// 	write(fd[1], "\n", 1);
-	// }
 }
 
 int	execute_cmds(t_data *data, t_cmd *cmd, int i)
