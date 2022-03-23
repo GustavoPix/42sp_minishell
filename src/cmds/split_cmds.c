@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/17 20:36:31 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/22 19:39:11 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->parans[args_count] = NULL;
 	cmd->parans[0] = "";
 	cmd->bultin = 0;
+	cmd->document = 0;
 	if (cmds->qty == 0)
 		cmds->first_cmd = cmd;
 	else
