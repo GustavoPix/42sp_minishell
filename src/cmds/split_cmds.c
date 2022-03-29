@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/23 04:28:20 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:32:29 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->parans[0] = "";
 	cmd->bultin = 0;
 	cmd->document = 0;
+	cmd->doc_end = 0;
 	if (cmds->qty == 0)
 		cmds->first_cmd = cmd;
 	else
@@ -85,6 +86,38 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0777);
 	if (cmds->file_out)
 		cmds->fd_file_out = open(cmds->file_in, O_RDWR, 0777);
+}
+
+static void hero_doc(t_cmd *cmd)
+{
+	int i;
+	int pos;
+	char *aux;
+
+	i = 0;
+	while (cmd->parans[i])
+	{
+		pos = has_double_signal(cmd->parans[i], '<');
+		if (pos >= 0)
+		{
+			aux = ft_strtrim(&cmd->parans[i][pos + 2], " ");
+			if (ft_strlen(aux))
+			{
+				cmd->doc_end = aux;
+				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
+			}
+			else
+			{
+				cmd->doc_end = ft_strdup(cmd->parans[i + 1]);
+				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
+				ft_bzero(cmd->parans[i + 1], ft_strlen(cmd->parans[i + 1]));
+				free(aux);
+			}
+			cmd->document = 1;
+		}
+		i++;
+	}
+
 }
 
 static void	setup_cmd(t_cmds *cmds, char *str)
@@ -99,6 +132,7 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	aux = ft_split(str, ' ');
 	free(str);
 	cmd->bin = ft_strdup(aux[0]);
+	printf("Line 135\n");
 	cmd->parans = malloc((count_size_matrix(aux) + 1) * sizeof(char *));
 	args = 1;
 	while (aux[args])
@@ -110,6 +144,7 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 		args++;
 	}
 	setup_default_params(cmds, cmd, args);
+	hero_doc(cmd);
 	free(aux[0]);
 	free(aux);
 }

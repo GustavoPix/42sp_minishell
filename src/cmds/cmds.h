@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 22:46:37 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/28 20:54:08 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_cmd
 	char	**parans;
 	void	*next;
 	int		document;
+	char	*doc_end;
 }			t_cmd;
 
 typedef struct s_cmds
@@ -42,6 +43,7 @@ t_cmds	*start_cmds(void);
 void	split_cmds(t_cmds *cmds, char *str);
 void	clear_cmds(t_cmds *cmds, int all);
 void	split_minnor_char(t_cmds *cmds);
+int		has_double_signal(char *str, char c);
 int		has_minnor_signal(char *str, char c);
 void	swap_char_quote(char *str, int from, int to);
 void	remove_quote(char *str);

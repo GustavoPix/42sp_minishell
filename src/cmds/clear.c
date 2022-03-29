@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 17:59:14 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:34:01 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,15 @@ void	clear_cmd(t_cmd *cmd)
 	free(cmd->bin);
 	while (cmd->parans[i])
 	{
+		printf("Line 23\n");
 		if (cmd->parans[i])
 			free(cmd->parans[i]);
 		i++;
 	}
 	free(cmd->parans);
+	if (cmd->doc_end)
+		free(cmd->doc_end);
+	cmd->document = 0;
 	free(cmd);
 }
 

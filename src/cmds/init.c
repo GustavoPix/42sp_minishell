@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 17:57:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/28 21:50:44 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	print_cmd(t_cmd *cmd)
 	ft_putstr_fd("----\n", 1);
 	ft_putstr_fd(cmd->bin, 1);
 	ft_putchar_fd('\n', 1);
+	ft_putstr_fd("document -> |", 1);
+	if (cmd->document)
+		ft_putstr_fd(cmd->doc_end, 1);
+	ft_putstr_fd("|\n", 1);
+
 	while (cmd->parans[i])
 	{
 		ft_putstr_fd(cmd->parans[i], 1);
