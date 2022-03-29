@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/28 22:50:10 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:13:46 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	aux = ft_split(str, ' ');
 	free(str);
 	cmd->bin = ft_strdup(aux[0]);
-	printf("Line 135\n");
 	cmd->parans = malloc((count_size_matrix(aux) + 1) * sizeof(char *));
 	args = 1;
 	while (aux[args])
