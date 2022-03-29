@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/28 22:32:29 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:50:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,29 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 	}
 }
 
+static int detect_outfile(t_cmds *cmds, char **str)
+{
+	int i_major;
+
+	i_major = has_double_signal(*str, '>');
+	if (i_major >= 0)
+	{
+		cmds->append_outfile = 1;
+		ft_memmove(&str[0][i_major], &str[0][i_major + 1], ft_strlen(&str[0][i_major + 1]));
+		str[0][ft_strlen(*str) - 1] = '\0';
+	}
+	else
+		i_major = has_minnor_signal(*str, '>');
+	return (i_major);
+}
+
 static void	signal_choose_tr(t_cmds *cmds, char **str)
 {
 	int		i_minus;
 	int		i_major;
 
 	i_minus = has_minnor_signal(*str, '<');
-	i_major = has_minnor_signal(*str, '>');
+	i_major = detect_outfile(cmds, str);
 	if (i_minus > -1 || i_major > -1)
 	{
 		if (i_minus < i_major)

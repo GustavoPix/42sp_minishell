@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/28 21:50:44 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:53:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	debug_cmds(t_cmds *cmds)
 
 	i = 0;
 	cmd = cmds->first_cmd;
-	ft_putstr_fd("file in -> |", 1);
+	ft_putstr_fd("file in  -> |", 1);
 	if (cmds->file_in)
 		ft_putstr_fd(cmds->file_in, 1);
 	ft_putstr_fd("|\n", 1);
@@ -60,6 +60,11 @@ void	debug_cmds(t_cmds *cmds)
 	if (cmds->file_out)
 		ft_putstr_fd(cmds->file_out, 1);
 	ft_putstr_fd("|\n", 1);
+	ft_putstr_fd("Append file: ", 1);
+	if (cmds->append_outfile)
+		ft_putstr_fd("Yes\n", 1);
+	else
+		ft_putstr_fd("No\n", 1);
 	while (i < cmds->qty)
 	{
 		print_cmd(cmd);
