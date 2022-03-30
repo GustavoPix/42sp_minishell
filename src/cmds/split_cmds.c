@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/29 18:13:46 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/29 21:40:15 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,7 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	while (aux[args])
 	{
 		swap_char_quote(aux[args], 1, ' ');
+		swap_char_quote(aux[args], 2, '|');
 		remove_quote(aux[args]);
 		cmd->parans[args] = ft_strdup(aux[args]);
 		free(aux[args]);
@@ -170,6 +171,7 @@ void	split_cmds(t_cmds *cmds, char *str)
 	int		i;
 
 	i = 0;
+	swap_char_quote(str, '|', 2);
 	aux = ft_split(str, '|');
 	while (aux && aux[i])
 	{
