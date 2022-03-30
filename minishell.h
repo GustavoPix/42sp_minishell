@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/23 04:07:04 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/30 20:50:33 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "./src/inputline/inputline.h"
 # include "./src/path/path.h"
 # include "./src/cmds/cmds.h"
+
+// Trocar isso aqui para o signal.h no futuro
+# include <signal.h>
 
 #define clear() printf("\033[H\033[J");
 #define blue \033[1;34m;

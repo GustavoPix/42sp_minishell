@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/23 04:22:09 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/30 20:51:28 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,15 @@ static int	replace_local_vars(t_data *data)
 	return (0);
 }
 
+static void sigint(int sig)
+{
+	(void)sig;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
+
 void	input_line(t_data *data)
 {
 	char	*aux;
@@ -101,6 +110,7 @@ void	input_line(t_data *data)
 	printf("\033[1;34m%s\033[0;0m in", user);
 	printf("\033[1;32m%s\033[0;0m\n", data->i_line->path);
 	data->i_line->input = readline("✦\033[1;31m 》\033[0;0m ");
+	signal(SIGINT, sigint);
 	if (!data->i_line->input)
 	{
 		ft_putstr_fd("exit\n", 1);
