@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/23 04:56:07 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/30 22:11:28 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,18 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			execve(cmd->bin, cmd->parans, NULL);
 		}
 		close(fd[1]);
+		//close(3);
+		//close(4);
+		//close(5);
+		//close(6);
+		//close(7);
+		//close(8);
 		exit(0);
 	}
 	if (data->cmds->fd_file_in)
 		data->cmds->fd_file_in = 0;
+	if (data->fd)
+		close(data->fd);
 	data->fd = fd[0];
 	waitpid(pid, &exit_code, 0);
 	close(fd[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/23 04:47:29 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/30 22:11:34 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,24 @@ int main(int argc, char **argv, char **env)
 			buffer = get_next_line(data.fd);
 			if (buffer == NULL)
 				break;
-			write(1, buffer, ft_strlen(buffer));
+			if (data.cmds->file_out)
+				write(data.cmds->fd_file_out, buffer, ft_strlen(buffer));
+			else
+				write(1, buffer, ft_strlen(buffer));
 			free(buffer);
 		}
+		if (data.cmds->file_out)
+			close(data.cmds->fd_file_out);
 		clear_cmds(data.cmds, 0);
 	}
-	// close(fd);
+	close(data.fd);
+	if (data.cmds->file_in)
+		close(data.cmds->fd_file_in);
+	//close(0);
+	//close(3);
+	//close(2);
+	//close(1);
+	//close(4);
 	clear_inputline(data.i_line);
 	clear_cmds(data.cmds, 1);
 	clear_envs(&data);

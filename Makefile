@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/17 20:32:24 by glima-de         ###   ########.fr        #
+#    Updated: 2022/03/30 22:11:16 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,3 +79,5 @@ val:		all clean
 			valgrind -q --leak-check=full ./${NAME}
 
 .PHONY:		all clean fclean re test val
+
+
