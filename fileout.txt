@@ -1,2 +1,11 @@
-gustbvo$
-wbrley$
+oi
+efile
+README.md
+filein.txt
+fileout.txt
+libft
+libraries
+main.c
+minishell
+minishell.h
+src

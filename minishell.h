@@ -6,13 +6,14 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/30 20:50:33 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/31 20:29:54 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+// #define _GNU_SOURCE
 # include "./libft/libft.h"
 # include "./src/inputline/inputline.h"
 # include "./src/path/path.h"
@@ -63,4 +64,10 @@ void	builtin_export(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_unset(t_data *data, t_cmd *builtin, int fd[]);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
+
+
+// minishell
+int	loop_minishell(t_data *data);
 #endif
+
+
