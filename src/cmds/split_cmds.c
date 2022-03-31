@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/29 21:40:15 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/30 21:27:38 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	if (cmds->file_in)
 		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0777);
 	if (cmds->file_out)
-		cmds->fd_file_out = open(cmds->file_in, O_RDWR, 0777);
+		cmds->fd_file_out = open(cmds->file_out, O_RDWR | O_CREAT, 0777);
 }
 
 static void hero_doc(t_cmd *cmd)
