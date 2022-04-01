@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/31 20:30:57 by wjuneo-f         ###   ########.fr        #
+#    Updated: 2022/03/31 21:24:06 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC			= ./src/inputline/path.c \
 			  ./src/envs/init.c \
 			  ./src/envs/clear.c \
 			  ./src/envs/get_env_var.c \
-			  ./src/minishell/minishell.c
+			  ./src/minishell/minishell.c \
+			  ./src/signals/signals.c
 
 OBJS_SLG	= ${SRC:.c=.o}
 

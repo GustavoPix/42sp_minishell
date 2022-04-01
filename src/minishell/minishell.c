@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/31 20:54:51 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/31 21:37:59 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	output_minishell(t_data *data)
 {
 	char	*buffer;
 
-	while (1)
+	while (data->fd)
 	{
 		buffer = get_next_line(data->fd);
 		if (buffer == NULL)
@@ -78,7 +78,7 @@ int	loop_minishell(t_data *data)
 	while (strcmp(data->i_line->input, "exit") != 0)
 	{
 		read_minishell(data);
-		//debug_cmds(data.cmds);
+		//debug_cmds(data->cmds);
 		execute_minishell(data);
 		output_minishell(data);
 	}

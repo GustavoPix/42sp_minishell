@@ -6,12 +6,13 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 21:10:57 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/03/31 21:30:35 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "inputline.h"
 #include "../minishell.h"
+#include "../signals/signals.h"
 
 static char	*get_env_name(char *str)
 {
@@ -91,14 +92,7 @@ static int	replace_local_vars(t_data *data)
 	return (0);
 }
 
-static void sigint(int sig)
-{
-	(void)sig;
-	printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+
 
 char	*create_print_path(t_data *data)
 {
@@ -111,7 +105,7 @@ char	*create_print_path(t_data *data)
 	free(final);
 	final = ft_strjoin(aux, data->i_line->path);
 	free(aux);
-	aux = ft_strjoin(final, "\033[0;0m\n✦\033[1;31m 》\033[0;0m ");
+	aux = ft_strjoin(final, "\033[0;0m ✦\033[1;31m 》\033[0;0m ");
 	free(final);
 	return (aux);
 }
@@ -119,18 +113,13 @@ char	*create_print_path(t_data *data)
 void	input_line(t_data *data)
 {
 	char	*aux;
-	//char	*user;
 	char	*to_print;
 
 	free(data->i_line->input);
-	//user = getenv("USER");
-
-	//printf("\033[1;34m%s\033[0;0m in", user);
-	//printf("\033[1;32m%s\033[0;0m\n", data->i_line->path);
 	to_print = create_print_path(data);
+	signal(SIGINT, sigint);
 	data->i_line->input = readline(to_print);
 	free(to_print);
-	signal(SIGINT, sigint);
 	if (!data->i_line->input)
 	{
 		ft_putstr_fd("exit\n", 1);
