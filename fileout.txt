@@ -1,11 +1,11 @@
-oi
-efile
-README.md
-filein.txt
-fileout.txt
-libft
-libraries
-main.c
-minishell
-minishell.h
-src
+total 100
+-rw-r--r-- 1 gustavo gustavo  2431 Mar 31 20:38 Makefile
+-rw-r--r-- 1 gustavo gustavo    79 Mar 15 19:44 README.md
+-rw-r--r-- 1 gustavo gustavo    15 Mar 30 21:29 filein.txt
+-rwxr-xr-x 1 gustavo gustavo     0 Mar 31 20:53 fileout.txt
+drwxr-xr-x 2 gustavo gustavo  4096 Mar 31 20:53 libft
+drwxr-xr-x 3 gustavo gustavo  4096 Mar 15 19:44 libraries
+-rw-r--r-- 1 gustavo gustavo  1299 Mar 31 20:46 main.c
+-rwxr-xr-x 1 gustavo gustavo 68832 Mar 31 20:53 minishell
+-rw-r--r-- 1 gustavo gustavo  2361 Mar 31 20:38 minishell.h
+drwxr-xr-x 8 gustavo gustavo  4096 Mar 31 20:41 src

@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 20:01:15 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/31 20:55:30 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
+#include "../minishell.h"
+
+void setup_cmds_bin_path(t_data *data)
+{
+	t_cmd *cmd;
+	int i;
+
+	i = 0;
+	cmd = data->cmds->first_cmd;
+	while (i < data->cmds->qty)
+	{
+		test_and_apply_bin(data, cmd);
+		i++;
+		if (i < data->cmds->qty)
+			cmd = cmd->next;
+	}
+}
 
 t_cmds	*start_cmds(void)
 {

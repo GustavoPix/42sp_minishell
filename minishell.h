@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 20:29:54 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/31 20:55:44 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	input_line(t_data *data);
 
 // cmds.h
 int		test_and_apply_bin(t_data *data, t_cmd *cmd);
+void setup_cmds_bin_path(t_data *data);
 // My alteration
 int	execute_cmds(t_data *data, t_cmd *cmd, int i);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);

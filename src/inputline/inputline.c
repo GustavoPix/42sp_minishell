@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/30 20:51:28 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/31 21:10:57 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,36 @@ static void sigint(int sig)
 	rl_redisplay();
 }
 
+char	*create_print_path(t_data *data)
+{
+	char *aux;
+	char *final;
+
+	aux = getenv("USER");
+	final = ft_strjoin("\033[1;34m", aux);
+	aux = ft_strjoin(final, "\033[0;0m in \033[1;32m");
+	free(final);
+	final = ft_strjoin(aux, data->i_line->path);
+	free(aux);
+	aux = ft_strjoin(final, "\033[0;0m\n✦\033[1;31m 》\033[0;0m ");
+	free(final);
+	return (aux);
+}
+
 void	input_line(t_data *data)
 {
 	char	*aux;
-	char	*user;
+	//char	*user;
+	char	*to_print;
 
 	free(data->i_line->input);
-	user = getenv("USER");
-	printf("\033[1;34m%s\033[0;0m in", user);
-	printf("\033[1;32m%s\033[0;0m\n", data->i_line->path);
-	data->i_line->input = readline("✦\033[1;31m 》\033[0;0m ");
+	//user = getenv("USER");
+
+	//printf("\033[1;34m%s\033[0;0m in", user);
+	//printf("\033[1;32m%s\033[0;0m\n", data->i_line->path);
+	to_print = create_print_path(data);
+	data->i_line->input = readline(to_print);
+	free(to_print);
 	signal(SIGINT, sigint);
 	if (!data->i_line->input)
 	{

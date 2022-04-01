@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/31 20:32:44 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/31 21:10:59 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,11 @@ int main(int argc, char **argv, char **env)
 	(void)argv;
 	start_all(&data, env);
 	loop_minishell(&data);
-	close(data.fd);
-	if (data.cmds->file_in)
-		close(data.cmds->fd_file_in);
+
 	//close(0);
 	//close(3);
 	//close(2);
 	//close(1);
 	//close(4);
-	clear_inputline(data.i_line);
-	clear_cmds(data.cmds, 1);
-	clear_envs(&data);
-	ft_putstr_fd("Bye! ;)\n", 1);
 	return (0);
 }
