@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 21:30:35 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:48:30 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,5 +130,7 @@ void	input_line(t_data *data)
 		add_history(aux);
 	free(data->i_line->input);
 	data->i_line->input = aux;
+	swap_char_quote(data->i_line->input, '$', 3);
 	replace_local_vars(data);
+	swap_char_quote(data->i_line->input, 3, '$');
 }
