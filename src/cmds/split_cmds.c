@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/30 21:27:38 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:14:46 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,12 +121,15 @@ static void hero_doc(t_cmd *cmd)
 			{
 				cmd->doc_end = aux;
 				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
+				cmd->parans[i] = NULL;
 			}
 			else
 			{
 				cmd->doc_end = ft_strdup(cmd->parans[i + 1]);
 				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
 				ft_bzero(cmd->parans[i + 1], ft_strlen(cmd->parans[i + 1]));
+				cmd->parans[i] = NULL;
+				cmd->parans[i + 1] = NULL;
 				free(aux);
 			}
 			cmd->document = 1;

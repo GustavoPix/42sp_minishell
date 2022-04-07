@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 20:55:30 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:41:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void setup_cmds_bin_path(t_data *data)
 	cmd = data->cmds->first_cmd;
 	while (i < data->cmds->qty)
 	{
-		test_and_apply_bin(data, cmd);
+		cmd->error = test_and_apply_bin(data, cmd);
 		i++;
 		if (i < data->cmds->qty)
 			cmd = cmd->next;

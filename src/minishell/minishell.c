@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/31 21:37:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/06 23:20:54 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	read_minishell(t_data *data)
 	input_line(data);
 	split_cmds(data->cmds, data->i_line->input);
 	setup_cmds_bin_path(data);
-
 	return (0);
 }
 
@@ -78,7 +77,7 @@ int	loop_minishell(t_data *data)
 	while (strcmp(data->i_line->input, "exit") != 0)
 	{
 		read_minishell(data);
-		//debug_cmds(data->cmds);
+		debug_cmds(data->cmds);
 		execute_minishell(data);
 		output_minishell(data);
 	}

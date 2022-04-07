@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 21:26:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/06 22:35:51 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 	t_env		**envs;
 	int			qty_env;
 	int			fd;
+	int			stdin_fd;
 }				t_data;
 
 void	start_envs(t_data *data, char **env);
@@ -58,10 +59,10 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 // finish
 void	builtin_echo(t_cmd *builtin, int fd[]);
-void	builtin_cd(t_cmd *builtin, int fd[]);
+void	builtin_cd(t_cmd *btin);
 void	builtin_pwd(t_cmd *builtin, int fd[]);
-void	builtin_export(t_data *data, t_cmd *builtin, int fd[]);
-void	builtin_unset(t_data *data, t_cmd *builtin, int fd[]);
+void	builtin_export(t_data *data, t_cmd *builtin);
+void	builtin_unset(t_data *data, t_cmd *builtin);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 21:30:35 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:18:42 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,21 +94,23 @@ static int	replace_local_vars(t_data *data)
 
 
 
-char	*create_print_path(t_data *data)
+char	*create_print_path(void)
 {
 	char *aux;
 	char *final;
+	char path[255];
 
 	aux = getenv("USER");
 	final = ft_strjoin("\033[1;34m", aux);
 	aux = ft_strjoin(final, "\033[0;0m in \033[1;32m");
 	free(final);
-	final = ft_strjoin(aux, data->i_line->path);
+	final = ft_strjoin(aux, getcwd(path, 255));
 	free(aux);
 	aux = ft_strjoin(final, "\033[0;0m ✦\033[1;31m 》\033[0;0m ");
 	free(final);
 	return (aux);
 }
+
 
 void	input_line(t_data *data)
 {
@@ -116,7 +118,7 @@ void	input_line(t_data *data)
 	char	*to_print;
 
 	free(data->i_line->input);
-	to_print = create_print_path(data);
+	to_print = create_print_path();
 	signal(SIGINT, sigint);
 	data->i_line->input = readline(to_print);
 	free(to_print);
