@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 20:34:12 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/22 21:50:22 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:36:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	test_and_apply_bin(t_data *data, t_cmd *cmd)
 		aux = ft_strjoin(env_bin->values[i], "/");
 		test_bin = ft_strjoin(aux, cmd->bin);
 		free(aux);
-		if (access(test_bin, F_OK) == 0)
+		if (access(test_bin, F_OK | X_OK) == 0)
 		{
 			free(cmd->bin);
 			cmd->bin = test_bin;

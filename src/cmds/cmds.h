@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/28 22:41:13 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:41:18 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_cmd
 	void	*next;
 	int		document;
 	char	*doc_end;
+	int		error;
 }			t_cmd;
 
 typedef struct s_cmds
@@ -52,8 +53,4 @@ int		count_size_matrix(char **str);
 void	debug_cmds(t_cmds *cmds);
 // My alteration
 // finish
-void	builtin_cd(t_cmd *builtin, int fd[]);
-void	builtin_echo(t_cmd *builtin, int fd[]);
-void	builtin_pwd(t_cmd *builtin, int fd[]);
-
 #endif

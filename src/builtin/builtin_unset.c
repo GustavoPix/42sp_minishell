@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 18:00:02 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/20 14:29:24 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/05 21:49:55 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "../minishell.h"
 
 // lembrar de dar join nos parans;
-void	builtin_unset(t_data *data, t_cmd *builtin, int fd[])
+void	builtin_unset(t_data *data, t_cmd *builtin)
 {
-	(void)fd;
 	remove_env(data, builtin->parans[1]);
 }
