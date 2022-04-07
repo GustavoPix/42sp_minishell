@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 23:29:18 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/06 23:36:07 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
-		ft_putstr_fd("Entrei na 123\n", 2);
 		exit(0);
 	}
 	if (data->cmds->fd_file_in)
