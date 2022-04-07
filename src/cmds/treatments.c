@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:11 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/29 20:23:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:32:37 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ void	swap_char_quote(char *str, int from, int to)
 			str[i] = to;
 		else if (str[i] == quot)
 			in_quot = !in_quot;
+		i++;
+	}
+}
+void	replace_char(char *str, int from, int to)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == from)
+			str[i] = to;
 		i++;
 	}
 }

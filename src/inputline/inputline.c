@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 23:46:04 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:34:03 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,9 @@ void	input_line(t_data *data)
 		add_history(aux);
 	free(data->i_line->input);
 	data->i_line->input = aux;
+	swap_char_quote(data->i_line->input, '\t', 1);
+	replace_char(data->i_line->input, '\t', ' ');
+	swap_char_quote(data->i_line->input, 1, '\t');
 	swap_char_quote(data->i_line->input, '$', 3);
 	replace_local_vars(data);
 	swap_char_quote(data->i_line->input, 3, '$');
