@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 23:31:49 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:20:27 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,16 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 		cmds->fd_file_out = open(cmds->file_out, O_RDWR | O_CREAT, 0777);
 }
 
+static void move_parans(t_cmd *cmd, int index, int qty)
+{
+	while (cmd->parans[index + qty])
+	{
+		cmd->parans[index] = cmd->parans[index + qty];
+		cmd->parans[index + qty] = NULL;
+		index++;
+	}
+}
+
 static void hero_doc(t_cmd *cmd)
 {
 	int i;
@@ -123,6 +133,7 @@ static void hero_doc(t_cmd *cmd)
 				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
 				free(cmd->parans[i]);
 				cmd->parans[i] = NULL;
+				move_parans(cmd, i, 1);
 			}
 			else
 			{
@@ -134,6 +145,7 @@ static void hero_doc(t_cmd *cmd)
 				cmd->parans[i] = NULL;
 				cmd->parans[i + 1] = NULL;
 				free(aux);
+				move_parans(cmd, i, 2);
 			}
 			cmd->document = 1;
 		}
