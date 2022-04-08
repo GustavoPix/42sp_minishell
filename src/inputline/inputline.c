@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 19:34:03 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:04:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,23 @@ static int	replace_local_vars(t_data *data)
 	return (0);
 }
 
+void replace_exit_code(t_data *data)
+{
+	int dpos;
+	char *code;
+	char *aux;
+
+	dpos = index_of_char(data->i_line->input, '$');
+	if (dpos > -1 && data->i_line->input[dpos + 1] == '?')
+	{
+		code = ft_itoa(data->exit_code);
+		aux = join_between(data->i_line->input, code, dpos, 1);
+		free(data->i_line->input);
+		data->i_line->input = aux;
+		free(code);
+		replace_exit_code(data);
+	}
+}
 
 
 char	*create_print_path(void)
@@ -110,7 +127,6 @@ char	*create_print_path(void)
 	free(final);
 	return (aux);
 }
-
 
 void	input_line(t_data *data)
 {
@@ -136,6 +152,7 @@ void	input_line(t_data *data)
 	replace_char(data->i_line->input, '\t', ' ');
 	swap_char_quote(data->i_line->input, 1, '\t');
 	swap_char_quote(data->i_line->input, '$', 3);
+	replace_exit_code(data);
 	replace_local_vars(data);
 	swap_char_quote(data->i_line->input, 3, '$');
 }

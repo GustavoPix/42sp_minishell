@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/06 23:23:21 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:05:14 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	start_all(t_data *data, char **env)
 {
 	clear();
 	data->fd = 0;
+	data->exit_code = 0;
 	data->i_line = start_inputline();
 	data->cmds = start_cmds();
 	start_envs(data, env);

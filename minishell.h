@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 20:14:21 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:31:12 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	int			qty_env;
 	int			fd;
 	int			stdin_fd;
+	int			exit_code;
 }				t_data;
 
 void	start_envs(t_data *data, char **env);
