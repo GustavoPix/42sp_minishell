@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 22:35:51 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 20:14:21 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 // finish
 void	builtin_echo(t_cmd *builtin, int fd[]);
-void	builtin_cd(t_cmd *btin);
+void	builtin_cd(t_data *data, t_cmd *btin);
 void	builtin_pwd(t_cmd *builtin, int fd[]);
 void	builtin_export(t_data *data, t_cmd *builtin);
 void	builtin_unset(t_data *data, t_cmd *builtin);
@@ -69,6 +69,7 @@ void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 
 // minishell
 int	loop_minishell(t_data *data);
+int	set_env_value(t_data *data, char *key, char *value);
 #endif
 
 

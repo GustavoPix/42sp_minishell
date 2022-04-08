@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:50:00 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/03/17 19:17:07 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:58:28 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -506,5 +506,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
  * @param f  The adress of the function used to iterate on the list.
  */
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+void	free_ptr(char **ptr);
 
 #endif

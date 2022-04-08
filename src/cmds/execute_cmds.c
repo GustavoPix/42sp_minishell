@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 23:36:07 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 20:04:59 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 	if (cmd->bultin == 1)
 	{
 		if (ft_strncmp(cmd->bin, "cd", ft_strlen(cmd->bin)) == 0)
-			builtin_cd(cmd);
+			builtin_cd(data, cmd);
 		else if (ft_strncmp(cmd->bin, "export", ft_strlen(cmd->bin)) == 0)
 			builtin_export(data, cmd);
 		else if (ft_strncmp(cmd->bin, "unset", ft_strlen(cmd->bin)) == 0)

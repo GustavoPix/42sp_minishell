@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/03/31 21:24:06 by glima-de         ###   ########.fr        #
+#    Updated: 2022/04/07 20:06:29 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRC			= ./src/inputline/path.c \
 			  ./src/envs/init.c \
 			  ./src/envs/clear.c \
 			  ./src/envs/get_env_var.c \
+			  ./src/envs/set_env.c \
 			  ./src/minishell/minishell.c \
 			  ./src/signals/signals.c
 

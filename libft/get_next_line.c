@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 22:10:52 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/02/16 11:35:59 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:58:09 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	free_ptr(char **ptr)
+void	free_ptr(char **ptr)
 {
 	free(*ptr);
 	*ptr = NULL;
