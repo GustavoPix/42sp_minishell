@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 20:04:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/08 20:34:08 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 		return (0);
 	}
 
-	else if (ft_strncmp(cmd->bin, "ls", ft_strlen(cmd->bin)) == 0)
+	else if (ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
 	{
 		if (data->cmds->qty == 1)
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
@@ -109,10 +109,11 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
-			close(fd[1]);
+			dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
+		close(fd[1]);
 		exit(0);
 	}
 	if (data->cmds->fd_file_in)
