@@ -6,13 +6,26 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/08 20:34:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:25:07 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 #include <errno.h>
+
+int	not_pipe_cmds(t_data *data, t_cmd *cmd)
+{
+	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
+	&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
+	{
+		if (execve(cmd->bin, cmd->parans, NULL) == -1)
+			exit(1);
+		ft_putstr_fd("ls function \n", 2);
+		return (0);
+	}
+	return (1);
+}
 
 int	not_fork_cmds(t_data *data, t_cmd *cmd)
 {
@@ -28,15 +41,6 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 			return (1);
 		return (0);
 	}
-
-	else if (ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-	{
-		if (data->cmds->qty == 1)
-			if (execve(cmd->bin, cmd->parans, NULL) == -1)
-				exit(1);
-		return (0);
-	}
-
 	return (1);
 }
 
@@ -96,9 +100,8 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		return (1);
 	else if (pid == 0)
 	{
-		dup2(data->fd, STDIN_FILENO);
-		if (data->cmds->fd_file_in)
-			dup2(data->cmds->fd_file_in, STDIN_FILENO);
+		not_pipe_cmds(data, cmd);
+		dup42(data, fd);
 		if (cmd->bultin == 1)
 			indentify_builtin(data, cmd, fd);
 		else
@@ -109,7 +112,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
-			dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 21:31:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:21:59 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "./src/inputline/inputline.h"
 # include "./src/path/path.h"
 # include "./src/cmds/cmds.h"
-
-
 
 #define clear() printf("\033[H\033[J");
 #define blue \033[1;34m;
@@ -71,6 +69,11 @@ void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 // minishell
 int	loop_minishell(t_data *data);
 int	set_env_value(t_data *data, char *key, char *value);
+
+
+
+// coisas triste a se fazer
+void	dup42(t_data *data, int fd[]);
 #endif
 
 

@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 19:33:19 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:37:26 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMDS_H
 # define CMDS_H
 
-# include "../inputline/inputline.h"
-# include "../../libft/libft.h"
+# include "libft.h"
 # include <sys/types.h>
 # include <sys/wait.h>
 

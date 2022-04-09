@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/08 11:36:48 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:33:12 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	loop_minishell(t_data *data)
 	while (strcmp(data->i_line->input, "exit") != 0)
 	{
 		read_minishell(data);
-		// debug_cmds(data->cmds);
+	//	debug_cmds(data->cmds);
 		execute_minishell(data);
 		output_minishell(data);
 	}

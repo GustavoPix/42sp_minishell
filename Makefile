@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/04/07 20:06:29 by glima-de         ###   ########.fr        #
+#    Updated: 2022/04/08 20:39:11 by wjuneo-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			= ./src/inputline/path.c \
 			  ./src/cmds/utils.c \
 			  ./src/cmds/get_inoutfile.c \
 			  ./src/cmds/execute_cmds.c \
+			  ./src/cmds/dup42.c \
 			  ./src/builtin/builtin_cd.c \
 			  ./src/builtin/builtin_echo.c \
 			  ./src/builtin/builtin_env.c \
