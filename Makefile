@@ -6,7 +6,7 @@
 #    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/04/08 20:39:11 by wjuneo-f         ###   ########.fr        #
+#    Updated: 2022/04/09 18:54:56 by wjuneo-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ test:		all clean
 
 val:		all clean
 			clear
-			valgrind -q --leak-check=full ./${NAME}
+			valgrind -q --leak-check=full --track-fds=yes ./${NAME}
 
 .PHONY:		all clean fclean re test val
 

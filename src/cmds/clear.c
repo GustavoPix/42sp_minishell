@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/08 21:42:13 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/09 19:05:21 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ static void	clear_cmds_base(t_cmds *cmds, int all)
 	{
 		free(cmds->file_in);
 		cmds->file_in = 0;
+		close(cmds->fd_file_in);
+		cmds->fd_file_in = 0;
 	}
 	if (cmds->file_out)
 	{
 		free(cmds->file_out);
 		cmds->file_out = 0;
+		close(cmds->fd_file_out);
+		cmds->fd_file_out = 0;
 	}
 	if (all)
 		free(cmds);
