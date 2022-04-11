@@ -6,7 +6,7 @@
 #    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/04/11 19:12:10 by glima-de         ###   ########.fr        #
+#    Updated: 2022/04/11 20:00:45 by glima-de         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC			= ./src/inputline/path.c \
 			  ./src/cmds/utils.c \
 			  ./src/cmds/get_inoutfile.c \
 			  ./src/cmds/execute_cmds.c \
+			  ./src/cmds/initdups.c \
 			  ./src/builtin/builtin_cd.c \
 			  ./src/builtin/builtin_echo.c \
 			  ./src/builtin/builtin_env.c \

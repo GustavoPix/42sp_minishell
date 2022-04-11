@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 19:50:43 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:04:31 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		return (1);
 	else if (pid == 0)
 	{
-		dup2(data->fd, STDIN_FILENO);
-		if (data->cmds->fd_file_in)
-			dup2(data->cmds->fd_file_in, STDIN_FILENO);
-		not_pipe_cmds(data, cmd);
-		dup2(fd[1], STDOUT_FILENO);
-		if (data->cmds->fd_file_out)
-			dup2(data->cmds->fd_file_out, STDOUT_FILENO);
+		initdups(data, cmd, fd);
 		if (cmd->bultin == 1)
 			indentify_builtin(data, cmd, fd);
 		else
@@ -125,7 +119,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
-			dup2(fd[1], STDOUT_FILENO);
+			//dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}

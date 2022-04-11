@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 21:31:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:05:22 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
 // minishell
 int	loop_minishell(t_data *data);
 int	set_env_value(t_data *data, char *key, char *value);
+int	not_pipe_cmds(t_data *data, t_cmd *cmd);
+void	initdups(t_data *data, t_cmd *cmd, int fd[]);
 #endif
 
 
