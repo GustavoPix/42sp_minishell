@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/08 21:42:13 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/28 22:47:42 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	clear_cmds_base(t_cmds *cmds, int all)
 	cmds->qty = 0;
 	cmds->first_cmd = 0;
 	cmds->last_cmd = 0;
-	cmds->append_outfile = 0;
 	if (cmds->file_in)
 	{
 		free(cmds->file_in);

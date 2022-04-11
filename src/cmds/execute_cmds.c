@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/08 22:02:42 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/08 21:25:07 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	int		stdin_fd_backup;
 
 	stdin_fd_backup = dup(data->stdin_fd);
-	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_RDWR, 0777);
+	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | O_RDWR, 0777);
 	while(1)
 	{
 		ft_putstr_fd("-> ", 1);
