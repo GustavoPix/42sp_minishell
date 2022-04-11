@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/09 19:00:07 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:02:42 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 	{
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);
-		exit(0);
+		ft_putstr_fd("ls function \n", 2);
+		return (0);
 	}
 	return (1);
 }
@@ -114,7 +115,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
-		close(data->cmds->fd_file_out);
 		close(fd[1]);
 		exit(0);
 	}
