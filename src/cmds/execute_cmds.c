@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 19:12:22 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:50:43 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 {
 	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-	&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
+		&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
 	{
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);
@@ -41,13 +41,13 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 		return (0);
 	}
 
-	else if (ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-	{
-		if (data->cmds->qty == 1)
-			if (execve(cmd->bin, cmd->parans, NULL) == -1)
-				exit(1);
-		return (0);
-	}
+	//else if (ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
+	//{
+	//	if (data->cmds->qty == 1)
+	//		if (execve(cmd->bin, cmd->parans, NULL) == -1)
+	//			exit(1);
+	//	return (0);
+	//}
 
 	return (1);
 }
@@ -62,7 +62,7 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | O_RDWR, 0777);
 	while(1)
 	{
-		ft_putstr_fd("-> ", 1);
+		//ft_putstr_fd("-> ", 1);
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
@@ -111,6 +111,10 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		dup2(data->fd, STDIN_FILENO);
 		if (data->cmds->fd_file_in)
 			dup2(data->cmds->fd_file_in, STDIN_FILENO);
+		not_pipe_cmds(data, cmd);
+		dup2(fd[1], STDOUT_FILENO);
+		if (data->cmds->fd_file_out)
+			dup2(data->cmds->fd_file_out, STDOUT_FILENO);
 		if (cmd->bultin == 1)
 			indentify_builtin(data, cmd, fd);
 		else
