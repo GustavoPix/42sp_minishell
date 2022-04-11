@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 20:24:29 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:38:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 {
 	int	fd[2];
+	int fake_fd[2];
 	int	pid;
 	int	exit_code;
 
@@ -109,8 +110,19 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 	else if (pid == 0)
 	{
 		initdups(data, cmd, fd);
+		//----
+				//----
 		if (cmd->bultin == 1)
+		{
+			if ((cmd->document) == 1)
+			{
+				pipe(fake_fd);
+				execute_doc(fake_fd, cmd->doc_end, data);
+				close(fake_fd[0]);
+				close(fake_fd[1]);
+			}
 			indentify_builtin(data, cmd, fd);
+		}
 		else
 		{
 			if ((cmd->document) == 1)
