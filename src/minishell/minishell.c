@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/08 11:36:48 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:09:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,13 @@ int	output_minishell(t_data *data)
 		buffer = get_next_line(data->fd);
 		if (buffer == NULL)
 			break;
-		if (data->cmds->file_out)
+		else if (data->cmds->file_out)
 			write(data->cmds->fd_file_out, buffer, ft_strlen(buffer));
 		else
 			write(1, buffer, ft_strlen(buffer));
 		free(buffer);
 	}
-	if (data->cmds->file_out)
-		close(data->cmds->fd_file_out);
 	clear_cmds(data->cmds, 0);
-
 	return (0);
 }
 

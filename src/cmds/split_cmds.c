@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 22:20:27 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:09:45 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,15 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmds->last_cmd = cmd;
 	cmds->qty++;
 	if (cmds->file_in)
-		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0777);
-	if (cmds->file_out)
-		cmds->fd_file_out = open(cmds->file_out, O_RDWR | O_CREAT, 0777);
+		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0666);
+	if (cmds->file_out && cmds->append_outfile)
+	{
+		cmds->fd_file_out = open(cmds->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	}
+	else if(cmds->file_out)
+	{
+		cmds->fd_file_out = open(cmds->file_out, O_CREAT | O_WRONLY | O_TRUNC , 0666);
+	}
 }
 
 static void move_parans(t_cmd *cmd, int index, int qty)

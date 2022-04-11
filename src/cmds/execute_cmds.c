@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/08 20:34:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/11 19:09:28 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 #include <errno.h>
+
+int	not_pipe_cmds(t_data *data, t_cmd *cmd)
+{
+	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
+	&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
+	{
+		if (execve(cmd->bin, cmd->parans, NULL) == -1)
+			exit(1);
+		exit(0);
+	}
+	return (1);
+}
 
 int	not_fork_cmds(t_data *data, t_cmd *cmd)
 {
@@ -113,6 +125,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
+		close(data->cmds->fd_file_out);
 		close(fd[1]);
 		exit(0);
 	}
