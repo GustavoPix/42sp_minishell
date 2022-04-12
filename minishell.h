@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 21:29:41 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 19:38:53 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 # include "./src/inputline/inputline.h"
 # include "./src/path/path.h"
 # include "./src/cmds/cmds.h"
-
-
-
-#define clear() printf("\033[H\033[J");
-#define blue \033[1;34m;
 
 typedef struct s_env
 {
@@ -54,9 +49,9 @@ void	input_line(t_data *data);
 
 // cmds.h
 int		test_and_apply_bin(t_data *data, t_cmd *cmd);
-void setup_cmds_bin_path(t_data *data);
+void	setup_cmds_bin_path(t_data *data);
 // My alteration
-int	execute_cmds(t_data *data, t_cmd *cmd, int i);
+int		execute_cmds(t_data *data, t_cmd *cmd, int i);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 // finish
 void	builtin_echo(t_cmd *builtin, int fd[]);
@@ -66,13 +61,9 @@ void	builtin_export(t_data *data, t_cmd *builtin);
 void	builtin_unset(t_data *data, t_cmd *builtin);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
-
-
 // minishell
-int	loop_minishell(t_data *data);
-int	set_env_value(t_data *data, char *key, char *value);
-int	not_pipe_cmds(t_data *data, t_cmd *cmd);
+int		loop_minishell(t_data *data);
+int		set_env_value(t_data *data, char *key, char *value);
+int		not_pipe_cmds(t_data *data, t_cmd *cmd);
 void	initdups(t_data *data, t_cmd *cmd, int fd[]);
 #endif
-
-

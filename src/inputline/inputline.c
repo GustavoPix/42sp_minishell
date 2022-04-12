@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 22:05:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 19:40:56 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ static int	replace_local_vars(t_data *data)
 	return (0);
 }
 
-void replace_exit_code(t_data *data)
+void	replace_exit_code(t_data *data)
 {
-	int dpos;
-	char *code;
-	char *aux;
+	int		dpos;
+	char	*code;
+	char	*aux;
 
 	dpos = index_of_char(data->i_line->input, '$');
 	if (dpos > -1 && data->i_line->input[dpos + 1] == '?')
@@ -110,12 +110,11 @@ void replace_exit_code(t_data *data)
 	}
 }
 
-
 char	*create_print_path(void)
 {
-	char *aux;
-	char *final;
-	char path[255];
+	char	*aux;
+	char	*final;
+	char	path[255];
 
 	aux = getenv("USER");
 	final = ft_strjoin("\033[1;34m", aux);

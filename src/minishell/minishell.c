@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/11 21:30:07 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 19:56:41 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int exit_minishell(t_data *data)
+int	exit_minishell(t_data *data)
 {
 	close(data->fd);
 	if (data->cmds->file_in)
@@ -32,7 +32,7 @@ int	output_minishell(t_data *data)
 	{
 		buffer = get_next_line(data->fd);
 		if (buffer == NULL)
-			break;
+			break ;
 		else if (data->cmds->file_out)
 			write(data->cmds->fd_file_out, buffer, ft_strlen(buffer));
 		else
@@ -74,7 +74,6 @@ int	loop_minishell(t_data *data)
 	while (strcmp(data->i_line->input, "exit") != 0)
 	{
 		read_minishell(data);
-		// debug_cmds(data->cmds);
 		execute_minishell(data);
 		output_minishell(data);
 	}

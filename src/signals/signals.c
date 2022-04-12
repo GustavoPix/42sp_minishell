@@ -3,17 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 22:07:30 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 20:40:37 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal.h"
 #include "../minishell.h"
 
-void *treat_sigs(int sig, siginfo_t *sitinfo, void *wtf)
+
+void	determine_sigs(int sig)
+{
+	if (sig == SIGINT)
+	{
+		
+	}
+}
+void	*treat_sigs(int sig, siginfo_t *sitinfo, void *wtf)
 {
 	(void)wtf;
 	if (sig == SIGINT || sig == SIGQUIT)
