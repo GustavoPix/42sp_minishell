@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 22:04:50 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 22:05:06 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ void	input_line(t_data *data)
 
 	free(data->i_line->input);
 	to_print = create_print_path();
-	signal(SIGINT, sigint);
 	data->i_line->input = readline(to_print);
 	free(to_print);
 	if (!data->i_line->input)

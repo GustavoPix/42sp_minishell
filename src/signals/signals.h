@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:43 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/31 21:26:17 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 22:07:10 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include <signal.h>
 
-void sigint(int sig);
+void treat_sigs(int sig, siginfo_t *sitinfo, void *wtf);
 
 #endif
