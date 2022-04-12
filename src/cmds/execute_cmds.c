@@ -3,16 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 21:29:33 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/11 22:48:20 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
-#include <errno.h>
+
+int ft_fdjoin(int fd1, int fd2)
+{
+	char	*buffer;
+
+	while (1)
+	{
+		buffer = get_next_line(fd1);
+		if (buffer == NULL)
+			break;
+		write(fd2, buffer, ft_strlen(buffer));
+		free(buffer);
+	}
+	return (0);
+}
 
 int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 {
@@ -40,15 +54,6 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 			return (1);
 		return (0);
 	}
-
-	//else if (ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-	//{
-	//	if (data->cmds->qty == 1)
-	//		if (execve(cmd->bin, cmd->parans, NULL) == -1)
-	//			exit(1);
-	//	return (0);
-	//}
-
 	return (1);
 }
 
@@ -60,9 +65,10 @@ void	execute_doc(int fd[], char *end, t_data *data)
 
 	stdin_fd_backup = dup(data->stdin_fd);
 	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | O_RDWR, 0777);
+	ft_fdjoin(data->fd, temp_file);
 	while(1)
 	{
-		//ft_putstr_fd("-> ", 1);
+
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
@@ -110,8 +116,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 	else if (pid == 0)
 	{
 		initdups(data, cmd, fd);
-		//----
-				//----
 		if (cmd->bultin == 1)
 		{
 			if ((cmd->document) == 1)
