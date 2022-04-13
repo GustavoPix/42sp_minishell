@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/13 16:10:44 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:13:27 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv, char **env)
 	struct sigaction	action;
 
 
-	action.sigaction = treat_sigs;
+	action.sa_sigaction = treat_sigs;
 	action.sa_flags = SA_SIGINFO;
 	init_sigaction(&action, SIG_IGN, SIGQUIT);
 	// action_quit.sa_handler = treat_sigs;
