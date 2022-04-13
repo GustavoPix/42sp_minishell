@@ -6,14 +6,14 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 20:43:28 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/11 22:48:20 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 
-int	ft_fdjoin(int fd1, int fd2)
+int ft_fdjoin(int fd1, int fd2)
 {
 	char	*buffer;
 
@@ -21,7 +21,7 @@ int	ft_fdjoin(int fd1, int fd2)
 	{
 		buffer = get_next_line(fd1);
 		if (buffer == NULL)
-			break ;
+			break;
 		write(fd2, buffer, ft_strlen(buffer));
 		free(buffer);
 	}
@@ -66,8 +66,9 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	stdin_fd_backup = dup(data->stdin_fd);
 	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | O_RDWR, 0777);
 	ft_fdjoin(data->fd, temp_file);
-	while (1)
+	while(1)
 	{
+
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
@@ -86,6 +87,7 @@ void	execute_doc(int fd[], char *end, t_data *data)
 
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 {
+
 	if (ft_strncmp(builtin->bin, "echo", ft_strlen(builtin->bin)) == 0)
 		builtin_echo(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "pwd", ft_strlen(builtin->bin)) == 0)
@@ -99,7 +101,7 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 {
 	int	fd[2];
-	int	fake_fd[2];
+	int fake_fd[2];
 	int	pid;
 	int	exit_code;
 
@@ -133,21 +135,18 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
+			//dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
-		// close(data->cmds->fd_file_out);
-		// close(data->cmds->fd_file_in);
+		close(data->cmds->fd_file_out);
 		close(fd[1]);
 		exit(0);
 	}
 	if (data->cmds->fd_file_in)
-	{
 		data->cmds->fd_file_in = 0;
-		close(data->cmds->fd_file_in);
-	}
 	if (data->fd)
-		// close(data->fd);
+		close(data->fd);
 	data->fd = fd[0];
 	waitpid(pid, &exit_code, 0);
 	close(fd[1]);

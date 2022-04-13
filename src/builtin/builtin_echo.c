@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:31:32 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 19:48:22 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/11 20:29:46 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	builtin_echo(t_cmd *builtin, int fd[])
 	}
 	else
 		ft_putchar_fd('\n', STDOUT_FILENO);
+
 }

@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/29 15:49:35 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/12 19:57:34 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/03/17 19:15:38 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+

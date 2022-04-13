@@ -6,17 +6,17 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 19:54:50 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:41:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 
-void	setup_cmds_bin_path(t_data *data)
+void setup_cmds_bin_path(t_data *data)
 {
-	t_cmd	*cmd;
-	int		i;
+	t_cmd *cmd;
+	int i;
 
 	i = 0;
 	cmd = data->cmds->first_cmd;
@@ -55,6 +55,7 @@ void	print_cmd(t_cmd *cmd)
 	if (cmd->document)
 		ft_putstr_fd(cmd->doc_end, 1);
 	ft_putstr_fd("|\n", 1);
+
 	while (cmd->parans[i])
 	{
 		ft_putstr_fd(cmd->parans[i], 1);
