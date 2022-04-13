@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/13 16:14:16 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:17:42 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*treat_sigs(int sig, siginfo_t *siginfo, void *wtf)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	return (0);
 }
 
 void	init_sigaction(struct sigaction *action, void (*handler)(int), int sig)
