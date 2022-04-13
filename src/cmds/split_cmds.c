@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 20:46:33 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:42:05 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ static char *signal_treatment(t_cmd *cmd, int i, int pos, int size)
 	char *aux;
 
 	aux = ft_strtrim(&cmd->parans[i][pos + size], " ");
-	printf("aux -> |%s| i -> |%i|\n", aux, i);
 	if (ft_strlen(aux))
 	{
 		ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));

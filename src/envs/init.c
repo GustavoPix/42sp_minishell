@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/03/20 14:37:15 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:47:23 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	add_env(t_data *data, char *env_value)
 		new_envs[i] = data->envs[i];
 		i++;
 	}
-	printf("EXPORT -> |%s|\n", env_value);
 	aux = ft_split(env_value, '=');
 	new_envs[i] = malloc(sizeof(t_env));
 	new_envs[i]->name = ft_strdup(aux[0]);
