@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/12 22:26:50 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 23:41:33 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	output_minishell(t_data *data)
 		if (buffer == NULL)
 			break;
 		else if (data->cmds->file_out)
+		{
+			printf("Isso esta errado\n");
 			write(data->cmds->fd_file_out, buffer, ft_strlen(buffer));
+		}
 		else
 			write(1, buffer, ft_strlen(buffer));
 		free(buffer);

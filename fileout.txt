@@ -1,0 +1,11 @@
+total 116
+-rw-r--r-- 1 gustavo gustavo  2577 Apr 12 23:05 Makefile
+-rw-r--r-- 1 gustavo gustavo    79 Apr 12 21:30 README.md
+-rw-r--r-- 1 gustavo gustavo     5 Apr 12 21:31 filein.txt
+-rw-r--r-- 1 gustavo gustavo     0 Apr 12 23:43 fileout.txt
+drwxr-xr-x 2 gustavo gustavo  4096 Apr 12 23:42 libft
+drwxr-xr-x 3 gustavo gustavo  4096 Apr 12 21:30 libraries
+-rw-r--r-- 1 gustavo gustavo  1571 Apr 12 22:07 main.c
+-rwxr-xr-x 1 gustavo gustavo 82744 Apr 12 23:42 minishell
+-rw-r--r-- 1 gustavo gustavo  2504 Apr 12 21:31 minishell.h
+drwxr-xr-x 9 gustavo gustavo  4096 Apr 12 21:30 src

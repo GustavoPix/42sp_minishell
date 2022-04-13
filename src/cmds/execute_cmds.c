@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 22:48:20 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/12 23:51:44 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int ft_fdjoin(int fd1, int fd2)
 
 int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 {
+	(void)data;
 	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-		&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
+		&& cmd->parans[1] == NULL && cmd->fd_file_out == 0)
 	{
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);
@@ -68,7 +69,7 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	ft_fdjoin(data->fd, temp_file);
 	while(1)
 	{
-
+		ft_putstr_fd("Eu nao deveria estar aqui\n", 1);
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
@@ -137,14 +138,15 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 			}
 			//dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
+			{
 				exit(1);
+			}
 		}
 		close(data->cmds->fd_file_out);
+		close(data->cmds->fd_file_in);
 		close(fd[1]);
 		exit(0);
 	}
-	if (data->cmds->fd_file_in)
-		data->cmds->fd_file_in = 0;
 	if (data->fd)
 		close(data->fd);
 	data->fd = fd[0];
