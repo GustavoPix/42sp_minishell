@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 20:41:32 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/12 20:37:44 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ void	print_cmd(t_cmd *cmd)
 	if (cmd->document)
 		ft_putstr_fd(cmd->doc_end, 1);
 	ft_putstr_fd("|\n", 1);
+
+	ft_putstr_fd("file out -> |", 1);
+	if (cmd->file_out)
+		ft_putstr_fd(cmd->file_out, 1);
+	ft_putstr_fd("|\n", 1);
+	ft_putstr_fd("Append file: ", 1);
+	if (cmd->append_outfile)
+		ft_putstr_fd("Yes\n", 1);
+	else
+		ft_putstr_fd("No\n", 1);
 
 	while (cmd->parans[i])
 	{

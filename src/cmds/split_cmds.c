@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 19:12:30 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 20:46:33 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 	}
 }
 
-static int detect_outfile(t_cmds *cmds, char **str)
-{
-	int i_major;
-
-	i_major = has_double_signal(*str, '>');
-	if (i_major >= 0)
-	{
-		cmds->append_outfile = 1;
-		ft_memmove(&str[0][i_major], &str[0][i_major + 1], ft_strlen(&str[0][i_major + 1]));
-		str[0][ft_strlen(*str) - 1] = '\0';
-	}
-	else
-		i_major = has_minnor_signal(*str, '>');
-	return (i_major);
-}
+//static int detect_outfile(t_cmds *cmds, char **str)
+//{
+//	int i_major;
+//
+//	i_major = has_double_signal(*str, '>');
+//	if (i_major >= 0)
+//	{
+//		cmds->append_outfile = 1;
+//		ft_memmove(&str[0][i_major], &str[0][i_major + 1], ft_strlen(&str[0][i_major + 1]));
+//		str[0][ft_strlen(*str) - 1] = '\0';
+//	}
+//	else
+//		i_major = has_minnor_signal(*str, '>');
+//	return (i_major);
+//}
 
 static void	signal_choose_tr(t_cmds *cmds, char **str)
 {
@@ -63,7 +63,8 @@ static void	signal_choose_tr(t_cmds *cmds, char **str)
 	int		i_major;
 
 	i_minus = has_minnor_signal(*str, '<');
-	i_major = detect_outfile(cmds, str);
+	//i_major = detect_outfile(cmds, str);
+	i_major = -1;
 	if (i_minus > -1 || i_major > -1)
 	{
 		if (i_minus < i_major)
@@ -100,14 +101,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmds->qty++;
 	if (cmds->file_in)
 		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0666);
-	if (cmds->file_out && cmds->append_outfile)
-	{
-		cmds->fd_file_out = open(cmds->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
-	}
-	else if(cmds->file_out)
-	{
-		cmds->fd_file_out = open(cmds->file_out, O_CREAT | O_WRONLY | O_TRUNC , 0666);
-	}
+	cmd->fd_file_out = 0;
 }
 
 static void move_parans(t_cmd *cmd, int index, int qty)
@@ -120,11 +114,38 @@ static void move_parans(t_cmd *cmd, int index, int qty)
 	}
 }
 
+static char *signal_treatment(t_cmd *cmd, int i, int pos, int size)
+{
+	char *aux;
+
+	aux = ft_strtrim(&cmd->parans[i][pos + size], " ");
+	printf("aux -> |%s| i -> |%i|\n", aux, i);
+	if (ft_strlen(aux))
+	{
+		ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
+		free(cmd->parans[i]);
+		cmd->parans[i] = NULL;
+		move_parans(cmd, i, 1);
+	}
+	else
+	{
+		free(aux);
+		aux = ft_strdup(cmd->parans[i + 1]);
+		ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
+		ft_bzero(cmd->parans[i + 1], ft_strlen(cmd->parans[i + 1]));
+		free(cmd->parans[i]);
+		free(cmd->parans[i + 1]);
+		cmd->parans[i] = NULL;
+		cmd->parans[i + 1] = NULL;
+		move_parans(cmd, i, 2);
+	}
+	return (aux);
+}
+
 static void hero_doc(t_cmd *cmd)
 {
 	int i;
 	int pos;
-	char *aux;
 
 	i = 0;
 	while (cmd->parans[i])
@@ -132,32 +153,41 @@ static void hero_doc(t_cmd *cmd)
 		pos = has_double_signal(cmd->parans[i], '<');
 		if (pos >= 0)
 		{
-			aux = ft_strtrim(&cmd->parans[i][pos + 2], " ");
-			if (ft_strlen(aux))
-			{
-				cmd->doc_end = aux;
-				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
-				free(cmd->parans[i]);
-				cmd->parans[i] = NULL;
-				move_parans(cmd, i, 1);
-			}
-			else
-			{
-				cmd->doc_end = ft_strdup(cmd->parans[i + 1]);
-				ft_bzero(cmd->parans[i], ft_strlen(cmd->parans[i]));
-				ft_bzero(cmd->parans[i + 1], ft_strlen(cmd->parans[i + 1]));
-				free(cmd->parans[i]);
-				free(cmd->parans[i + 1]);
-				cmd->parans[i] = NULL;
-				cmd->parans[i + 1] = NULL;
-				free(aux);
-				move_parans(cmd, i, 2);
-			}
+			cmd->doc_end = signal_treatment(cmd, i, pos, 2);
 			cmd->document = 1;
+			continue;
 		}
 		i++;
 	}
+}
 
+static void out_file(t_cmd *cmd)
+{
+	int i;
+	int pos;
+
+	i = 0;
+	while (cmd->parans[i])
+	{
+		pos = has_double_signal(cmd->parans[i], '>');
+		if (pos >= 0)
+		{
+			cmd->file_out = signal_treatment(cmd, i, pos, 2);
+			cmd->append_outfile = 1;
+			continue;
+		}
+		else
+		{
+			pos = has_minnor_signal(cmd->parans[i], '>');
+			if (pos >= 0)
+			{
+				cmd->file_out = signal_treatment(cmd, i, pos, 1);
+				cmd->append_outfile = 0;
+				continue;
+			}
+		}
+		i++;
+	}
 }
 
 static void	setup_cmd(t_cmds *cmds, char *str)
@@ -174,6 +204,8 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	cmd->bin = ft_strdup(aux[0]);
 	cmd->parans = malloc((count_size_matrix(aux) + 1) * sizeof(char *));
 	args = 1;
+	cmd->file_out = 0;
+	cmd->append_outfile = 0;
 	while (aux[args])
 	{
 		swap_char_quote(aux[args], 1, ' ');
@@ -185,6 +217,15 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	}
 	setup_default_params(cmds, cmd, args);
 	hero_doc(cmd);
+	out_file(cmd);
+	if (cmd->file_out && cmd->append_outfile)
+	{
+		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
+	}
+	else if(cmd->file_out)
+	{
+		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_TRUNC , 0666);
+	}
 	free(aux[0]);
 	free(aux);
 }
