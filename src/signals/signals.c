@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/13 16:17:42 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:17:59 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*treat_sigs(int sig, siginfo_t *siginfo, void *wtf)
 void	init_sigaction(struct sigaction *action, void (*handler)(int), int sig)
 {
 	action->sa_handler = handler;
-	action->sa_flags = SA_INFO;
+	action->sa_flags = SA_RESTART;
 	sigemptyset(&action->sa_mask);
 	sigaction(sig, action, NULL);
 }
