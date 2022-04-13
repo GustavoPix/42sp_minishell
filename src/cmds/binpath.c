@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binpath.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 20:34:12 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/06 20:36:32 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/12 22:11:27 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	test_and_apply_bin(t_data *data, t_cmd *cmd)
 		return (1);
 	env_bin = get_env(data, "PATH");
 	i = 0;
-	while (env_bin->values[i])
+	while (env_bin && env_bin->values[i])
 	{
 		aux = ft_strjoin(env_bin->values[i], "/");
 		test_bin = ft_strjoin(aux, cmd->bin);
