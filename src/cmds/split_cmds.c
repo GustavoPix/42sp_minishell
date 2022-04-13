@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 21:42:05 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/12 22:25:31 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,8 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	{
 		swap_char_quote(aux[args], 1, ' ');
 		swap_char_quote(aux[args], 2, '|');
+		swap_char_quote(aux[args], '>', 1);
+		swap_char_quote(aux[args], '<', 2);
 		remove_quote(aux[args]);
 		cmd->parans[args] = ft_strdup(aux[args]);
 		free(aux[args]);
@@ -217,6 +219,14 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	setup_default_params(cmds, cmd, args);
 	hero_doc(cmd);
 	out_file(cmd);
+	args = 0;
+	while (cmd->parans[args])
+	{
+		replace_char(cmd->parans[args], 1, '>');
+		replace_char(cmd->parans[args], 2, '<');
+		//printf("$%s$\n", cmd->parans[args]);
+		args++;
+	}
 	if (cmd->file_out && cmd->append_outfile)
 	{
 		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
