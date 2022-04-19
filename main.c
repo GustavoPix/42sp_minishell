@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/13 16:13:27 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 17:44:00 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,16 @@ int	main(int argc, char **argv, char **env)
 	// struct sigaction	action_quit;
 	struct sigaction	action;
 
-
-	action.sa_sigaction = treat_sigs;
-	action.sa_flags = SA_SIGINFO;
+	// action.sa_sigaction = treat_sigs;
+	// action.sa_flags = SA_SIGINFO;
+	init_sigaction2(&action, &treat_sigs, SIGQUIT);
 	init_sigaction(&action, SIG_IGN, SIGQUIT);
+	// init_sigaction2(&action, SIGINT);
 	// action_quit.sa_handler = treat_sigs;
 	// action_quit.sa_flags = SA_SIGINFO;
 	// action_quit.sa_mask = SIG_IGN;
 	data.stdin_fd = dup(0);
-	// sigaction(SIGINT, &action_int, NULL);
+	// sigaction(SIGINT, &action, NULL);
 	// sigaction(SIGQUIT, &action_quit, NULL);
 	start_all(&data, env);
 	loop_minishell(&data);

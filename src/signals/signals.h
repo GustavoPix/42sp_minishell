@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:43 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/13 16:17:24 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:39:54 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <signal.h>
 
+void	init_sigaction2(struct sigaction *action, void (*sa_sigaction)(int, siginfo_t *, void *), int sig);
 void	init_sigaction(struct sigaction *action, void (*handler)(int), int sig);
 void	treat_sigs(int sig, siginfo_t *sitinfo, void *wtf);
 

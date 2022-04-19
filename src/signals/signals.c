@@ -6,14 +6,14 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/13 16:17:59 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:36:31 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal.h"
 #include "../minishell.h"
 
-void	*treat_sigs(int sig, siginfo_t *siginfo, void *wtf)
+void	treat_sigs(int sig, siginfo_t *siginfo, void *wtf)
 {
 	(void)wtf;
 	if (sig == SIGINT)
@@ -25,7 +25,14 @@ void	*treat_sigs(int sig, siginfo_t *siginfo, void *wtf)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	return (0);
+}
+
+void	init_sigaction2(struct sigaction *action, void (*sa_sigaction)(int, siginfo_t *, void *), int sig)
+{
+	action->sa_sigaction = sa_sigaction;
+	action->sa_flags = SA_SIGINFO;
+	sigemptyset(&action->sa_mask);
+	sigaction(sig, action, NULL);
 }
 
 void	init_sigaction(struct sigaction *action, void (*handler)(int), int sig)
