@@ -1,6 +1,12 @@
-safe
-teste
-
-aaa
-bbb
-ccc
+total 128
+-rw-r--r-- 1 saitama saitama  2620 Apr 19 19:48 Makefile
+-rw-r--r-- 1 saitama saitama    79 Mar 19 16:54 README.md
+-rw-r--r-- 1 saitama saitama    11 Apr 19 20:23 filein.txt
+-rw-r--r-- 1 saitama saitama     0 Apr 19 20:37 fileout.txt
+drwxr-xr-x 2 saitama saitama  4096 Apr 19 20:19 libft
+drwxr-xr-x 3 saitama saitama  4096 Mar 19 16:54 libraries
+-rw-r--r-- 1 saitama saitama  1569 Apr 19 20:26 main.c
+-rw-r--r-- 1 saitama saitama  8648 Apr 19 20:26 main.o
+-rwxr-xr-x 1 saitama saitama 83056 Apr 19 20:37 minishell
+-rw-r--r-- 1 saitama saitama  2504 Apr 19 19:48 minishell.h
+drwxr-xr-x 9 saitama saitama  4096 Mar 31 21:58 src
