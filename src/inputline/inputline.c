@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/11 22:05:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/18 22:00:22 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,13 +128,22 @@ char	*create_print_path(void)
 	return (aux);
 }
 
+//static void print_line(char *antes, char *depois)
+//{
+//	ft_putstr_fd(antes, 1);
+//	ft_putstr_fd(" -> |", 1);
+//	ft_putstr_fd(depois, 1);
+//	ft_putstr_fd("|\n", 1);
+//}
+
 void	input_line(t_data *data)
 {
 	char	*aux;
 	char	*to_print;
 
-	free(data->i_line->input);
+	//free(data->i_line->input);
 	to_print = create_print_path();
+
 	data->i_line->input = readline(to_print);
 	free(to_print);
 	if (!data->i_line->input)

@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 22:25:31 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/18 22:41:59 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	treatment_signal(t_cmds *cmds, char **str, char c)
 {
 	int		i_char;
+	char	*aux2;
 	char	*aux;
 
 	i_char = has_minnor_signal(*str, c);
@@ -23,7 +24,13 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 		free(cmds->file_in);
 		cmds->file_in = ft_strtrim(&str[0][i_char + 1], " ");
 		if (has_minnor_signal(*str, '>') > -1)
-			treatment_signal(cmds, &cmds->file_in, '>');
+		{
+			aux = cmds->file_in;
+			cmds->file_in = ft_calloc(sizeof(char), has_minnor_signal(aux, '>'));
+			ft_strlcpy(cmds->file_in, aux, has_minnor_signal(aux, '>'));
+			free(aux);
+		}
+		//	treatment_signal(cmds, &cmds->file_in, '>');
 	}
 	else
 	{
@@ -35,9 +42,11 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 	if (i_char != 0)
 	{
 		aux = *str;
-		*str = ft_calloc(sizeof(char), i_char + 1);
-		ft_strlcpy(str[0], aux, i_char + 1);
+		aux2 = ft_calloc(sizeof(char), i_char + 1);
+		ft_strlcpy(aux2, aux, i_char + 1);
+		*str = ft_strjoin(aux2, &aux[has_minnor_signal(aux, '>')]);
 		free(aux);
+		free(aux2);
 	}
 }
 
@@ -71,14 +80,14 @@ static void	signal_choose_tr(t_cmds *cmds, char **str)
 		{
 			if (i_minus > -1)
 				treatment_signal(cmds, str, '<');
-			else
-				treatment_signal(cmds, str, '>');
+			//else
+			//	treatment_signal(cmds, str, '>');
 		}
 		else
 		{
-			if (i_major > -1)
-				treatment_signal(cmds, str, '>');
-			else
+			//if (i_major > -1)
+			//	treatment_signal(cmds, str, '>');
+			//else
 				treatment_signal(cmds, str, '<');
 		}
 		if (i_minus == 0 && i_major == 0)
@@ -218,7 +227,6 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 	}
 	setup_default_params(cmds, cmd, args);
 	hero_doc(cmd);
-	out_file(cmd);
 	args = 0;
 	while (cmd->parans[args])
 	{
@@ -227,6 +235,7 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 		//printf("$%s$\n", cmd->parans[args]);
 		args++;
 	}
+	out_file(cmd);
 	if (cmd->file_out && cmd->append_outfile)
 	{
 		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
