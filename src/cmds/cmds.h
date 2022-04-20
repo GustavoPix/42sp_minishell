@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 18:56:13 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:03:24 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	clear_cmds(t_cmds *cmds, int all);
 void	split_minnor_char(t_cmds *cmds);
 int		has_double_signal(char *str, char c);
 int		has_minnor_signal(char *str, char c);
+int		has_char(char *str, char c);
 void	swap_char_quote(char *str, int from, int to);
 void	remove_quote(char *str);
 int		count_size_matrix(char **str);

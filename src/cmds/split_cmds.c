@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/18 22:41:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/19 21:12:30 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 	{
 		free(cmds->file_in);
 		cmds->file_in = ft_strtrim(&str[0][i_char + 1], " ");
-		if (has_minnor_signal(*str, '>') > -1)
+		if (has_char(*str, '>') > -1)
 		{
 			aux = cmds->file_in;
-			cmds->file_in = ft_calloc(sizeof(char), has_minnor_signal(aux, '>'));
-			ft_strlcpy(cmds->file_in, aux, has_minnor_signal(aux, '>'));
+			cmds->file_in = ft_calloc(sizeof(char), has_char(aux, '>'));
+			ft_strlcpy(cmds->file_in, aux, has_char(aux, '>'));
 			free(aux);
 		}
 		//	treatment_signal(cmds, &cmds->file_in, '>');
@@ -44,7 +44,7 @@ static void	treatment_signal(t_cmds *cmds, char **str, char c)
 		aux = *str;
 		aux2 = ft_calloc(sizeof(char), i_char + 1);
 		ft_strlcpy(aux2, aux, i_char + 1);
-		*str = ft_strjoin(aux2, &aux[has_minnor_signal(aux, '>')]);
+		*str = ft_strjoin(aux2, &aux[has_char(aux, '>')]);
 		free(aux);
 		free(aux2);
 	}
