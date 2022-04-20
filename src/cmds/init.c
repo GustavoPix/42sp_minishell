@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/18 22:02:41 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:30:08 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	print_cmd(t_cmd *cmd)
 		ft_putchar_fd('\n', 1);
 		i++;
 	}
+	ft_putstr_fd("cmd error: ", 1);
+	ft_putnbr_fd(cmd->error,1);
+	ft_putstr_fd("\n", 1);
 	ft_putstr_fd("----\n", 1);
 }
 

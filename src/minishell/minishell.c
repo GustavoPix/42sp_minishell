@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/18 22:44:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/19 20:41:49 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ int exit_minishell(t_data *data)
 int	output_minishell(t_data *data)
 {
 	char	*buffer;
+	int		i;
+	t_cmd	*temp;
+
+	i = 0;
+	temp = data->cmds->first_cmd;
 	while (data->fd)
 	{
 		buffer = get_next_line(data->fd);
@@ -37,6 +42,16 @@ int	output_minishell(t_data *data)
 		else
 			write(1, buffer, ft_strlen(buffer));
 		free(buffer);
+	}
+
+	// alterar Dprintf depos
+	while (i < data->cmds->qty)
+	{
+		if (temp->error == 0)
+			dprintf(2,"command not found: %s\n", temp->bin);
+		i++;
+		if (i < data->cmds->qty)
+			temp = temp->next;
 	}
 	clear_cmds(data->cmds, 0);
 	return (0);
@@ -52,7 +67,8 @@ int	execute_minishell(t_data *data)
 	i = 0;
 	while (i < data->cmds->qty)
 	{
-		exit_code = execute_cmds(data, temp, i);
+		if (temp->error == 1)
+			exit_code = execute_cmds(data, temp, i);
 		i++;
 		if (i < data->cmds->qty)
 			temp = temp->next;
@@ -74,7 +90,7 @@ int	loop_minishell(t_data *data)
 	{
 		read_minishell(data);
 		debug_cmds(data->cmds);
-		execute_minishell(data);
+		data->exit_code =  execute_minishell(data);
 		output_minishell(data);
 	}
 	exit_minishell(data);
