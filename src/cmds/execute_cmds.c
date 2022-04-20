@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/18 22:03:53 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/19 21:11:25 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
+#include "../signals/signals.h"
 
 int ft_fdjoin(int fd1, int fd2)
 {
@@ -104,6 +105,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 	int fake_fd[2];
 	int	pid;
 	int	exit_code;
+	struct sigaction action = {};
 
 	(void)i;
 	if (not_fork_cmds(data, cmd) == 0)
@@ -115,6 +117,7 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		return (1);
 	else if (pid == 0)
 	{
+		init_sigaction(&action, handler_int_fork, SIGINT);
 		initdups(data, cmd, fd);
 		if (cmd->bultin == 1)
 		{
@@ -135,7 +138,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 				dup2(fd[0], STDIN_FILENO);
 				close(fd[0]);
 			}
-			//dup2(fd[1], STDOUT_FILENO);
 			if (execve(cmd->bin, cmd->parans, NULL) == -1)
 				exit(1);
 		}
@@ -143,8 +145,6 @@ int	execute_cmds(t_data *data, t_cmd *cmd, int i)
 		close(fd[1]);
 		exit(0);
 	}
-	//if (data->cmds->fd_file_in)
-	//	data->cmds->fd_file_in = 0;
 	if (data->fd)
 		close(data->fd);
 	data->fd = fd[0];
