@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/19 20:30:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:47:26 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,34 +48,23 @@ void	print_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	ft_putstr_fd("----\n", 1);
-	ft_putstr_fd(cmd->bin, 1);
-	ft_putchar_fd('\n', 1);
-	ft_putstr_fd("document -> |", 1);
-	if (cmd->document)
-		ft_putstr_fd(cmd->doc_end, 1);
-	ft_putstr_fd("|\n", 1);
-
-	ft_putstr_fd("file out -> |", 1);
-	if (cmd->file_out)
-		ft_putstr_fd(cmd->file_out, 1);
-	ft_putstr_fd("|\n", 1);
-	ft_putstr_fd("Append file: ", 1);
+	printf("----\n");
+	printf("%s\n", cmd->bin);
+	printf("document ->  |%s|\n", cmd->doc_end);
+	printf("file in ->   |%s|\n", cmd->file_in);
+	printf("file out ->  |%s|\n", cmd->file_out);
+	printf("Append file: ");
 	if (cmd->append_outfile)
-		ft_putstr_fd("Yes\n", 1);
+		printf("Yes\n");
 	else
-		ft_putstr_fd("No\n", 1);
-
+		printf("No\n");
+	printf("cmd error:   |%i|\n", cmd->error);
 	while (cmd->parans[i])
 	{
-		ft_putstr_fd(cmd->parans[i], 1);
-		ft_putchar_fd('\n', 1);
+		printf("%s\n", cmd->parans[i]);
 		i++;
 	}
-	ft_putstr_fd("cmd error: ", 1);
-	ft_putnbr_fd(cmd->error,1);
-	ft_putstr_fd("\n", 1);
-	ft_putstr_fd("----\n", 1);
+	printf("----\n");
 }
 
 void	debug_cmds(t_cmds *cmds)
@@ -85,19 +74,13 @@ void	debug_cmds(t_cmds *cmds)
 
 	i = 0;
 	cmd = cmds->first_cmd;
-	ft_putstr_fd("file in  -> |", 1);
-	if (cmds->file_in)
-		ft_putstr_fd(cmds->file_in, 1);
-	ft_putstr_fd("|\n", 1);
-	ft_putstr_fd("file out -> |", 1);
-	if (cmds->file_out)
-		ft_putstr_fd(cmds->file_out, 1);
-	ft_putstr_fd("|\n", 1);
-	ft_putstr_fd("Append file: ", 1);
+	printf("file in  ->  |%s|\n", cmds->file_in);
+	printf("file out ->  |%s|\n", cmds->file_out);
+	printf("Append file: ");
 	if (cmds->append_outfile)
-		ft_putstr_fd("Yes\n", 1);
+		printf("Yes\n");
 	else
-		ft_putstr_fd("No\n", 1);
+		printf("No\n");
 	while (i < cmds->qty)
 	{
 		print_cmd(cmd);

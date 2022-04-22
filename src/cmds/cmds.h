@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/19 20:03:24 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:08:03 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_cmd
 	char	*doc_end;
 	int		error;
 	char	*file_out;
+	char	*file_in;
+	int		fd_file_in;
 	int		fd_file_out;
 	int		append_outfile;
 }			t_cmd;
