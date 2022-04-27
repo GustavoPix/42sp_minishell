@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/24 19:29:25 by glima-de          #+#    #+#              #
-#    Updated: 2022/04/18 21:14:11 by glima-de         ###   ########.fr        #
+#    Updated: 2022/04/27 12:47:33 by wjuneo-f         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC			= ./src/inputline/path.c \
 			  ./src/cmds/get_inoutfile.c \
 			  ./src/cmds/execute_cmds.c \
 			  ./src/cmds/initdups.c \
+			  ./src/cmds/aux_files.c \
 			  ./src/builtin/builtin_cd.c \
 			  ./src/builtin/builtin_echo.c \
 			  ./src/builtin/builtin_env.c \
@@ -80,7 +81,7 @@ test:		all clean
 
 val:		all clean
 			clear
-			valgrind -q --leak-check=full --show-leak-kinds=all --trace-children=yes ./${NAME}
+			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp --trace-children=yes --verbose --log-file=valgrind-out.txt ./$(NAME)
 
 .PHONY:		all clean fclean re test val
 

@@ -6,57 +6,13 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/19 21:11:25 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:01:00 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 #include "../signals/signals.h"
-
-int ft_fdjoin(int fd1, int fd2)
-{
-	char	*buffer;
-
-	while (1)
-	{
-		buffer = get_next_line(fd1);
-		if (buffer == NULL)
-			break;
-		write(fd2, buffer, ft_strlen(buffer));
-		free(buffer);
-	}
-	return (0);
-}
-
-int	not_pipe_cmds(t_data *data, t_cmd *cmd)
-{
-	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-		&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
-	{
-		if (execve(cmd->bin, cmd->parans, NULL) == -1)
-			exit(1);
-		exit(0);
-	}
-	return (1);
-}
-
-int	not_fork_cmds(t_data *data, t_cmd *cmd)
-{
-	if (cmd->bultin == 1)
-	{
-		if (ft_strncmp(cmd->bin, "cd", ft_strlen(cmd->bin)) == 0)
-			builtin_cd(data, cmd);
-		else if (ft_strncmp(cmd->bin, "export", ft_strlen(cmd->bin)) == 0)
-			builtin_export(data, cmd);
-		else if (ft_strncmp(cmd->bin, "unset", ft_strlen(cmd->bin)) == 0)
-			builtin_unset(data, cmd);
-		else
-			return (1);
-		return (0);
-	}
-	return (1);
-}
 
 void	execute_doc(int fd[], char *end, t_data *data)
 {
@@ -65,11 +21,11 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	int		stdin_fd_backup;
 
 	stdin_fd_backup = dup(data->stdin_fd);
-	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | O_RDWR, 0777);
+	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | \
+	O_RDWR, 0777);
 	ft_fdjoin(data->fd, temp_file);
-	while(1)
+	while (1)
 	{
-
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
@@ -88,7 +44,6 @@ void	execute_doc(int fd[], char *end, t_data *data)
 
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 {
-
 	if (ft_strncmp(builtin->bin, "echo", ft_strlen(builtin->bin)) == 0)
 		builtin_echo(builtin, fd);
 	else if (ft_strncmp(builtin->bin, "pwd", ft_strlen(builtin->bin)) == 0)
@@ -99,52 +54,62 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 		exit(0);
 }
 
-int	execute_cmds(t_data *data, t_cmd *cmd, int i)
+void	aux_cmd_fork(t_data *data, t_cmd *cmd, int fake_fd[], int fd[])
+{
+	if (cmd->bultin == 1)
+	{
+		if ((cmd->document) == 1)
+		{
+			pipe(fake_fd);
+			execute_doc(fake_fd, cmd->doc_end, data);
+			close(fake_fd[0]);
+			close(fake_fd[1]);
+		}
+		indentify_builtin(data, cmd, fd);
+	}
+	else
+	{
+		if ((cmd->document) == 1)
+		{
+			execute_doc(fd, cmd->doc_end, data);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+		}
+		if (execve(cmd->bin, cmd->parans, NULL) == -1)
+			exit(1);
+	}
+}
+
+int	execute_cmd_fork(t_data *data, t_cmd *cmd, int fd[])
+{
+	int			fake_fd[2];
+	t_action	action;
+
+	init_sigaction(&action.sigaction, handler_int_fork, SIGINT);
+	init_sigaction(&action.sigaction, handler_quit_fork, SIGQUIT);
+	initdups(data, cmd, fd);
+	aux_cmd_fork(data, cmd, fake_fd, fd);
+	close(data->cmds->fd_file_out);
+	close(fd[1]);
+	exit(0);
+}
+
+int	execute_cmds(t_data *data, t_cmd *cmd, t_action *action)
 {
 	int	fd[2];
-	int fake_fd[2];
 	int	pid;
 	int	exit_code;
-	struct sigaction action = {};
 
-	(void)i;
 	if (not_fork_cmds(data, cmd) == 0)
 		return (0);
 	if (pipe(fd) == -1)
 		return (1);
 	pid = fork();
+	init_sigaction(&action->sigaction, SIG_IGN, SIGINT);
 	if (pid == -1)
 		return (1);
 	else if (pid == 0)
-	{
-		init_sigaction(&action, handler_int_fork, SIGINT);
-		initdups(data, cmd, fd);
-		if (cmd->bultin == 1)
-		{
-			if ((cmd->document) == 1)
-			{
-				pipe(fake_fd);
-				execute_doc(fake_fd, cmd->doc_end, data);
-				close(fake_fd[0]);
-				close(fake_fd[1]);
-			}
-			indentify_builtin(data, cmd, fd);
-		}
-		else
-		{
-			if ((cmd->document) == 1)
-			{
-				execute_doc(fd, cmd->doc_end, data);
-				dup2(fd[0], STDIN_FILENO);
-				close(fd[0]);
-			}
-			if (execve(cmd->bin, cmd->parans, NULL) == -1)
-				exit(1);
-		}
-		close(data->cmds->fd_file_out);
-		close(fd[1]);
-		exit(0);
-	}
+		execute_cmd_fork(data, cmd, fd);
 	if (data->fd)
 		close(data->fd);
 	data->fd = fd[0];

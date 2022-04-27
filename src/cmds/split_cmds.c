@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/22 16:23:15 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:34:24 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->fd_file_out = 0;
 }
 
-static void move_parans(t_cmd *cmd, int index, int qty)
+static void	move_parans(t_cmd *cmd, int index, int qty)
 {
 	while (cmd->parans[index + qty])
 	{
@@ -42,9 +42,9 @@ static void move_parans(t_cmd *cmd, int index, int qty)
 	}
 }
 
-static char *signal_treatment(t_cmd *cmd, int i, int pos, int size)
+static char	*signal_treatment(t_cmd *cmd, int i, int pos, int size)
 {
-	char *aux;
+	char	*aux;
 
 	aux = ft_strtrim(&cmd->parans[i][pos + size], " ");
 	if (ft_strlen(aux))
@@ -69,10 +69,10 @@ static char *signal_treatment(t_cmd *cmd, int i, int pos, int size)
 	return (aux);
 }
 
-static void hero_doc(t_cmd *cmd)
+static void	hero_doc(t_cmd *cmd)
 {
-	int i;
-	int pos;
+	int	i;
+	int	pos;
 
 	i = 0;
 	while (cmd->parans[i])
@@ -82,16 +82,16 @@ static void hero_doc(t_cmd *cmd)
 		{
 			cmd->doc_end = signal_treatment(cmd, i, pos, 2);
 			cmd->document = 1;
-			continue;
+			continue ;
 		}
 		i++;
 	}
 }
 
-static void out_file(t_cmd *cmd)
+static void	out_file(t_cmd *cmd)
 {
-	int i;
-	int pos;
+	int	i;
+	int	pos;
 
 	i = 0;
 	while (cmd->parans[i])
@@ -101,7 +101,7 @@ static void out_file(t_cmd *cmd)
 		{
 			cmd->file_out = signal_treatment(cmd, i, pos, 2);
 			cmd->append_outfile = 1;
-			continue;
+			continue ;
 		}
 		else
 		{
@@ -110,17 +110,17 @@ static void out_file(t_cmd *cmd)
 			{
 				cmd->file_out = signal_treatment(cmd, i, pos, 1);
 				cmd->append_outfile = 0;
-				continue;
+				continue ;
 			}
 		}
 		i++;
 	}
 }
 
-static void in_file(t_cmd *cmd)
+static void	in_file(t_cmd *cmd)
 {
-	int i;
-	int pos;
+	int	i;
+	int	pos;
 
 	i = 0;
 	while (cmd->parans[i])
@@ -129,7 +129,7 @@ static void in_file(t_cmd *cmd)
 		if (pos >= 0)
 		{
 			cmd->file_in = signal_treatment(cmd, i, pos, 1);
-			continue;
+			continue ;
 		}
 		i++;
 	}
@@ -178,7 +178,7 @@ static void	setup_cmd(t_cmds *cmds, char *str)
 		cmd->fd_file_in = open(cmd->file_in, O_RDONLY, 0666);
 	if (cmd->file_out && cmd->append_outfile)
 		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_APPEND, 0666);
-	else if(cmd->file_out)
+	else if (cmd->file_out)
 		cmd->fd_file_out = open(cmd->file_out, O_CREAT | O_WRONLY | O_TRUNC , 0666);
 	free(aux[0]);
 	free(aux);

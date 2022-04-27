@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/22 15:47:26 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/25 23:27:02 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 #include "../minishell.h"
 
-void setup_cmds_bin_path(t_data *data)
+void	setup_cmds_bin_path(t_data *data)
 {
-	t_cmd *cmd;
-	int i;
+	t_cmd	*cmd;
+	int		i;
 
 	i = 0;
 	cmd = data->cmds->first_cmd;
@@ -39,7 +39,6 @@ t_cmds	*start_cmds(void)
 	cmds->file_out = 0;
 	cmds->append_outfile = 0;
 	cmds->fd_file_in = 0;
-	//cmds->fd_file_out = 0;
 	return (cmds);
 }
 

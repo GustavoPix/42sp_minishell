@@ -3,21 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/19 16:02:21 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 22:34:57 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:41:06 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cmds/cmds.h"
 #include "../minishell.h"
-// lembrar de dar join nos parans;
 
 void	builtin_export(t_data *data, t_cmd *builtin)
 {
-	char **aux;
-	int i;
+	char	**aux;
+	int		i;
 
 	i = 0;
 	if (builtin->parans[1])

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 19:52:27 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 20:29:12 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:39:10 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char *mount_key_value(char *key, char *value)
+static char	*mount_key_value(char *key, char *value)
 {
-	char *aux1;
-	char *aux2;
+	char	*aux1;
+	char	*aux2;
 
 	aux1 = ft_strjoin(key, "=");
 	aux2 = ft_strjoin(aux1, value);
@@ -25,10 +25,10 @@ static char *mount_key_value(char *key, char *value)
 
 int	set_env_value(t_data *data, char *key, char *value)
 {
-	t_env *env;
-	char *new;
-	int i;
-	char **aux;
+	t_env	*env;
+	char	*new;
+	int		i;
+	char	**aux;
 
 	env = get_env(data, key);
 	if (env)

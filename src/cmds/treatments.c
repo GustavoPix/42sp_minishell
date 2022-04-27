@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   treatments.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:11 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/07 19:32:37 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:32:13 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-static int pos_char(char *str, int c)
+static int	pos_char(char *str, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -23,13 +23,12 @@ static int pos_char(char *str, int c)
 			return (i);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
-
-static int rev_pos_char(char *str, int c)
+static int	rev_pos_char(char *str, int c)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(str) - 1;
 	while (i >= 0)
@@ -38,14 +37,14 @@ static int rev_pos_char(char *str, int c)
 			return (i);
 		i--;
 	}
-	return(i);
+	return (i);
 }
 
 void	swap_char_quote(char *str, int from, int to)
 {
 	int	i;
 	int	in_quot;
-	int quot;
+	int	quot;
 
 	i = 0;
 	in_quot = 0;
@@ -64,6 +63,7 @@ void	swap_char_quote(char *str, int from, int to)
 		i++;
 	}
 }
+
 void	replace_char(char *str, int from, int to)
 {
 	int	i;
@@ -79,9 +79,9 @@ void	replace_char(char *str, int from, int to)
 
 void	remove_quote(char *str)
 {
-	int quot;
-	int start;
-	int end;
+	int	quot;
+	int	start;
+	int	end;
 
 	if (pos_char(str, '\'') < pos_char(str, '"'))
 		quot = '\'';
@@ -93,5 +93,4 @@ void	remove_quote(char *str)
 	end = rev_pos_char(str, quot);
 	memmove(&str[start], &str[start + 1], end - start);
 	ft_bzero(&str[end - 1], ft_strlen(str) - end);
-
 }

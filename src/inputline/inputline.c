@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/18 22:00:22 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/27 12:38:08 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ static int	replace_local_vars(t_data *data)
 	return (0);
 }
 
-void replace_exit_code(t_data *data)
+void	replace_exit_code(t_data *data)
 {
-	int dpos;
-	char *code;
-	char *aux;
+	int		dpos;
+	char	*code;
+	char	*aux;
 
 	dpos = index_of_char(data->i_line->input, '$');
 	if (dpos > -1 && data->i_line->input[dpos + 1] == '?')
@@ -110,12 +110,11 @@ void replace_exit_code(t_data *data)
 	}
 }
 
-
 char	*create_print_path(void)
 {
-	char *aux;
-	char *final;
-	char path[255];
+	char	*aux;
+	char	*final;
+	char	path[255];
 
 	aux = getenv("USER");
 	final = ft_strjoin("\033[1;34m", aux);
@@ -128,22 +127,12 @@ char	*create_print_path(void)
 	return (aux);
 }
 
-//static void print_line(char *antes, char *depois)
-//{
-//	ft_putstr_fd(antes, 1);
-//	ft_putstr_fd(" -> |", 1);
-//	ft_putstr_fd(depois, 1);
-//	ft_putstr_fd("|\n", 1);
-//}
-
 void	input_line(t_data *data)
 {
 	char	*aux;
 	char	*to_print;
 
-	//free(data->i_line->input);
 	to_print = create_print_path();
-
 	data->i_line->input = readline(to_print);
 	free(to_print);
 	if (!data->i_line->input)

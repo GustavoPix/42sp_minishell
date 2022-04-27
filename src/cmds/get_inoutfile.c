@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_inoutfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 10:50:06 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/19 20:03:03 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/04/23 13:30:36 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	has_minnor_signal(char *str, char c)
 			if (str[i + 1] && str[i + 1] == c)
 			{
 				i += 2;
-				continue;
+				continue ;
 			}
 			return (i);
 		}
