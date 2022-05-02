@@ -1,0 +1,23 @@
+// data
+	int			qty_env; V
+	int			fd; V
+	int			stdin_fd; V
+	int			exit_code; V
+
+
+// cmds
+int		qty; V
+
+// cmd
+	int		bultin; V
+	char	*bin; V X
+	char	**parans; V X
+	void	*next; V
+	int		document; V X
+	char	*doc_end; V X
+	int		error; V
+	char	*file_out; V X
+	char	*file_in; V X
+	int		fd_file_in; V
+	int		fd_file_out; V
+	int		append_outfile; V X

@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:22:16 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/25 23:27:02 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:14:33 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ t_cmds	*start_cmds(void)
 
 	cmds = malloc(sizeof(t_cmds));
 	cmds->qty = 0;
-	cmds->file_in = 0;
-	cmds->file_out = 0;
-	cmds->append_outfile = 0;
-	cmds->fd_file_in = 0;
+	// cmds->file_in = 0;
+	// cmds->file_out = 0;
+	// cmds->append_outfile = 0;
+	// cmds->fd_file_in = 0;
 	return (cmds);
 }
 
@@ -73,13 +73,7 @@ void	debug_cmds(t_cmds *cmds)
 
 	i = 0;
 	cmd = cmds->first_cmd;
-	printf("file in  ->  |%s|\n", cmds->file_in);
-	printf("file out ->  |%s|\n", cmds->file_out);
 	printf("Append file: ");
-	if (cmds->append_outfile)
-		printf("Yes\n");
-	else
-		printf("No\n");
 	while (i < cmds->qty)
 	{
 		print_cmd(cmd);

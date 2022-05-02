@@ -1,1 +1,14 @@
-oi
+Makefile
+README.md
+exit.txt
+fileout.txt
+libft
+libraries
+main.c
+main.o
+minishell
+minishell.h
+notes
+readline.supp
+src
+valgrind-out.txt

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initdups.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:36:07 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/12 20:31:58 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:16:57 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	initdups(t_data *data, t_cmd *cmd, int fd[])
 {
 	dup2(data->fd, STDIN_FILENO);
-	if (data->cmds->fd_file_in)
-		dup2(data->cmds->fd_file_in, STDIN_FILENO);
+	if (cmd->fd_file_in)
+		dup2(cmd->fd_file_in, STDIN_FILENO);
 	not_pipe_cmds(data, cmd);
 	dup2(fd[1], STDOUT_FILENO);
 	if (cmd->fd_file_out)

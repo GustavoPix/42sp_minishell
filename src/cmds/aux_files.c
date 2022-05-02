@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:46:33 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/27 12:49:22 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:17:46 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 
 int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 {
+	(void)data;
 	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-		&& cmd->parans[1] == NULL && data->cmds->fd_file_out == 0)
+		&& cmd->parans[1] == NULL && cmd->fd_file_out == 0)
 	{
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);

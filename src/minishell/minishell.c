@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/04/27 12:42:53 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:40:39 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 int	exit_minishell(t_data *data)
 {
 	close(data->fd);
-	if (data->cmds->file_in)
-		close(data->cmds->fd_file_in);
+	// lembrar de limpar os fd's de todos os comandos (dentro do clear);
+	// if (data->cmds->file_in)
+	// 	close(data->cmds->fd_file_in);
 	clear_inputline(data->i_line);
 	clear_cmds(data->cmds, 1);
 	clear_envs(data);
-	ft_putstr_fd("Bye! ;)\n", 1);
 	return (0);
 }
 
@@ -38,8 +38,8 @@ int	output_minishell(t_data *data)
 		buffer = get_next_line(data->fd);
 		if (buffer == NULL)
 			break ;
-		else if (data->cmds->file_out)
-			write(data->cmds->fd_file_out, buffer, ft_strlen(buffer));
+		else if (data->cmds->last_cmd->file_out)
+			write(data->cmds->last_cmd->fd_file_out, buffer, ft_strlen(buffer));
 		else
 			write(1, buffer, ft_strlen(buffer));
 		free(buffer);

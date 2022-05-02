@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/25 23:26:55 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:14:00 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct s_cmd
 typedef struct s_cmds
 {
 	int		qty;
-	char	*file_in;
-	char	*file_out;
-	int		fd_file_in;
-	int		fd_file_out;
-	int		append_outfile;
+	// char	*file_in;
+	// char	*file_out;
+	// int		fd_file_in;
+	// int		fd_file_out;
+	// int		append_outfile;
 	t_cmd	*first_cmd;
 	t_cmd	*last_cmd;
 }			t_cmds;

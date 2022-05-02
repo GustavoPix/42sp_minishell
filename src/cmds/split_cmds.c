@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/23 13:34:24 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 20:35:59 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,14 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 		cmds->last_cmd->next = cmd;
 	cmds->last_cmd = cmd;
 	cmds->qty++;
-	if (cmds->file_in)
-		cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0666);
+	// if (cmds->file_in)
+	// 	cmds->fd_file_in = open(cmds->file_in, O_RDONLY, 0666);
 	cmd->file_in = 0;
 	cmd->file_out = 0;
 	cmd->fd_file_out = 0;
+	cmd->fd_file_in = 0;
+	cmd->append_outfile = 0;
+	cmd->error = 0;
 }
 
 static void	move_parans(t_cmd *cmd, int index, int qty)
