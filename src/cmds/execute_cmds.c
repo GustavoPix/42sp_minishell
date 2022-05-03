@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/02 20:15:48 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:12:16 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	stdin_fd_backup = dup(data->stdin_fd);
 	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | \
 	O_RDWR, 0777);
-	ft_fdjoin(data->fd, temp_file);
+	if (data->fd)
+		ft_fdjoin(data->fd, temp_file);
 	while (1)
 	{
 		line = get_next_line(stdin_fd_backup);
 		if (line == NULL)
 			return ;
-		else if (ft_strncmp(line, end, ft_strlen(line) - 1) == 0)
+		else if (ft_strcmp(line, end) == 0)
 		{
 			free((void *)line);
 			close(stdin_fd_backup);
 			close(temp_file);
 			break ;
 		}
+
 		ft_putstr_fd(line, temp_file);
 		free((void *)line);
 	}
@@ -71,10 +73,12 @@ void	aux_cmd_fork(t_data *data, t_cmd *cmd, int fake_fd[], int fd[])
 	{
 		if ((cmd->document) == 1)
 		{
+			dprintf(2, "Linha 76: %s\n", cmd->bin);
 			execute_doc(fd, cmd->doc_end, data);
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
+		dprintf(2, "Linha 80: %s\n", cmd->bin);
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);
 	}

@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:46:33 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/02 20:17:46 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:10:56 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	ft_fdjoin(int fd1, int fd2)
 	{
 		buffer = get_next_line(fd1);
 		if (buffer == NULL)
+		{
 			break ;
+		}
 		write(fd2, buffer, ft_strlen(buffer));
 		free(buffer);
 	}

@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/02 20:40:39 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/02 21:19:45 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	loop_minishell(t_data *data, t_action *action)
 	{
 		init_sigaction(&action->sigaction, handler_int, SIGINT);
 		init_sigaction(&action->sigaction, SIG_IGN, SIGQUIT);
+		data->fd = 0;
 		read_minishell(data);
 		debug_cmds(data->cmds);
 		data->exit_code = execute_minishell(data, action);
