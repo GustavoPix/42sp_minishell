@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treatments.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 18:48:11 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/23 13:32:13 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:25:02 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@ static int	rev_pos_char(char *str, int c)
 		i--;
 	}
 	return (i);
+}
+
+void	swap_char_simple_quote(char *str, int from, int to)
+{
+	int	i;
+	int	in_quot;
+	int	quot;
+
+	i = 0;
+	in_quot = 0;
+	if (pos_char(str, '\'') < pos_char(str, '"'))
+		quot = '\'';
+	else
+		return;
+	if (rev_pos_char(str, quot) <= pos_char(str, quot))
+		return ;
+	while (str[i] != '\0')
+	{
+		if (str[i] == from && in_quot)
+			str[i] = to;
+		else if (str[i] == quot)
+			in_quot = !in_quot;
+		i++;
+	}
 }
 
 void	swap_char_quote(char *str, int from, int to)

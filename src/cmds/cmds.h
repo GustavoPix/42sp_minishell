@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/02 20:14:00 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:26:00 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	split_minnor_char(t_cmds *cmds);
 int		has_double_signal(char *str, char c);
 int		has_minnor_signal(char *str, char c);
 int		has_char(char *str, char c);
+void	swap_char_simple_quote(char *str, int from, int to);
 void	swap_char_quote(char *str, int from, int to);
 void	remove_quote(char *str);
 int		count_size_matrix(char **str);

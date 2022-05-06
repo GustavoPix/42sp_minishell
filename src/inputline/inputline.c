@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/27 12:38:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/06 16:41:13 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_env_name(char *str)
 
 	i = 0;
 	qty = 0;
-	while (str[qty] && str[qty] != ' ')
+	while (str[qty] && str[qty] >= 'A' && str[qty] <= 'Z')
 		qty++;
 	aux = ft_calloc(sizeof(char), qty + 1);
 	while (i < qty)
@@ -148,7 +148,7 @@ void	input_line(t_data *data)
 	swap_char_quote(data->i_line->input, '\t', 1);
 	replace_char(data->i_line->input, '\t', ' ');
 	swap_char_quote(data->i_line->input, 1, '\t');
-	swap_char_quote(data->i_line->input, '$', 3);
+	swap_char_simple_quote(data->i_line->input, '$', 3);
 	replace_exit_code(data);
 	replace_local_vars(data);
 	swap_char_quote(data->i_line->input, 3, '$');
