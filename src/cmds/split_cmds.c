@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmds.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/02 20:35:59 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/09 22:00:45 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,53 @@ static char	*signal_treatment(t_cmd *cmd, int i, int pos, int size)
 	return (aux);
 }
 
+static void reduce_samevar(char **str, char c)
+{
+	char *aux;
+	int pos;
+
+	pos = has_minnor_signal(str[0], c);
+	if (pos >= 0)
+	{
+		aux = str[0];
+		str[0] = ft_strdup(&aux[pos + 1]);
+		free(aux);
+		reduce_samevar(str, c);
+	}
+}
+
+static void reduce_parans(char **str_ori, char **str_dest, char c, int size)
+{
+	char *aux;
+	char *aux_dst;
+	int pos;
+
+	if (!str_ori || !str_ori[0])
+		return ;
+	if (size == 1)
+		pos = has_minnor_signal(str_ori[0], c);
+	else
+		pos = has_double_signal(str_ori[0], c);
+	if (pos >= 0)
+	{
+		aux = str_ori[0];
+		str_ori[0] = ft_calloc(sizeof(char), pos + size);
+		ft_strlcpy(str_ori[0], aux, pos + 1);
+		aux_dst = ft_strdup(&aux[pos + 1]);
+		free(aux);
+		free(str_dest[0]);
+		str_dest[0] = aux_dst;
+		reduce_samevar(str_dest, c);
+	}
+}
+
 static void	hero_doc(t_cmd *cmd)
 {
 	int	i;
 	int	pos;
 
 	i = 0;
+	reduce_parans(&cmd->bin, &cmd->doc_end, '<', 2);
 	while (cmd->parans[i])
 	{
 		pos = has_double_signal(cmd->parans[i], '<');
@@ -89,7 +130,12 @@ static void	hero_doc(t_cmd *cmd)
 		}
 		i++;
 	}
+	if (cmd->doc_end)
+		cmd->document = 1;
 }
+
+
+
 
 static void	out_file(t_cmd *cmd)
 {
@@ -97,6 +143,8 @@ static void	out_file(t_cmd *cmd)
 	int	pos;
 
 	i = 0;
+	reduce_parans(&cmd->bin, &cmd->file_out, '>', 1);
+	reduce_parans(&cmd->file_out, &cmd->file_in, '<', 1);
 	while (cmd->parans[i])
 	{
 		pos = has_double_signal(cmd->parans[i], '>');
@@ -118,6 +166,8 @@ static void	out_file(t_cmd *cmd)
 		}
 		i++;
 	}
+	if (cmd->file_out)
+		reduce_samevar(&cmd->file_out, '>');
 }
 
 static void	in_file(t_cmd *cmd)
@@ -126,16 +176,20 @@ static void	in_file(t_cmd *cmd)
 	int	pos;
 
 	i = 0;
+	reduce_parans(&cmd->bin, &cmd->file_in, '<', 1);
 	while (cmd->parans[i])
 	{
 		pos = has_minnor_signal(cmd->parans[i], '<');
 		if (pos >= 0)
 		{
 			cmd->file_in = signal_treatment(cmd, i, pos, 1);
+			i = 0;
 			continue ;
 		}
 		i++;
 	}
+	if (cmd->file_in)
+		reduce_samevar(&cmd->file_in, '<');
 }
 
 static void	setup_cmd(t_cmds *cmds, char *str)

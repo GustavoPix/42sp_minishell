@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/02 21:12:16 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/09 21:51:07 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,10 @@ void	aux_cmd_fork(t_data *data, t_cmd *cmd, int fake_fd[], int fd[])
 	{
 		if ((cmd->document) == 1)
 		{
-			dprintf(2, "Linha 76: %s\n", cmd->bin);
 			execute_doc(fd, cmd->doc_end, data);
 			dup2(fd[0], STDIN_FILENO);
 			close(fd[0]);
 		}
-		dprintf(2, "Linha 80: %s\n", cmd->bin);
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);
 	}
