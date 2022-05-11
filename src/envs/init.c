@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/12 21:47:23 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:30:16 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	remove_env(t_data *data, char *env_unset)
 void	start_envs(t_data *data, char **env)
 {
 	int		i;
-	int		j;
 	t_env	**envs;
 	char	**aux;
 
@@ -100,7 +99,6 @@ void	start_envs(t_data *data, char **env)
 			envs[i]->values = ft_split(aux[1], ':');
 		else
 			envs[i]->values = 0;
-		j = 0;
 		clear_matrix(aux);
 		i++;
 	}

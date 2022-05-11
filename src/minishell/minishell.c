@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/09 21:53:07 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:08:07 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	loop_minishell(t_data *data, t_action *action)
 		init_sigaction(&action->sigaction, SIG_IGN, SIGQUIT);
 		data->fd = 0;
 		read_minishell(data);
-		debug_cmds(data->cmds);
+		//debug_cmds(data->cmds);
 		data->exit_code = execute_minishell(data, action);
 		output_minishell(data);
 		clear_cmds(data->cmds, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initdups.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 20:36:07 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/02 21:14:00 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/10 21:12:57 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 void	initdups(t_data *data, t_cmd *cmd, int fd[])
 {
 	if (cmd->fd_file_in)
-		dup2(cmd->fd_file_in, STDIN_FILENO);
+	{
+		if (cmd->fd_file_in == -1)
+		{
+			ft_putstr_fd(cmd->file_in, 1);
+			ft_putstr_fd(":No such file or directory\n", 1);
+			exit(1);
+		}
+		else
+			dup2(cmd->fd_file_in, STDIN_FILENO);
+	}
 	else
 		dup2(data->fd, STDIN_FILENO);
 	not_pipe_cmds(data, cmd);
