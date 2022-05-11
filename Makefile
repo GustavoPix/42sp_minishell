@@ -66,8 +66,9 @@ test:		all clean
 
 val:		all clean
 			clear
-			valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp --trace-children=yes --verbose --log-file=valgrind-out.txt ./$(NAME)
+			valgrind -q --leak-check=full ./${NAME}
 
 .PHONY:		all clean fclean re test val
 
+# valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=readline.supp --trace-children=yes --verbose --log-file=valgrind-out.txt ./$(NAME)
 # valgrind -q --leak-check=full --track-fds=yes ./${NAME}

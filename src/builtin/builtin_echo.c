@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:31:32 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/10 21:27:25 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/11 03:55:03 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	builtin_echo(t_cmd *builtin, int fd[])
 			i = 2;
 		while (builtin->parans[i])
 		{
-			if (ft_strcmp(builtin->parans[i], "-n") || pn)
+			if (ft_strncmp(builtin->parans[i], "-n", 2) || pn)
 			{
 				ft_putstr_fd(builtin->parans[i], STDOUT_FILENO);
 				i++;

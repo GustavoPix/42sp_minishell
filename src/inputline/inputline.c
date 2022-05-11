@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inputline.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/06 16:41:13 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/11 03:51:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	input_line(t_data *data)
 	char	*to_print;
 
 	to_print = create_print_path();
+	free(data->i_line->input);
 	data->i_line->input = readline(to_print);
 	free(to_print);
 	if (!data->i_line->input)
