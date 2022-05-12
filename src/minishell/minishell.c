@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/10 21:08:07 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:21:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	execute_minishell(t_data *data, t_action *action)
 
 	temp = data->cmds->first_cmd;
 	i = 0;
+	exit_code = 0;
 	while (i < data->cmds->qty)
 	{
 		if (temp->error == 1)
