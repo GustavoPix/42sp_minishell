@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/12 20:21:50 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:13:46 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,13 @@
 int	exit_minishell(t_data *data)
 {
 	close(data->fd);
-	// lembrar de limpar os fd's de todos os comandos (dentro do clear);
-	// if (data->cmds->file_in)
-	// 	close(data->cmds->fd_file_in);
 	clear_inputline(data->i_line);
 	clear_cmds(data->cmds, 1);
 	clear_envs(data);
 	return (0);
 }
 
-int	output_minishell(t_data *data)
+static void	output_minishell(t_data *data)
 {
 	char	*buffer;
 	int		i;
@@ -52,7 +49,6 @@ int	output_minishell(t_data *data)
 		if (i < data->cmds->qty)
 			temp = temp->next;
 	}
-	return (0);
 }
 
 int	execute_minishell(t_data *data, t_action *action)
@@ -91,7 +87,6 @@ int	loop_minishell(t_data *data, t_action *action)
 		init_sigaction(&action->sigaction, SIG_IGN, SIGQUIT);
 		data->fd = 0;
 		read_minishell(data);
-		//debug_cmds(data->cmds);
 		data->exit_code = execute_minishell(data, action);
 		output_minishell(data);
 		clear_cmds(data->cmds, 0);

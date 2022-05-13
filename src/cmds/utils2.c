@@ -6,11 +6,24 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:37:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 21:38:38 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:11:04 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
+
+void	replace_char(char *str, int from, int to)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == from)
+			str[i] = to;
+		i++;
+	}
+}
 
 void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 {
@@ -34,7 +47,7 @@ void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->error = 0;
 }
 
-char *valid_fopen(char *path)
+char	*valid_fopen(char *path)
 {
 	if (access(path, R_OK))
 		return (ft_strdup(path));

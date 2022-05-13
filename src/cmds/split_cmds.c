@@ -6,15 +6,16 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 22:05:10 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:08:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-static int loop_swapchar_cmd(t_cmd *cmd, char *str, int args)
+static int	loop_swapchar_cmd(t_cmd *cmd, char *str, int args)
 {
 	char	**aux;
+
 	aux = ft_split(str, ' ');
 	cmd->bin = ft_strdup(aux[0]);
 	cmd->parans = malloc((count_size_matrix(aux) + 1) * sizeof(char *));

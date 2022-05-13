@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:46:33 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/10 21:20:33 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:11:52 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	not_pipe_cmds(t_data *data, t_cmd *cmd)
 {
 	(void)data;
 	if ((ft_strncmp(cmd->bin, "/usr/bin/ls", ft_strlen(cmd->bin)) == 0)
-		&& cmd->parans[1] == NULL && cmd->fd_file_out == 0 && data->cmds->qty == 1)
+		&& cmd->parans[1] == NULL && cmd->fd_file_out == 0
+		&& data->cmds->qty == 1)
 	{
 		if (execve(cmd->bin, cmd->parans, NULL) == -1)
 			exit(1);

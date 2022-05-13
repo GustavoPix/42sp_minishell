@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:48:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 21:53:28 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 22:10:48 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static void	out_file(t_cmd *cmd)
 
 void	set_cmd_files(t_cmd *cmd)
 {
-	int args;
+	int	args;
 
 	args = 0;
 	hero_doc(cmd);
