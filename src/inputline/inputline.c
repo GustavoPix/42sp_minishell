@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 20:34:23 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:12:16 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,14 +141,14 @@ void	input_line(t_data *data)
 		ft_putstr_fd("exit\n", 1);
 		data->i_line->input = ft_strdup("exit");
 	}
+	swap_char_quote(data->i_line->input, '\t', 1);
+	replace_char(data->i_line->input, '\t', ' ');
+	swap_char_quote(data->i_line->input, 1, '\t');
 	aux = ft_strtrim(data->i_line->input, " ");
 	if (ft_strlen(aux))
 		add_history(aux);
 	free(data->i_line->input);
 	data->i_line->input = aux;
-	swap_char_quote(data->i_line->input, '\t', 1);
-	replace_char(data->i_line->input, '\t', ' ');
-	swap_char_quote(data->i_line->input, 1, '\t');
 	swap_char_simple_quote(data->i_line->input, '$', 3);
 	replace_exit_code(data);
 	replace_local_vars(data);
