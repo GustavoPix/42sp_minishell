@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/06 16:26:00 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:42:52 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_cmd
 	int		document;
 	char	*doc_end;
 	int		error;
+	char	*error_fopen;
 	char	*file_out;
 	char	*file_in;
 	int		fd_file_in;

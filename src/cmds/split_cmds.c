@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 10:04:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 20:29:11 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:00:24 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->bultin = 0;
 	cmd->document = 0;
 	cmd->doc_end = 0;
+	cmd->error_fopen = 0;
 	if (cmds->qty == 0)
 		cmds->first_cmd = cmd;
 	else
@@ -174,6 +175,13 @@ static void	out_file(t_cmd *cmd)
 		reduce_samevar(&cmd->file_out, '>');
 }
 
+static char *valid_fopen(char *path)
+{
+	if (access(path, R_OK))
+		return (ft_strdup(path));
+	return (NULL);
+}
+
 static void	in_file(t_cmd *cmd)
 {
 	int	i;
@@ -187,7 +195,11 @@ static void	in_file(t_cmd *cmd)
 		if (pos >= 0)
 		{
 			if (cmd->file_in)
+			{
+				if (!cmd->error_fopen)
+					cmd->error_fopen = valid_fopen(cmd->file_in);
 				free(cmd->file_in);
+			}
 			cmd->file_in = signal_treatment(cmd, i, pos, 1);
 			i = 0;
 			continue ;

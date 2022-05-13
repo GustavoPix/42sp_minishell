@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/26 16:25:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 20:21:58 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:34:23 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_env_name(char *str)
 
 	i = 0;
 	qty = 0;
-	while (str[qty] && str[qty] >= 'A' && str[qty] <= 'Z')
+	while (ft_isalpha(str[qty]) || ft_isdigit(str[qty]))
 		qty++;
 	aux = ft_calloc(sizeof(char), qty + 1);
 	while (i < qty)

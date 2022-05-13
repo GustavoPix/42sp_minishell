@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/09 21:07:39 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 20:47:21 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	clear_cmd(t_cmd *cmd)
 		free(cmd->file_out);
 		cmd->file_out = 0;
 	}
+	if (cmd->error_fopen)
+		free(cmd->error_fopen);
 	cmd->append_outfile = 0;
 	cmd->document = 0;
 	free(cmd);
