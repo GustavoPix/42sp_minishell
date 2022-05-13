@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:29:38 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/27 12:38:39 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:24:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cmds/cmds.h"
 #include "../minishell.h"
+
+static void	ft_chreturn(t_data *data, char *oldpdw, int chreturn, t_cmd *btin)
+{
+	if (chreturn == -1)
+		fprintf(stderr, "cd: %s: No such file or directory\n", btin->parans[1]);
+	else
+		set_env_value(data, "OLDPWD", oldpdw);
+}
 
 void	builtin_cd(t_data *data, t_cmd *btin)
 {
@@ -37,8 +45,5 @@ void	builtin_cd(t_data *data, t_cmd *btin)
 		chreturn = chdir(".");
 	else
 		chreturn = chdir(btin->parans[1]);
-	if (chreturn == -1)
-		fprintf(stderr, "cd: %s: No such file or directory\n", btin->parans[1]);
-	else
-		set_env_value(data, "OLDPWD", oldpdw);
+	ft_chreturn(data, oldpdw, chreturn, btin);
 }

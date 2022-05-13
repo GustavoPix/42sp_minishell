@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 20:42:52 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:51:17 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,15 @@ void	remove_quote(char *str);
 int		count_size_matrix(char **str);
 void	debug_cmds(t_cmds *cmds);
 void	replace_char(char *str, int from, int to);
+
+void	move_parans(t_cmd *cmd, int index, int qty);
+char	*signal_treatment(t_cmd *cmd, int i, int pos, int size);
+void	reduce_samevar(char **str, char c);
+void	reduce_parans(char **str_ori, char **str_dest, char c, int size);
+
+void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count);
+char	*valid_fopen(char *path);
+void	set_cmd_files(t_cmd *cmd);
 // My alteration
 // finish
 #endif

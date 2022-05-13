@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/10 21:18:51 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:32:59 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	execute_doc(int fd[], char *end, t_data *data)
 			close(temp_file);
 			break ;
 		}
-
 		ft_putstr_fd(line, temp_file);
 		free((void *)line);
 	}
@@ -91,7 +90,6 @@ int	execute_cmd_fork(t_data *data, t_cmd *cmd, int fd[])
 	init_sigaction(&action.sigaction, handler_quit_fork, SIGQUIT);
 	initdups(data, cmd, fd);
 	aux_cmd_fork(data, cmd, fake_fd, fd);
-	// close(data->cmds->fd_file_out);
 	close(fd[1]);
 	exit(0);
 }

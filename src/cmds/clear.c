@@ -6,25 +6,14 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:01:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 20:47:21 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/12 21:32:25 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-void	clear_cmd(t_cmd *cmd)
+static void	clear_cmd_file(t_cmd *cmd)
 {
-	int	i;
-
-	i = 1;
-	free(cmd->bin);
-	while (cmd->parans[i])
-	{
-		if (cmd->parans[i])
-			free(cmd->parans[i]);
-		i++;
-	}
-	free(cmd->parans);
 	if (cmd->doc_end)
 		free(cmd->doc_end);
 	if (cmd->file_in)
@@ -39,6 +28,22 @@ void	clear_cmd(t_cmd *cmd)
 		free(cmd->file_out);
 		cmd->file_out = 0;
 	}
+}
+
+void	clear_cmd(t_cmd *cmd)
+{
+	int	i;
+
+	i = 1;
+	free(cmd->bin);
+	while (cmd->parans[i])
+	{
+		if (cmd->parans[i])
+			free(cmd->parans[i]);
+		i++;
+	}
+	free(cmd->parans);
+	clear_cmd_file(cmd);
 	if (cmd->error_fopen)
 		free(cmd->error_fopen);
 	cmd->append_outfile = 0;
@@ -49,15 +54,6 @@ void	clear_cmd(t_cmd *cmd)
 static void	clear_cmds_base(t_cmds *cmds, int all)
 {
 	cmds->qty = 0;
-	// cmds->first_cmd = 0;
-	// cmds->last_cmd = 0;
-	// if (cmds->file_in)
-	// {
-	// 	free(cmds->file_in);
-	// 	cmds->file_in = 0;
-	// 	close(cmds->fd_file_in);
-	// 	cmds->fd_file_in = 0;
-	// }
 	if (all)
 		free(cmds);
 }

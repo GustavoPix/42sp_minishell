@@ -1,6 +1,7 @@
 LIBFT         = ./libft/libft.a
 
 SRC            = ./main.c \
+              ./src/inputline/utils.c \
               ./src/inputline/path.c \
               ./src/inputline/init.c \
               ./src/inputline/inputline.c \
@@ -10,6 +11,8 @@ SRC            = ./main.c \
               ./src/cmds/split_cmds.c \
               ./src/cmds/clear.c \
               ./src/cmds/utils.c \
+              ./src/cmds/utils2.c \
+              ./src/cmds/utils3.c \
               ./src/cmds/get_inoutfile.c \
               ./src/cmds/execute_cmds.c \
               ./src/cmds/initdups.c \
