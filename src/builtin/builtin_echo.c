@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:31:32 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/11 03:55:03 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/12 21:08:18 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	builtin_echo(t_cmd *builtin, int fd[])
 			{
 				ft_putstr_fd(builtin->parans[i], STDOUT_FILENO);
 				i++;
+				pn = 1;
 				if (builtin->parans[i])
 					ft_putstr_fd(" ", STDOUT_FILENO);
 			}
 			else
 			{
-				pn = 1;
 				i++;
 			}
 		}
