@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 20:54:35 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/10 21:30:16 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/15 12:41:50 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,21 @@ void	add_env(t_data *data, char *env_value)
 		i++;
 	}
 	aux = ft_split(env_value, '=');
-	new_envs[i] = malloc(sizeof(t_env));
-	new_envs[i]->name = ft_strdup(aux[0]);
-	if (aux[1] && ft_strlen(aux[1]))
-		new_envs[i]->values = ft_split(aux[1], ':');
+	if (aux)
+	{
+		new_envs[i] = malloc(sizeof(t_env));
+		new_envs[i]->name = ft_strdup(aux[0]);
+		if (aux[1] && ft_strlen(aux[1]))
+			new_envs[i]->values = ft_split(aux[1], ':');
+		else
+			new_envs[i]->values = 0;
+		free(data->envs);
+		data->envs = new_envs;
+		data->qty_env++;
+		clear_matrix(aux);
+	}
 	else
-		new_envs[i]->values = 0;
-	free(data->envs);
-	data->envs = new_envs;
-	data->qty_env++;
-	clear_matrix(aux);
+		free(new_envs);
 }
 
 void	remove_env(t_data *data, char *env_unset)
@@ -59,23 +64,29 @@ void	remove_env(t_data *data, char *env_unset)
 
 	pos = 0;
 	i = 0;
-	while (pos < data->qty_env && ft_strcmp(env_unset, data->envs[pos]->name))
-		pos++;
-	new_envs = malloc(sizeof(t_env *) * (data->qty_env - 1));
-	while (i < data->qty_env - 1)
+	if (env_unset)
 	{
-		if (i < pos)
-			new_envs[i] = data->envs[i];
-		else
-			new_envs[i] = data->envs[i + 1];
-		i++;
+		while (pos < data->qty_env && ft_strcmp(env_unset, data->envs[pos]->name))
+			pos++;
+		if (pos < data->qty_env)
+		{
+			new_envs = malloc(sizeof(t_env *) * (data->qty_env - 1));
+			while (i < data->qty_env - 1)
+			{
+				if (i < pos)
+					new_envs[i] = data->envs[i];
+				else
+					new_envs[i] = data->envs[i + 1];
+				i++;
+			}
+				free(data->envs[pos]->name);
+				clear_matrix(data->envs[pos]->values);
+				free(data->envs[pos]);
+			free(data->envs);
+			data->envs = new_envs;
+			data->qty_env--;
+		}
 	}
-	free(data->envs[pos]->name);
-	clear_matrix(data->envs[pos]->values);
-	free(data->envs[pos]);
-	free(data->envs);
-	data->envs = new_envs;
-	data->qty_env--;
 }
 
 void	start_envs(t_data *data, char **env)
