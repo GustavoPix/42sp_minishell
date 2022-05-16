@@ -6,14 +6,13 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/02 20:13:55 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:00:32 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// #define _GNU_SOURCE
 # include "./libft/libft.h"
 # include "./src/inputline/inputline.h"
 # include "./src/path/path.h"
@@ -48,7 +47,6 @@ void	clear_envs(t_data *data);
 t_env	*get_env(t_data *data, char *env);
 char	*get_value_env_join(t_env *env);
 
-// Precisa tirar isso daqui
 // inputline.h
 void	input_line(t_data *data);
 
@@ -77,4 +75,7 @@ void	initdups(t_data *data, t_cmd *cmd, int fd[]);
 int		not_pipe_cmds(t_data *data, t_cmd *cmd);
 int		not_fork_cmds(t_data *data, t_cmd *cmd);
 int		ft_fdjoin(int fd1, int fd2);
+
+// output
+void    treat_errors(t_data *data);
 #endif

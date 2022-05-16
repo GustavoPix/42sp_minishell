@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/12 22:13:46 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/16 16:59:49 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ int	exit_minishell(t_data *data)
 static void	output_minishell(t_data *data)
 {
 	char	*buffer;
-	int		i;
-	t_cmd	*temp;
 
-	i = 0;
-	temp = data->cmds->first_cmd;
 	while (data->fd)
 	{
 		buffer = get_next_line(data->fd);
@@ -41,14 +37,7 @@ static void	output_minishell(t_data *data)
 			write(1, buffer, ft_strlen(buffer));
 		free(buffer);
 	}
-	while (i < data->cmds->qty)
-	{
-		if (temp->error == 0)
-			printf("command not found: %s\n", temp->bin);
-		i++;
-		if (i < data->cmds->qty)
-			temp = temp->next;
-	}
+	treat_errors(data);
 }
 
 int	execute_minishell(t_data *data, t_action *action)

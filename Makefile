@@ -30,6 +30,7 @@ SRC            = ./main.c \
               ./src/envs/get_env_var.c \
               ./src/envs/set_env.c \
               ./src/minishell/minishell.c \
+              ./src/minishell/minishell_aux.c \
               ./src/signals/signals.c
 
 OBJS_SLG    = ${SRC:.c=.o}

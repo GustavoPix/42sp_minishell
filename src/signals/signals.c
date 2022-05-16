@@ -6,7 +6,7 @@
 /*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:22:07 by glima-de          #+#    #+#             */
-/*   Updated: 2022/04/27 12:42:08 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/16 17:15:22 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	handler_quit_fork(int sig)
 {
 	(void)sig;
 	printf("[1]     quit       ./minishell\n");
-	exit(0);
+	exit(131);
 }
 
 void	handler_int(int sig)
@@ -40,5 +40,5 @@ void	handler_int(int sig)
 void	handler_int_fork(int sig)
 {
 	(void)sig;
-	exit (0);
+	exit (130);
 }

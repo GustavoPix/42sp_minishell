@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 21:32:59 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/16 20:46:39 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	execute_doc(int fd[], char *end, t_data *data)
 	while (1)
 	{
 		line = get_next_line(stdin_fd_backup);
+		printf("Aqui está line: %s\n", line);
 		if (line == NULL)
 			return ;
 		else if (ft_strcmp(line, end) == 0)
@@ -112,8 +113,13 @@ int	execute_cmds(t_data *data, t_cmd *cmd, t_action *action)
 		execute_cmd_fork(data, cmd, fd);
 	if (data->fd)
 		close(data->fd);
-	data->fd = fd[0];
 	waitpid(pid, &exit_code, 0);
+	if (WIFEXITED(exit_code))
+        exit_code = WEXITSTATUS(exit_code);
+	else if (WIFSIGNALED(exit_code))
+		if (!cmd->doc_end)
+        	exit_code = WTERMSIG(exit_code) + 128;
+	data->fd = fd[0];
 	close(fd[1]);
 	return (exit_code);
 }
