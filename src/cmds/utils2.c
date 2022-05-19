@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:37:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 22:11:04 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:15:51 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 	cmd->fd_file_in = 0;
 	cmd->append_outfile = 0;
 	cmd->error = 0;
+}
+
+void	create_file_out(char *path)
+{
+	int fd;
+	if (access(path, W_OK) < 0 && access(path, F_OK) < 0)
+	{
+		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
+		close(fd);
+	}
 }
 
 char	*valid_fopen(char *path)

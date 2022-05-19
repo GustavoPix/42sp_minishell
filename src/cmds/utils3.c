@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:48:47 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 22:10:48 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:40:01 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ static int	out_file_minsig(t_cmd *cmd, int i)
 	if (pos >= 0)
 	{
 		if (cmd->file_out)
+		{
+			create_file_out(cmd->file_out);
 			free(cmd->file_out);
+		}
 		cmd->file_out = signal_treatment(cmd, i, pos, 1);
 		cmd->append_outfile = 0;
 	}
@@ -92,16 +95,17 @@ static void	out_file(t_cmd *cmd)
 		pos = has_double_signal(cmd->parans[i], '>');
 		if (pos >= 0)
 		{
+			if (cmd->file_out)
+			{
+				create_file_out(cmd->file_out);
+				free(cmd->file_out);
+			}
 			cmd->file_out = signal_treatment(cmd, i, pos, 2);
 			cmd->append_outfile = 1;
 			continue ;
 		}
-		else
-		{
-			if (out_file_minsig(cmd, i) >= 0)
-				continue ;
-		}
-		i++;
+		else if (out_file_minsig(cmd, i) < 0)
+			i++;
 	}
 	if (cmd->file_out)
 		reduce_samevar(&cmd->file_out, '>');

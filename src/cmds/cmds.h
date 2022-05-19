@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/27 15:18:34 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 22:11:21 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:10:35 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	reduce_parans(char **str_ori, char **str_dest, char c, int size);
 void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count);
 char	*valid_fopen(char *path);
 void	set_cmd_files(t_cmd *cmd);
+void	create_file_out(char *path);
 // My alteration
 // finish
 #endif
