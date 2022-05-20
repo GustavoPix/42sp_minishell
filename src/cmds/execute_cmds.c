@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/19 21:17:53 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:49:13 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,44 @@
 #include "../minishell.h"
 #include "../signals/signals.h"
 
+static void	ft_print_end_doc(int i, char *end)
+{
+	ft_putstr_fd("warning: here-document at line ", 1);
+	ft_putnbr_fd(i, 1);
+	ft_putstr_fd(" delimited by end-of-file (wanted `", 1);
+	ft_putstr_fd(end, 1);
+	ft_putstr_fd("')\n", 1);
+}
+
 void	execute_doc(int fd[], char *end, t_data *data)
 {
 	char	*line;
+	int		i;
 	int		temp_file;
 	int		stdin_fd_backup;
 
 	stdin_fd_backup = dup(data->stdin_fd);
 	temp_file = open("/tmp/here_doc_temp_file", O_CREAT | O_TRUNC | \
 	O_RDWR, 0777);
+	i = 1;
 	if (data->fd)
 		ft_fdjoin(data->fd, temp_file);
 	while (1)
 	{
 		line = get_next_line(stdin_fd_backup);
-		printf("Aqui está line: %s\n", line);
 		if (line == NULL)
-			return ;
-		else if (ft_strcmp(line, end) == 0)
 		{
-			free((void *)line);
-			close(stdin_fd_backup);
-			close(temp_file);
+			ft_print_end_doc(i, end);
 			break ;
 		}
+		else if (ft_strcmp(line, end) == 0)
+			break ;
+		i++;
 		ft_putstr_fd(line, temp_file);
 		free((void *)line);
 	}
+	close(stdin_fd_backup);
+			close(temp_file);
 	fd[0] = open("/tmp/here_doc_temp_file", O_CREAT | O_RDWR, 0777);
 }
 
