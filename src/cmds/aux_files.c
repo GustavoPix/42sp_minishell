@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 12:46:33 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/12 22:11:52 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:14:11 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	not_fork_cmds(t_data *data, t_cmd *cmd)
 			builtin_export(data, cmd);
 		else if (ft_strncmp(cmd->bin, "unset", ft_strlen(cmd->bin)) == 0)
 			builtin_unset(data, cmd);
+		else if (ft_strncmp(cmd->bin, "exit", ft_strlen(cmd->bin)) == 0 && data->cmds->qty == 1)
+			builtin_exit(data, cmd);
 		else
 			return (1);
 		return (0);

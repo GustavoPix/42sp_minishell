@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/16 17:00:32 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/19 20:58:42 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_data
 	int			fd;
 	int			stdin_fd;
 	int			exit_code;
+	int			exit_code_exit;
+	int			exit;
 }				t_data;
 
 typedef struct s_action
@@ -64,6 +66,7 @@ void	builtin_export(t_data *data, t_cmd *builtin);
 void	builtin_unset(t_data *data, t_cmd *builtin);
 void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[]);
 void	builtin_env(t_data *data, t_cmd *builtin, int fd[]);
+void	builtin_exit(t_data *data, t_cmd *builtin);
 
 // minishell
 int		loop_minishell(t_data *data, t_action *action);

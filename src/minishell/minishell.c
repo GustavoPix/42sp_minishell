@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/16 16:59:49 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:00:41 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	read_minishell(t_data *data)
 
 int	loop_minishell(t_data *data, t_action *action)
 {
-	while (strcmp(data->i_line->input, "exit") != 0)
+	int exit;
+	while (data->exit == 0)
 	{
 		init_sigaction(&action->sigaction, handler_int, SIGINT);
 		init_sigaction(&action->sigaction, SIG_IGN, SIGQUIT);
@@ -80,6 +81,7 @@ int	loop_minishell(t_data *data, t_action *action)
 		output_minishell(data);
 		clear_cmds(data->cmds, 0);
 	}
+	exit = data->exit_code_exit;
 	exit_minishell(data);
-	return (0);
+	return (exit);
 }

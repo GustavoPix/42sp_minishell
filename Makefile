@@ -23,6 +23,7 @@ SRC            = ./main.c \
               ./src/builtin/builtin_export.c \
               ./src/builtin/builtin_pwd.c \
               ./src/builtin/builtin_unset.c \
+              ./src/builtin/builtin_exit.c \
               ./src/cmds/binpath.c \
               ./src/cmds/treatments.c \
               ./src/envs/init.c \
@@ -35,7 +36,7 @@ SRC            = ./main.c \
 
 OBJS_SLG    = ${SRC:.c=.o}
 
-UNAME        := $(shell uname)
+#UNAME        := $(shell uname)
 
 CC             = gcc
 CFLAGS        = -Wall -Wextra -Werror -g3

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:12:45 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/16 20:46:39 by wjuneo-f         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:17:53 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	indentify_builtin(t_data *data, t_cmd *builtin, int fd[])
 	else if (ft_strncmp(builtin->bin, "env", ft_strlen(builtin->bin)) == 0)
 		builtin_env(data, builtin, fd);
 	else if (ft_strncmp(builtin->bin, "exit", ft_strlen(builtin->bin)) == 0)
+	{
+		if (builtin->parans[1])
+			exit(ft_atoi(builtin->parans[1]));
 		exit(0);
+	}
 }
 
 void	aux_cmd_fork(t_data *data, t_cmd *cmd, int fake_fd[], int fd[])
