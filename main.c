@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 19:57:03 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/19 21:06:06 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 21:58:20 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data		data;
 	t_action	action;
-	int exit_code;
+	int			exit_code;
 
 	(void)argc;
 	(void)argv;

@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 17:54:58 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/19 20:58:42 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 22:05:22 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ int		not_fork_cmds(t_data *data, t_cmd *cmd);
 int		ft_fdjoin(int fd1, int fd2);
 
 // output
-void    treat_errors(t_data *data);
+void	treat_errors(t_data *data);
+void	ft_print_end_doc(char *end);
 #endif

@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 21:37:23 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/18 21:15:51 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 22:05:58 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	setup_default_params(t_cmds *cmds, t_cmd *cmd, int args_count)
 
 void	create_file_out(char *path)
 {
-	int fd;
+	int	fd;
+
 	if (access(path, W_OK) < 0 && access(path, F_OK) < 0)
 	{
 		fd = open(path, O_CREAT | O_WRONLY | O_TRUNC, 0666);
@@ -62,4 +63,12 @@ char	*valid_fopen(char *path)
 	if (access(path, R_OK))
 		return (ft_strdup(path));
 	return (NULL);
+}
+
+void	ft_print_end_doc(char *end)
+{
+	ft_putstr_fd("warning: here-document ", 1);
+	ft_putstr_fd("delimited by end-of-file (wanted `", 1);
+	ft_putstr_fd(end, 1);
+	ft_putstr_fd("')\n", 1);
 }

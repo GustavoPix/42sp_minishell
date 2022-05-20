@@ -6,7 +6,7 @@
 /*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 20:12:08 by wjuneo-f          #+#    #+#             */
-/*   Updated: 2022/05/19 21:00:41 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/05/19 22:09:38 by glima-de         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	read_minishell(t_data *data)
 
 int	loop_minishell(t_data *data, t_action *action)
 {
-	int exit;
+	int	exit;
+
 	while (data->exit == 0)
 	{
 		init_sigaction(&action->sigaction, handler_int, SIGINT);
