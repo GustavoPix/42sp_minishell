@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: glima-de <glima-de@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: wjuneo-f <wjuneo-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 14:29:38 by glima-de          #+#    #+#             */
-/*   Updated: 2022/05/12 21:24:50 by glima-de         ###   ########.fr       */
+/*   Updated: 2022/06/02 08:24:21 by wjuneo-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	builtin_cd(t_data *data, t_cmd *btin)
 		else
 			printf("minishell: cd: OLDPWD not set\n");
 	}
-	else if (strncmp(btin->parans[1], "..", 2) == 0)
+	else if (strncmp(btin->parans[1], "..", ft_strlen(btin->parans[1])) == 0)
 		chreturn = chdir("..");
-	else if (strncmp(btin->parans[1], ".", 1) == 0)
+	else if (strncmp(btin->parans[1], ".",ft_strlen(btin->parans[1])) == 0)
 		chreturn = chdir(".");
 	else
 		chreturn = chdir(btin->parans[1]);
